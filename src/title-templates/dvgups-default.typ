@@ -1,0 +1,135 @@
+#import "../component/title.typ": per-line
+
+#let work-type-variants = (
+  (keys: ("курсовая работа", "курсовая"), title: "Курсовая работа", code: "КР"),
+  (keys: ("курсовой проект", "курсовой", "кп"), title: "Курсовой проект", code: "КП"),
+  (keys: ("лабораторная работа", "лабораторная", "лр", "лб"), title: "Лабораторная работа", code: "ЛБ"),
+  (keys: ("практическая работа", "практическая", "пр"), title: "Практическая работа", code: "ПР"),
+  (keys: ("реферат", "рф"), title: "Реферат", code: "РФ"),
+  (keys: ("расчётно-графическая работа", "расчетно-графическая работа", "ргр"), title: "Расчётно-графическая работа", code: "РГР"),
+)
+
+#let normalize(value) = {
+  if value == none { return none }
+  lower(str(value))
+}
+
+#let ensure-array(value) = {
+  if value == none { return () }
+  if type(value) == array { return value }
+  return (value,)
+}
+
+#let pad-two(value) = {
+  if value == none { return none }
+  let text = str(value)
+  if text.len() == 1 { return "0" + text }
+  text
+}
+
+#let resolve-work-type(value) = {
+  let normalized = normalize(value)
+  assert(normalized != none, message: "Параметр `work-type` обязателен.")
+  for variant in work-type-variants {
+    if variant.keys.any(key => normalize(key) == normalized) {
+      return variant
+    }
+  }
+  panic("Неизвестный вид работы: " + repr(value))
+}
+
+#let arguments(..args, year: auto) = {
+  let args = args.named()
+  let work-type = resolve-work-type(args.at("work-type", default: none))
+
+  let variant = pad-two(args.at("variant", default: none))
+  let work-number = pad-two(args.at("work-number", default: none))
+  let specialty = args.at("specialty-code", default: none)
+
+  let group = args.at("group", default: none)
+  if group != none { group = upper(str(group)) }
+
+  let code-line = args.at("code", default: none)
+  if code-line == none {
+    let pieces = ()
+    if specialty != none { pieces.push(str(specialty)) }
+    if variant != none { pieces.push(variant) }
+    if work-number != none { pieces.push(work-number) }
+    if group != none { pieces.push(group) }
+
+    code-line = if pieces != () {
+    work-type.code + " " + pieces.join(".")
+    } 
+    else {
+      work-type.code
+    }
+
+
+  }
+
+  (
+    ministry-lines: ensure-array(args.at("ministry", default: none)),
+    university-lines: ensure-array(args.at("university", default: none)),
+    department: args.at("department", default: none),
+    topic: args.at("topic", default: none),
+    work-title: work-type.title,
+    discipline: args.at("discipline", default: none),
+    work-code: code-line,
+    student: args.at("student", default: none),
+    advisor: args.at("advisor", default: none),
+  )
+}
+
+#let template(
+  ministry-lines: (),
+  university-lines: (),
+  department: none,
+  topic: none,
+  work-title: none,
+  discipline: none,
+  work-code: none,
+  student: none,
+  advisor: none,
+) = {
+  per-line(
+    force-indent: true,
+    ..ministry-lines,
+    ..university-lines,
+    (value: [Кафедра «#department»], when-present: department),
+  )
+
+  v(4fr)
+
+  per-line(
+    align: center,
+    indent: 2.5fr,
+    (value: topic, when-present: topic),
+    (value: work-title, when-present: work-title),
+    (value: [дисциплина «#discipline»], when-present: discipline),
+    (value: work-code, when-present: work-code),
+  )
+
+  v(4fr)
+
+  let signature-cells = ()
+  if student != none {
+    signature-cells.push([Студент])
+    signature-cells.push([#student])
+  }
+  if advisor != none {
+    signature-cells.push([Руководитель])
+    signature-cells.push([#advisor])
+  }
+
+  if signature-cells.len() > 0 {
+    grid(
+      columns: (1fr, 1fr),
+      align: (left, right),
+      gutter: 15%,
+      ..signature-cells,
+    )
+    v(3fr)
+  }
+
+  v(0.5fr)
+}
