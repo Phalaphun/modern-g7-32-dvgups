@@ -47,7 +47,6 @@
   let specialty = args.at("specialty-code", default: none)
 
   let group = args.at("group", default: none)
-  if group != none { group = upper(str(group)) }
 
   let code-line = args.at("code", default: none)
   if code-line == none {
@@ -55,16 +54,12 @@
     if specialty != none { pieces.push(str(specialty)) }
     if variant != none { pieces.push(variant) }
     if work-number != none { pieces.push(work-number) }
-    if group != none { pieces.push(group) }
-
+    if group != none { pieces.push(str(group)) }
     code-line = if pieces != () {
-    work-type.code + " " + pieces.join(".")
-    } 
-    else {
+      work-type.code + " " + pieces.join(".")
+    } else {
       work-type.code
     }
-
-
   }
 
   (
@@ -91,11 +86,22 @@
   student: none,
   advisor: none,
 ) = {
+  let sized = (content, size) => context {
+    set text(size: size)
+    content
+  }
+
+  let styled-ministry = ministry-lines.map(line => sized(line, 12pt))
+  let styled-university = university-lines.map(line => sized(line, 12pt))
+  let department-line = if department != none {
+    sized([Кафедра «#department»], 12pt)
+  } else { none }
+
   per-line(
     force-indent: true,
-    ..ministry-lines,
-    ..university-lines,
-    (value: [Кафедра «#department»], when-present: department),
+    ..styled-ministry,
+    ..styled-university,
+    (value: department-line, when-present: department-line),
   )
 
   v(4fr)
@@ -103,10 +109,10 @@
   per-line(
     align: center,
     indent: 2.5fr,
-    (value: topic, when-present: topic),
-    (value: work-title, when-present: work-title),
-    (value: [дисциплина «#discipline»], when-present: discipline),
-    (value: work-code, when-present: work-code),
+    (value: sized(topic, 20pt), when-present: topic),
+    (value: sized(work-title, 18pt), when-present: work-title),
+    (value: sized([дисциплина «#discipline»], 20pt), when-present: discipline),
+    (value: sized(upper(work-code), 20pt), when-present: work-code),
   )
 
   v(4fr)
