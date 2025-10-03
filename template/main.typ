@@ -23,6 +23,7 @@
   advisor: "Ешенко Р.А.",
   city: "Хабаровск",
   year: 2025,
+  pagination-align: right,
 
 )
 
