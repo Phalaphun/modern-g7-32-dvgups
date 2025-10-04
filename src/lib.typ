@@ -44,6 +44,7 @@
   pagination-align: center,
   pagination-skip-pages: (),
   pagebreaks: true,
+  section-number-prefix: false,
   city: none,
   year: auto,
   hide-title: false,
@@ -91,6 +92,7 @@
     pagination-align,
     skip-pagination-pages,
     pagebreaks,
+    section-number-prefix,
   )
 
   gost-common(

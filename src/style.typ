@@ -13,12 +13,14 @@
   pagination-align,
   pagination-skip-pages,
   pagebreaks,
+  section-number-prefix,
   body,
 ) = {
   if small-text-size == none { small-text-size = text-size - 4pt }
   [#metadata((
       small-text-size: small-text-size,
       pagebreaks: pagebreaks,
+      section-number-prefix: section-number-prefix,
     )) <modern-g7-32-parameters>]
 
   set page(margin: margin)

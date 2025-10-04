@@ -26,6 +26,7 @@
   pagination-align: right,
   pagination-skip-pages: (2),
   margin: (left: 20mm, right: 15mm, top: 20mm, bottom: 30mm),
+  section-number-prefix:true
 )
 
 // #abstract("шаблон", "гост", "typst", "демонстрация", "ключевые слова")[
