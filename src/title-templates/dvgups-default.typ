@@ -1,4 +1,5 @@
 #import "../component/title.typ": per-line
+#import "../utils.typ": long-sign-field
 
 #let work-type-variants = (
   (keys: ("курсовая работа", "курсовая"), title: "Курсовая работа", code: "КР"),
@@ -117,23 +118,21 @@
 
   v(0fr)
 
-  let signature-cells = ()
+  let signature-lines = ()
   if student != none {
-    signature-cells.push([Студент])
-    signature-cells.push([#student])
+    signature-lines.push(long-sign-field(student, [Студент], details: "подпись, дата"))
   }
   if advisor != none {
-    signature-cells.push([Руководитель])
-    signature-cells.push([#advisor])
+    signature-lines.push(long-sign-field(advisor, [Руководитель], details: "подпись, дата"))
   }
 
-  if signature-cells.len() > 0 {
-    grid(
-      columns: (1fr, 1fr),
-      align: (left, right),
-      gutter: 5%,
-      ..signature-cells,
-    )
+  if signature-lines.len() > 0 {
+    for (index, line) in signature-lines.enumerate() {
+      line
+      if index < signature-lines.len() - 1 {
+        v(1fr)
+      }
+    }
     v(3fr)
   }
 
