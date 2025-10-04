@@ -1,4 +1,3 @@
-#import "../component/title.typ": per-line
 #import "../utils.typ": long-sign-field
 
 #let work-type-variants = (
@@ -92,28 +91,26 @@
     content
   }
 
-  // let styled-ministry = ministry-lines.map(line => sized(line, 12pt))
-  // let styled-university = university-lines.map(line => sized(line, 12pt))
-  // let department-line = if department != none {
-  //   sized([Кафедра «#department»], 12pt)
-  // } else { none }
+let result1 = (
+  content,
+  alignment: center,
+  before: 0pt,
+  after: 6pt,
+  size: 12pt,
+) => context {
+  set align(alignment)
+  set text(size: size)
+  set par(spacing: 1.0em)
+  set block(above: before, below: after)
+  content
+}
 
-  // per-line(
-  //   force-indent: true,
-  //   ..styled-ministry,
-  //   ..styled-university,
-  //   (value: department-line, when-present: department-line),
-  // )
-  // 
-  // 
-  // 
-  // 
-  
 
   let result = (sh, univercity, cafedra) => {
-  set par(spacing: 8pt)
+  set par(spacing: 1.0em)
   set align(center)
   set text(size:12pt)
+  set block(above: 0pt, below: 8pt)
   [
     #for c in sh [
       #c\
@@ -131,14 +128,23 @@
 
   v(5*12pt)
 
-  per-line(
-    align: center,
-    indent: 2.5fr,
-    (value: sized(topic, 20pt), when-present: topic),
-    (value: sized(work-title, 18pt), when-present: work-title),
-    (value: sized([дисциплина «#discipline»], 20pt), when-present: discipline),
-    (value: sized(upper(work-code), 20pt), when-present: work-code),
-  )
+  if topic != none {
+    result1([#upper(str(topic))], size: 20pt)
+  }
+
+  if work-title != none {
+    result1([#work-title], size: 18pt)
+  }
+
+  if discipline != none {
+    result1([дисциплина «#discipline»], size: 18pt)
+  }
+
+  if work-code != none {
+    result1([#upper(work-code)], size: 20pt)
+  }
+
+  v(2 * 20pt)
 
 
   let signature-lines = ()
