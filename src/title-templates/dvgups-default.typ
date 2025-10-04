@@ -104,7 +104,7 @@
     (value: department-line, when-present: department-line),
   )
 
-  v(4fr)
+  v(1fr)
 
   per-line(
     align: center,
@@ -115,7 +115,7 @@
     (value: sized(upper(work-code), 20pt), when-present: work-code),
   )
 
-  v(4fr)
+  v(0fr)
 
   let signature-cells = ()
   if student != none {
@@ -131,7 +131,7 @@
     grid(
       columns: (1fr, 1fr),
       align: (left, right),
-      gutter: 15%,
+      gutter: 5%,
       ..signature-cells,
     )
     v(3fr)
