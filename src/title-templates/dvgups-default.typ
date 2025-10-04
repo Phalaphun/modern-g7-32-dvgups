@@ -92,18 +92,42 @@
     content
   }
 
-  let styled-ministry = ministry-lines.map(line => sized(line, 12pt))
-  let styled-university = university-lines.map(line => sized(line, 12pt))
-  let department-line = if department != none {
-    sized([Кафедра «#department»], 12pt)
-  } else { none }
+  // let styled-ministry = ministry-lines.map(line => sized(line, 12pt))
+  // let styled-university = university-lines.map(line => sized(line, 12pt))
+  // let department-line = if department != none {
+  //   sized([Кафедра «#department»], 12pt)
+  // } else { none }
 
-  per-line(
-    force-indent: true,
-    ..styled-ministry,
-    ..styled-university,
-    (value: department-line, when-present: department-line),
-  )
+  // per-line(
+  //   force-indent: true,
+  //   ..styled-ministry,
+  //   ..styled-university,
+  //   (value: department-line, when-present: department-line),
+  // )
+  // 
+  // 
+  // 
+  // 
+  
+
+  let result = (sh, univercity, cafedra) => {
+  set par(spacing: 8pt)
+  set align(center)
+  set text(size:12pt)
+  [
+    #for c in sh [
+      #c\
+    ]
+    
+    #for c in univercity [
+      #c\
+    ]
+    
+    #sized([Кафедра «#cafedra»], 12pt)
+  ]
+ }
+
+ result(ministry-lines,university-lines,department)
 
   v(1fr)
 
