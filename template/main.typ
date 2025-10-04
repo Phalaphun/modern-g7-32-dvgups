@@ -24,8 +24,7 @@
   city: "Хабаровск",
   year: 2025,
   pagination-align: right,
-  pagination-skip-pages: (2)
-
+  pagination-skip-pages: (2),
 )
 
 // #abstract("шаблон", "гост", "typst", "демонстрация", "ключевые слова")[
