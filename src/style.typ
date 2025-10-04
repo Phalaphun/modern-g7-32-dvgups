@@ -11,6 +11,7 @@
   margin,
   title-footer-align,
   pagination-align,
+  pagination-skip-pages,
   pagebreaks,
   body,
 ) = {
@@ -76,8 +77,12 @@
   set enum(indent: indent, spacing: 1em)
 
   set page(footer: context {
-    if counter(page).get() == (1,) and not hide-title {
+    let page-state = counter(page).get()
+    let page-number = if page-state.len() > 0 { page-state.at(0) } else { none }
+    if page-state == (1,) and not hide-title {
       align(title-footer-align)[#city #year]
+    } else if page-number != none and pagination-skip-pages.any(page => page == page-number) {
+      align(pagination-align)[ ]
     } else {
       align(pagination-align)[#counter(page).display()]
     }

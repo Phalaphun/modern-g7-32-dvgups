@@ -24,6 +24,7 @@
   city: "Хабаровск",
   year: 2025,
   pagination-align: right,
+  pagination-skip-pages: (2)
 
 )
 
