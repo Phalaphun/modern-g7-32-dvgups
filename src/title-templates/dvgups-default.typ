@@ -129,7 +129,7 @@
 
  result(ministry-lines,university-lines,department)
 
-  v(1fr)
+  v(5*12pt)
 
   per-line(
     align: center,
@@ -140,7 +140,6 @@
     (value: sized(upper(work-code), 20pt), when-present: work-code),
   )
 
-  v(0fr)
 
   let signature-lines = ()
   if student != none {
@@ -154,11 +153,7 @@
     for (index, line) in signature-lines.enumerate() {
       line
       if index < signature-lines.len() - 1 {
-        v(1fr)
       }
     }
-    v(3fr)
   }
-
-  v(0.5fr)
 }
