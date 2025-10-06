@@ -25,7 +25,7 @@
 
   set page(margin: margin)
 
-  set text(size: text-size, lang: "ru", hyphenate: false)
+  set text(size: text-size, lang: "ru", hyphenate: false, font:("Times New Roman","Arial","Liberation Serif","Libertinus Serif"))
 
   set par(
     justify: true,
