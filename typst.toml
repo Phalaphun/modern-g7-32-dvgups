@@ -1,16 +1,17 @@
 [package]
-name = "modern-g7-32"
-version = "0.1.0"
+name = "modern-g7-32-dvgups"
+version = "0.1.1"
 entrypoint = "src/export.typ"
 authors = [
 	"Pavel Eliseev <forgenet@inbox.ru>",
-	"Arseniy Zasypkin <imcatcatcher@internet.ru>"
+	"Arseniy Zasypkin <imcatcatcher@internet.ru>",
+	"Dmitrii Zhurin <phalaphun@capybara.su>"
 ]
 license = "GPL-3.0-only"
-description = "Template for academic documents in compliance with GOST 7.32‑2017"
+description = "Template for academic documents in compliance with GOST 7.32‑2017 and standart DVGUPS"
 homepage = "https://typst-gost.ru"
-repository = "https://github.com/typst-g7-32/modern-g7-32"
-keywords = ["gost", "7.32", "2017", "paper", "document", "russian"]
+repository = "https://github.com/Phalaphun/modern-g7-32-dvgups"
+keywords = ["gost", "7.32", "2017", "paper", "document", "russian","dvgups"]
 categories = ["report", "components", "scripting"]
 disciplines = ["education"]
 compiler = "0.13.0"
