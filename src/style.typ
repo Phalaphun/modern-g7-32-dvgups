@@ -155,7 +155,7 @@
   })
 
   set bibliography(
-    style: "gost-r-705-2008-numeric",
+    style: "csl/gost-r-7-0-100-2018-numeric-alphabetical.csl",
     title: structural-heading-titles.references,
   )
 
