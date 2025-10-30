@@ -21,6 +21,7 @@
   group: "МО211БИС",
   student: "Журин Д.К.",
   advisor: "Ешенко Р.А.",
+  advisor-position-secondary: "к.ф-м.н, доцент",
   city: "Хабаровск",
   year: 2025,
   pagination-align: right,

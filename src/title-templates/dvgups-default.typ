@@ -72,6 +72,7 @@
     work-code: code-line,
     student: args.at("student", default: none),
     advisor: args.at("advisor", default: none),
+    advisor-position-secondary: args.at("advisor-position-secondary", default: none),
   )
 }
 
@@ -85,6 +86,7 @@
   work-code: none,
   student: none,
   advisor: none,
+  advisor-position-secondary: none,
 ) = {
   let sized = (content, size) => context {
     set text(size: size)
@@ -152,7 +154,12 @@ let result1 = (
     signature-lines.push(long-sign-field(student, [Студент], details: "подпись, дата"))
   }
   if advisor != none {
-    signature-lines.push(long-sign-field(advisor, [Руководитель #linebreak() к.ф-м.н, доцент], details: "подпись, дата"))
+    let advisor-position-label = if advisor-position-secondary == none {
+      [Руководитель]
+    } else {
+      [Руководитель #linebreak() #advisor-position-secondary]
+    }
+    signature-lines.push(long-sign-field(advisor, advisor-position-label, details: "подпись, дата"))
   }
 
   if signature-lines.len() > 0 {
