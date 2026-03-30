@@ -381,22 +381,6 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 #long-listing(
   ```python
-  print("Hello, world!")
-    print("Hello, world!")
-      print("Hello, world!")
-        print("Hello, world!")
-          print("Hello, world!")
-            print("Hello, world!")
-
-              print("Hello, world!")
-                print("Hello, world!")
-                  print("Hello, world!")
-                    print("Hello, world!")
-                      print("Hello, world!")
-                        print("Hello, world!")
-  
-    print("Hello, world!")
-      print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
@@ -406,23 +390,6 @@ $ cal(A) := { x in RR | x "натуральное" } $
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
-                print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-                print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-        print("Hello, world!")
-                print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
@@ -431,7 +398,6 @@ $ cal(A) := { x in RR | x "натуральное" } $
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
-                print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
@@ -439,7 +405,6 @@ $ cal(A) := { x in RR | x "натуральное" } $
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
-                print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
@@ -447,7 +412,26 @@ $ cal(A) := { x in RR | x "натуральное" } $
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
-                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
@@ -507,6 +491,25 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 
 
+
+
+
+
+
+#long-listing(
+  ```python
+  print("Hello, world!")
+    print("Hello, world!")
+      print("Hello, world!")
+        print("Hello, world!")
+          print("Hello, world!")
+            print("Hello, world!")
+
+              print("Hello, world!")
+                print("He
+  ```,
+  caption: [Короткий листинг на одной странице],
+) <listing-one>
 
 
 

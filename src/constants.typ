@@ -42,6 +42,12 @@
 #let default-long-listing-end-marker-cell-inset = (x: 0pt, y: 0pt)
 #let default-long-listing-frame-cell-inset = (x: 0pt, y: 0pt)
 #let default-long-listing-figure-gap = 0pt
+#let default-long-listing-line-number-cell-inset = (
+  left: 0pt,
+  right: 8pt,
+  top: 4pt,
+  bottom: 4pt,
+)
 
 #let default-long-table-end-marker-value = "modern-g7-32-long-table-end-marker"
 #let default-long-table-continuation-cell-inset = (

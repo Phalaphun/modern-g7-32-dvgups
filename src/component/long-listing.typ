@@ -5,6 +5,7 @@
   default-long-listing-figure-gap,
   default-long-listing-frame-cell-inset,
   default-long-listing-line-cell-inset,
+  default-long-listing-line-number-cell-inset,
   default-listing-raw-block-style,
   default-table-and-raw-caption-leading,
 )
@@ -114,20 +115,27 @@
   ]
 
   let lines-table = table(
-    columns: (1fr,),
+    columns: (auto, 1fr),
     stroke: none,
-    ..raw-lines.map(line => {
+    ..raw-lines.enumerate().map(((index, line)) => {
       let line-content = if raw-lang == none {
         raw(line, block: false)
       } else {
         raw(line, lang: raw-lang, block: false)
       }
+      let line-number = raw(str(index + 1), block: false)
 
-      table.cell(
-        stroke: none,
-        inset: default-long-listing-line-cell-inset,
-      )[#line-content]
-    }),
+      (
+        table.cell(
+          stroke: none,
+          inset: default-long-listing-line-number-cell-inset,
+        )[#align(right, line-number)],
+        table.cell(
+          stroke: none,
+          inset: default-long-listing-line-cell-inset,
+        )[#line-content],
+      )
+    }).flatten(),
   )
 
   let listing-frame = block(..default-listing-raw-block-style)[#lines-table]
