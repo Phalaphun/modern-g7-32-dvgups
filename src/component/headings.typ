@@ -1,3 +1,5 @@
+#import "../constants.typ": default-heading-margin
+
 #let structural-heading-titles = (
   performers: [Список исполнителей],
   abstract: [Реферат],
@@ -17,7 +19,7 @@
   structure-heading-style(heading(numbering: none)[#body])
 }
 
-#let headings(text-size, indent, pagebreaks) = body => {
+#let headings(text-size, indent, add-pagebreaks) = body => {
   show heading: set text(size: text-size)
   set heading(numbering: "1.1")
 
@@ -30,7 +32,7 @@
   }
 
   show heading.where(level: 1): it => {
-    if pagebreaks {
+    if add-pagebreaks {
       pagebreak(weak: true)
     }
     it
@@ -42,13 +44,13 @@
 
   show structural-heading: set heading(numbering: none)
   show structural-heading: it => {
-    if pagebreaks {
+    if add-pagebreaks {
       pagebreak(weak: true)
     }
     structure-heading-style(it)
   }
 
-  show heading: set block(below: 2em, above: 2em)
+  show heading: set block(..default-heading-margin)
 
   body
 }

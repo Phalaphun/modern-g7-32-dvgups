@@ -1,6 +1,6 @@
 [package]
 name = "modern-g7-32-dvgups"
-version = "0.1.1"
+version = "0.2.0"
 entrypoint = "src/export.typ"
 authors = [
 	"Pavel Eliseev <forgenet@inbox.ru>",
@@ -14,7 +14,7 @@ repository = "https://github.com/Phalaphun/modern-g7-32-dvgups"
 keywords = ["gost", "7.32", "2017", "paper", "document", "russian","dvgups"]
 categories = ["report", "components", "scripting"]
 disciplines = ["education"]
-compiler = "0.13.0"
+compiler = "0.14.0"
 exclude = [".github", "docs", "tests", "assets"]
 
 [template]

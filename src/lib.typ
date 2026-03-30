@@ -3,6 +3,8 @@
 #import "component/title-templates.typ": templates
 #import "component/performers.typ": fetch-performers, performers-page
 
+#import "constants.typ": *
+
 #let gost-common(
   title-template,
   title-arguments,
@@ -29,7 +31,7 @@
   }
 
   if not hide-title {
-    block(width: 100%, title-template(..title-arguments), breakable: false)
+    title-template(..title-arguments)
   }
 
   if show-performers-page { performers-page(performers) }
@@ -37,13 +39,13 @@
 
 #let gost(
   title-template: templates.default,
-  text-size: (default: 14pt, small: 10pt),
-  indent: 1.25cm,
-  margin: (left: 30mm, right: 15mm, top: 20mm, bottom: 20mm),
+  text-size: default-text-size,
+  indent: default-indent,
+  margin: default-margin,
   title-footer-align: center,
   pagination-align: center,
   pagination-skip-pages: (),
-  pagebreaks: true,
+  add-pagebreaks: true,
   section-number-prefix: false,
   city: none,
   year: auto,
@@ -91,8 +93,8 @@
     title-footer-align,
     pagination-align,
     skip-pagination-pages,
-    pagebreaks,
     section-number-prefix,
+    add-pagebreaks,
   )
 
   gost-common(
