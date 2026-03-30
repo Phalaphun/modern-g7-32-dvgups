@@ -150,7 +150,11 @@
     set figure.caption(position: top)
     set block(breakable: true, above: 18pt, below: text-size)
     set align(left)
-    show raw.where(block: true): set block(width: 100%)
+    show raw.where(block: true): set block(
+      width: 100%,
+      inset: 6pt,
+      stroke: 0.5pt + black,
+    )
     it
   }
   show figure.caption.where(kind: raw): it => {
