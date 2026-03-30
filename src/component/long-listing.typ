@@ -9,7 +9,7 @@
   default-listing-raw-block-style,
   default-table-and-raw-caption-leading,
 )
-
+//TODO: Реализовать автоматическое выравнивание по левому краю. Чтобы отрезались лишние отступы табуляции. 
 #let marker-after-current-page(marker-position, current-position) = {
   marker-position.page > current-position.page or (
     marker-position.page == current-position.page
