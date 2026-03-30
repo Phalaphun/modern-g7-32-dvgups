@@ -65,7 +65,7 @@
       )
 
       if nearest-heading.level <= 2 and paragraphs-after-heading-before-current.len() == 1 {
-        [#block[#text("1123")] #parbreak() #pad(top: text-size, it)]
+        [#parbreak() #pad(top: text-size, it)]
       } else {
         it
       }
