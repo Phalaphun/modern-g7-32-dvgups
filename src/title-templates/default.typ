@@ -1,7 +1,5 @@
 #import "../component/title.typ": (
-  approved-and-agreed-fields,
-  detailed-sign-field,
-  per-line,
+  approved-and-agreed-fields, detailed-sign-field, per-line,
 )
 #import "../utils.typ": fetch-field, sign-field
 
@@ -31,7 +29,8 @@
   )
   args.manager = fetch-field(
     args.at("manager", default: none),
-    ("position*", "name*"),
+    ("position*", "name*", "title"),
+    default: (title: "Руководитель НИР,"),
     hint: "руководителя",
   )
 
@@ -60,7 +59,7 @@
   part: none,
   stage: none,
   federal: none,
-  manager: (position: none, name: none),
+  manager: (position: none, name: none, title: none),
   performer: none,
 ) = {
   per-line(
@@ -101,13 +100,23 @@
   )
 
   if manager.name != none {
-    sign-field(manager.at("name"), [Руководитель НИР,\ #manager.at("position")])
+    let title = if type(manager.title) == str and manager.title != "" {
+      manager.title + linebreak()
+    } else {
+      none
+    }
+    sign-field(manager.at("name"), [#title #manager.at("position")])
   }
 
   if performer != none {
+    let title = if type(performer.title) == str and performer.title != "" {
+      performer.title + linebreak()
+    } else {
+      none
+    }
     sign-field(
       performer.at("name", default: none),
-      [Исполнитель НИР,\ #performer.at("position", default: none)],
+      [#title #performer.at("position", default: none)],
       part: performer.at("part", default: none),
     )
   }
