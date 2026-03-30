@@ -132,9 +132,16 @@
     set align(left)
     it
   }
-  show figure.caption.where(kind: table): set align(left)
-  show figure.caption.where(kind: table): set block(above: 0pt, below: 10pt)
-  show figure.caption.where(kind: table): set par(leading: 0em, first-line-indent: default-indent)
+  show figure.caption.where(kind: table): it => {
+    set align(left)
+    set block(above: 0pt, below: 10pt)
+    set par(
+      leading: 0em,
+      first-line-indent: (amount: default-indent, all: true),
+    )
+
+    [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
+  }
   show table.cell: set align(left)
   show table.cell: set block(width: 100%)
   // TODO: Расположить table.header по центру и сделать шрифт жирным
@@ -146,9 +153,16 @@
     show raw.where(block: true): set block(width: 100%)
     it
   }
-  show figure.caption.where(kind: raw): set align(left)
-  show figure.caption.where(kind: raw): set block(above: 0pt, below: 10pt)
-  show figure.caption.where(kind: raw): set par(leading: 0em, first-line-indent: default-indent)
+  show figure.caption.where(kind: raw): it => {
+    set align(left)
+    set block(above: 0pt, below: 10pt)
+    set par(
+      leading: 0em,
+      first-line-indent: (amount: default-indent, all: true),
+    )
+
+    [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
+  }
 
   show heading.where(level: 1): it => context {
     if not state("appendixes", false).at(it.location()) {
