@@ -121,18 +121,18 @@
 
   show image: set align(center)
   show figure.where(kind: image): set figure(supplement: [Рисунок])
-  show figure.where(kind: image): set block(above: 24pt, below: 0pt)
+  show figure.where(kind: image): set block(above: 24pt, below: 24pt)
   show figure.where(kind: image): set par(leading: 0em, first-line-indent: 0pt)
-  show figure.caption.where(kind: image): set block(above: 12pt, below: 24pt)
+  show figure.caption.where(kind: image): set block(above: 12pt, below: 0pt)
   show figure.caption.where(kind: image): set par(leading: 0em, first-line-indent: 0pt)
 
   show figure.where(kind: table): it => {
     set figure.caption(position: top)
     it
   }
-  show figure.where(kind: table): set block(breakable: true)
+  show figure.where(kind: table): set block(breakable: true, above: 18pt, below: 0pt)
   show figure.caption.where(kind: table): set align(left)
-  show figure.caption.where(kind: table): set block(above: 18pt, below: 10pt)
+  show figure.caption.where(kind: table): set block(above: 0pt, below: 10pt)
   show figure.caption.where(kind: table): set par(leading: 0em, first-line-indent: default-indent)
   show table.cell: set align(left)
   // TODO: Расположить table.header по центру и сделать шрифт жирным
@@ -141,9 +141,9 @@
     set figure.caption(position: top)
     it
   }
-  show figure.where(kind: raw): set block(breakable: true)
+  show figure.where(kind: raw): set block(breakable: true, above: 18pt, below: 0pt)
   show figure.caption.where(kind: raw): set align(left)
-  show figure.caption.where(kind: raw): set block(above: 18pt, below: 10pt)
+  show figure.caption.where(kind: raw): set block(above: 0pt, below: 10pt)
   show figure.caption.where(kind: raw): set par(leading: 0em, first-line-indent: default-indent)
 
   show heading.where(level: 1): it => context {

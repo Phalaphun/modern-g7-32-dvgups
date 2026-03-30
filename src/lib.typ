@@ -55,20 +55,6 @@
   ..title-arguments,
   body,
 ) = {
-  let table-counter = counter("table")
-  let image-counter = counter("image")
-  let citation-counter = counter("citation")
-  let appendix-counter = counter("appendix")
-
-  show figure.where(kind: image): it => {
-    image-counter.step()
-    it
-  }
-  show figure.where(kind: table): it => {
-    table-counter.step()
-    it
-  }
-
   if year == auto {
     year = int(datetime.today().display("[year]"))
   }
