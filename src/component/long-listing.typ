@@ -1,11 +1,13 @@
 #import "../constants.typ": (
-  default-indent,
+  default-long-listing-continuation-cell-inset,
+  default-long-listing-end-marker-cell-inset,
+  default-long-listing-end-marker-value,
+  default-long-listing-figure-gap,
+  default-long-listing-frame-cell-inset,
+  default-long-listing-line-cell-inset,
   default-listing-raw-block-style,
   default-table-and-raw-caption-leading,
-  default-table-and-raw-caption-margin,
 )
-
-#let long-listing-end-marker-value = "modern-g7-32-long-listing-end-marker"
 
 #let marker-after-current-page(marker-position, current-position) = {
   marker-position.page > current-position.page or (
@@ -15,7 +17,7 @@
 }
 
 #let nearest-end-marker(current-position) = {
-  let markers = query(metadata.where(value: long-listing-end-marker-value))
+  let markers = query(metadata.where(value: default-long-listing-end-marker-value))
     .filter(marker => {
       let marker-position = marker.location().position()
       marker-after-current-page(marker-position, current-position)
@@ -106,12 +108,7 @@
   let continuation-row = table.cell(
     colspan: 1,
     stroke: none,
-    inset: (
-      left: default-indent,
-      right: 0pt,
-      top: 0pt,
-      bottom: default-table-and-raw-caption-margin.below,
-    ),
+    inset: default-long-listing-continuation-cell-inset,
   )[
     #continuation-title()
   ]
@@ -128,7 +125,7 @@
 
       table.cell(
         stroke: none,
-        inset: (x: 0pt, y: 0pt),
+        inset: default-long-listing-line-cell-inset,
       )[#line-content]
     }),
   )
@@ -140,9 +137,9 @@
     table.cell(
       colspan: 1,
       stroke: none,
-      inset: (x: 0pt, y: 0pt),
+      inset: default-long-listing-end-marker-cell-inset,
     )[
-      #hide(metadata(long-listing-end-marker-value))
+      #hide(metadata(default-long-listing-end-marker-value))
     ],
   )
 
@@ -154,11 +151,11 @@
         repeat: true,
         continuation-row,
       ),
-      table.cell(stroke: none, inset: (x: 0pt, y: 0pt))[#listing-frame],
+      table.cell(stroke: none, inset: default-long-listing-frame-cell-inset)[#listing-frame],
       end-marker-footer,
     ),
     kind: raw,
-    gap: 0pt,
+    gap: default-long-listing-figure-gap,
     caption: caption,
     ..figure-args,
   )

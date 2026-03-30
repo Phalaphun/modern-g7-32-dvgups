@@ -31,3 +31,24 @@
   inset: 6pt,
   stroke: 0.5pt + black,
 )
+#let default-long-listing-line-cell-inset = (x: 0pt, y: 4pt)
+#let default-long-listing-end-marker-value = "modern-g7-32-long-listing-end-marker"
+#let default-long-listing-continuation-cell-inset = (
+  left: default-indent,
+  right: 0pt,
+  top: 0pt,
+  bottom: default-table-and-raw-caption-margin.below,
+)
+#let default-long-listing-end-marker-cell-inset = (x: 0pt, y: 0pt)
+#let default-long-listing-frame-cell-inset = (x: 0pt, y: 0pt)
+#let default-long-listing-figure-gap = 0pt
+
+#let default-long-table-end-marker-value = "modern-g7-32-long-table-end-marker"
+#let default-long-table-continuation-cell-inset = (
+  left: default-indent,
+  right: 0pt,
+  top: 0pt,
+  bottom: default-table-and-raw-caption-margin.below,
+)
+#let default-long-table-end-marker-cell-inset = (x: 0pt, y: 0pt)
+#let default-long-table-figure-gap = 0pt

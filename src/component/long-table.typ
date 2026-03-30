@@ -1,10 +1,10 @@
 #import "../constants.typ": (
-  default-indent,
+  default-long-table-continuation-cell-inset,
+  default-long-table-end-marker-cell-inset,
+  default-long-table-end-marker-value,
+  default-long-table-figure-gap,
   default-table-and-raw-caption-leading,
-  default-table-and-raw-caption-margin,
 )
-
-#let long-table-end-marker-value = "modern-g7-32-long-table-end-marker"
 
 #let marker-after-current-page(marker-position, current-position) = {
   marker-position.page > current-position.page or (
@@ -14,7 +14,7 @@
 }
 
 #let nearest-end-marker(current-position) = {
-  let markers = query(metadata.where(value: long-table-end-marker-value))
+  let markers = query(metadata.where(value: default-long-table-end-marker-value))
     .filter(marker => {
       let marker-position = marker.location().position()
       marker-after-current-page(marker-position, current-position)
@@ -123,12 +123,7 @@
   let continuation-row = table.cell(
     colspan: column-count,
     stroke: none,
-    inset: (
-      left: default-indent,
-      right: 0pt,
-      top: 0pt,
-      bottom: default-table-and-raw-caption-margin.below,
-    ),
+    inset: default-long-table-continuation-cell-inset,
   )[
     #continuation-title()
   ]
@@ -144,14 +139,14 @@
     table.cell(
       colspan: column-count,
       stroke: none,
-      inset: (x: 0pt, y: 0pt),
+      inset: default-long-table-end-marker-cell-inset,
     )[
-      #hide(metadata(long-table-end-marker-value))
+      #hide(metadata(default-long-table-end-marker-value))
     ],
   )
 
   {
-    set figure(gap: 0pt)
+    set figure(gap: default-long-table-figure-gap)
     figure(
       table(
         ..table-options,
