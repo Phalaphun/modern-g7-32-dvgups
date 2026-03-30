@@ -35,6 +35,7 @@
     if add-pagebreaks {
       pagebreak(weak: true)
     }
+
     it
   }
 
@@ -52,6 +53,24 @@
 
   show heading: set block(..default-heading-margin)
   show heading.where(level: 1): set block(..default-heading-level-1-margin)
+
+  show par: it => context {
+    let headings-before = query(selector(heading).before(here()))
+    if headings-before.len() == 0 {
+      it
+    } else {
+      let nearest-heading = headings-before.last()
+      let paragraphs-after-heading-before-current = query(
+        selector(par).after(nearest-heading.location()).before(here()),
+      )
+
+      if nearest-heading.level <= 2 and paragraphs-after-heading-before-current.len() == 1 {
+        [#block[#text("1123")] #parbreak() #pad(top: text-size, it)]
+      } else {
+        it
+      }
+    }
+  }
 
   body
 }
