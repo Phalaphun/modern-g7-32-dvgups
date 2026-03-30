@@ -129,17 +129,21 @@
   show figure.where(kind: table): it => {
     set figure.caption(position: top)
     set block(breakable: true, above: 18pt, below: text-size)
+    set align(left)
     it
   }
   show figure.caption.where(kind: table): set align(left)
   show figure.caption.where(kind: table): set block(above: 0pt, below: 10pt)
   show figure.caption.where(kind: table): set par(leading: 0em, first-line-indent: default-indent)
   show table.cell: set align(left)
+  show table.cell: set block(width: 100%)
   // TODO: Расположить table.header по центру и сделать шрифт жирным
 
   show figure.where(kind: raw): it => {
     set figure.caption(position: top)
     set block(breakable: true, above: 18pt, below: text-size)
+    set align(left)
+    show raw.where(block: true): set block(width: 100%)
     it
   }
   show figure.caption.where(kind: raw): set align(left)
