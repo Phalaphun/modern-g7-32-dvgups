@@ -1,4 +1,4 @@
-#import "../constants.typ": default-heading-margin
+#import "../constants.typ": default-heading-margin, default-heading-level-1-margin
 
 #let structural-heading-titles = (
   performers: [Список исполнителей],
@@ -51,6 +51,7 @@
   }
 
   show heading: set block(..default-heading-margin)
+  show heading.where(level: 1): set block(..default-heading-level-1-margin)
 
   body
 }
