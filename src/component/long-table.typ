@@ -1,3 +1,9 @@
+#import "../constants.typ": (
+  default-indent,
+  default-table-and-raw-caption-leading,
+  default-table-and-raw-caption-margin,
+)
+
 #let long-table-end-marker-value = "modern-g7-32-long-table-end-marker"
 
 #let marker-after-current-page(marker-position, current-position) = {
@@ -56,14 +62,18 @@
   let marker = nearest-end-marker(current-position)
   let last-page = marker != none and marker.location().page() == current-position.page
   let number = current-table-number()
-
-  set par(first-line-indent: 0pt)
-
-  if last-page {
+  let continuation-text = if last-page {
     [Окончание таблицы #number.]
   } else {
     [Продолжение таблицы #number]
   }
+
+  set par(
+    leading: default-table-and-raw-caption-leading,
+    first-line-indent: 0pt,
+  )
+
+  continuation-text
 }
 
 #let long-table(
@@ -113,7 +123,12 @@
   let continuation-row = table.cell(
     colspan: column-count,
     stroke: none,
-    inset: (x: 0pt, y: 0pt),
+    inset: (
+      left: default-indent,
+      right: 0pt,
+      top: 0pt,
+      bottom: default-table-and-raw-caption-margin.below,
+    ),
   )[
     #continuation-title()
   ]
