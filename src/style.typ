@@ -128,9 +128,9 @@
 
   show figure.where(kind: table): it => {
     set figure.caption(position: top)
+    set block(breakable: true, above: 18pt, below: text-size)
     it
   }
-  show figure.where(kind: table): set block(breakable: true, above: 18pt, below: 0pt)
   show figure.caption.where(kind: table): set align(left)
   show figure.caption.where(kind: table): set block(above: 0pt, below: 10pt)
   show figure.caption.where(kind: table): set par(leading: 0em, first-line-indent: default-indent)
@@ -139,9 +139,9 @@
 
   show figure.where(kind: raw): it => {
     set figure.caption(position: top)
+    set block(breakable: true, above: 18pt, below: text-size)
     it
   }
-  show figure.where(kind: raw): set block(breakable: true, above: 18pt, below: 0pt)
   show figure.caption.where(kind: raw): set align(left)
   show figure.caption.where(kind: raw): set block(above: 0pt, below: 10pt)
   show figure.caption.where(kind: raw): set par(leading: 0em, first-line-indent: default-indent)
