@@ -3,7 +3,7 @@
 #let default-margin = (left: 30mm, right: 15mm, top: 20mm, bottom: 20mm)
 #let default-justify = true
 #let default-leading = 1.5em - 0.75em
-#let default-spacing = 1.5em
+#let default-spacing = 1em
 #let default-figure-margin-bottom = 0.5em
 #let default-list-spacing = 1em
 #let default-enum-spacing = 1em
