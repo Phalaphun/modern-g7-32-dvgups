@@ -10,3 +10,24 @@
 #let default-outline-depth = 3
 #let default-heading-margin = (below: 3em, above: 3em)
 #let default-heading-level-1-margin = (below: 3em, above: 0cm)
+
+#let default-image-figure-margin = (above: 24pt, below: 24pt)
+#let default-image-par-style = (leading: 0.2em, first-line-indent: 0pt)
+#let default-image-caption-margin = (above: 12pt, below: 0pt)
+#let default-image-caption-par-style = (leading: 0.5em, first-line-indent: 0pt)
+
+#let default-table-and-raw-figure-margin-above = 18pt
+#let default-table-and-raw-figure-below-lines = 1
+#let default-table-and-raw-caption-margin = (above: 0pt, below: 10pt)
+#let default-table-and-raw-caption-leading = 0.5em
+#let default-table-and-raw-caption-first-line-indent = (
+  amount: default-indent,
+  all: true,
+)
+
+#let default-table-cell-width = 100%
+#let default-listing-raw-block-style = (
+  width: 100%,
+  inset: 6pt,
+  stroke: 0.5pt + black,
+)

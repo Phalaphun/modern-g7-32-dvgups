@@ -121,48 +121,52 @@
 
   show image: set align(center)
   show figure.where(kind: image): set figure(supplement: [Рисунок])
-  show figure.where(kind: image): set block(above: 24pt, below: 24pt)
-  show figure.where(kind: image): set par(leading: 0.2em, first-line-indent: 0pt)
-  show figure.caption.where(kind: image): set block(above: 12pt, below: 0pt)
-  show figure.caption.where(kind: image): set par(leading: 0.5em, first-line-indent: 0pt)
+  show figure.where(kind: image): set block(..default-image-figure-margin)
+  show figure.where(kind: image): set par(..default-image-par-style)
+  show figure.caption.where(kind: image): set block(..default-image-caption-margin)
+  show figure.caption.where(kind: image): set par(..default-image-caption-par-style)
 
   show figure.where(kind: table): it => {
     set figure.caption(position: top)
-    set block(breakable: true, above: 18pt, below: text-size)
+    set block(
+      breakable: true,
+      above: default-table-and-raw-figure-margin-above,
+      below: text-size * default-table-and-raw-figure-below-lines,
+    )
     set align(left)
     it
   }
   show figure.caption.where(kind: table): it => {
     set align(left)
-    set block(above: 0pt, below: 10pt)
+    set block(..default-table-and-raw-caption-margin)
     set par(
-      leading: 0.5em,
-      first-line-indent: (amount: default-indent, all: true),
+      leading: default-table-and-raw-caption-leading,
+      first-line-indent: default-table-and-raw-caption-first-line-indent,
     )
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
   }
   show table.cell: set align(left)
-  show table.cell: set block(width: 100%)
+  show table.cell: set block(width: default-table-cell-width)
   // TODO: Расположить table.header по центру и сделать шрифт жирным
 
   show figure.where(kind: raw): it => {
     set figure.caption(position: top)
-    set block(breakable: true, above: 18pt, below: text-size)
-    set align(left)
-    show raw.where(block: true): set block(
-      width: 100%,
-      inset: 6pt,
-      stroke: 0.5pt + black,
+    set block(
+      breakable: true,
+      above: default-table-and-raw-figure-margin-above,
+      below: text-size * default-table-and-raw-figure-below-lines,
     )
+    set align(left)
+    show raw.where(block: true): set block(..default-listing-raw-block-style)
     it
   }
   show figure.caption.where(kind: raw): it => {
     set align(left)
-    set block(above: 0pt, below: 10pt)
+    set block(..default-table-and-raw-caption-margin)
     set par(
-      leading: 0.5em,
-      first-line-indent: (amount: default-indent, all: true),
+      leading: default-table-and-raw-caption-leading,
+      first-line-indent: default-table-and-raw-caption-first-line-indent,
     )
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
