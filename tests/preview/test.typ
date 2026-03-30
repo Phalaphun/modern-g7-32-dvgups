@@ -113,6 +113,9 @@
   caption: [Пример таблицы с данными],
 ) <example-table>
 
+
+Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third – использование типов и обозначений @ivanov2020osnovy.
+
 == Блоки кода
 
 Чтобы оформить блоки кода в документе, можно использовать синтаксис, похожий на Markdown. Пример указан на листинге @example-code:
@@ -157,6 +160,20 @@ $ cal(A) := { x in RR | x "натуральное" } $
   image("/tests/assets/home.jpg", width: 40%),
   caption: "Пример изображения",
 ) <example-image>
+
+
+
+Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third.
+
+
+Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third – использование типов и обозначений @ivanov2020osnovy.
+
+#figure(
+  image("/tests/assets/home.jpg", width: 40%),
+  caption: "Пример изображения",
+) <example-image1>
+
+фывфывфывфывфывфывфвфывфыывывывывыфвыфвыфвфвывфыфывыфв
 
 = Test
 == Tsts
