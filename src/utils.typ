@@ -108,7 +108,7 @@
 #let sign-field(name, position, part: none, details: "подпись, дата") = {
   let part-cell = []
   if part != none {
-    part-cell = table.cell(align: top)[(#small-text[#part])]
+    part-cell = table.cell(align: top)[#small-text[#part]]
   }
 
   set par(justify: false)
@@ -119,6 +119,31 @@
     [#position], [], [], [], table.cell(align: bottom)[#unbreak-name(name)],
     table.hline(start: 2, end: 3),
     [], [], table.cell(align: center)[#small-text[#details]], [], part-cell
+  )
+}
+
+#let long-sign-field(name, position, part: none, details: "подпись, дата") = {
+  let part-cell = []
+  if part != none {
+    part-cell = table.cell(align: bottom, inset: (top: 1pt))[#small-text[#part]]
+  }
+
+  set par(justify: false)
+  table(
+    stroke: none,
+    inset: (x: 0pt, y: 2pt),
+    columns: (auto, 1fr, auto, auto),
+    align: (left, center, right, right),
+    table.cell(inset: (right: 6pt))[#position],
+    table.cell(align: center, inset: (top: 11pt, bottom: 0pt))[
+      #line(length: 100%)
+    ],
+    table.cell(inset: (left: 6pt))[#unbreak-name(name)],
+    [],
+    [],
+    table.cell(align: center, inset: (top: 0pt, bottom: 0pt))[#small-text[#details]],
+    [],
+    part-cell,
   )
 }
 

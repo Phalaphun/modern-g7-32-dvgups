@@ -42,7 +42,9 @@
   margin: (left: 30mm, right: 15mm, top: 20mm, bottom: 20mm),
   title-footer-align: center,
   pagination-align: center,
+  pagination-skip-pages: (),
   pagebreaks: true,
+  section-number-prefix: false,
   city: none,
   year: auto,
   hide-title: false,
@@ -71,6 +73,13 @@
 
   text-size = fetch-field(text-size, ("default*", "small"))
 
+  let skip-pagination-pages = pagination-skip-pages
+  if skip-pagination-pages == none {
+    skip-pagination-pages = ()
+  } else if type(skip-pagination-pages) != array {
+    skip-pagination-pages = (skip-pagination-pages,)
+  }
+
   show: gost-style.with(
     year,
     city,
@@ -81,7 +90,9 @@
     margin,
     title-footer-align,
     pagination-align,
+    skip-pagination-pages,
     pagebreaks,
+    section-number-prefix,
   )
 
   gost-common(
