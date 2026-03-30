@@ -150,14 +150,17 @@
     ],
   )
 
-  figure(
-    table(
-      ..table-options,
-      combined-header,
-      ..body-children,
-      end-marker-footer,
-    ),
-    caption: caption,
-    ..figure-args,
-  )
+  {
+    set figure(gap: 0pt)
+    figure(
+      table(
+        ..table-options,
+        combined-header,
+        ..body-children,
+        end-marker-footer,
+      ),
+      caption: caption,
+      ..figure-args,
+    )
+  }
 }
