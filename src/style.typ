@@ -134,6 +134,8 @@
       below: text-size * default-table-and-raw-figure-below-lines,
     )
     set align(left)
+    show table.cell: set align(left)
+    show table.cell: set block(width: default-table-cell-width)
     it
   }
   show figure.caption.where(kind: table): it => {
@@ -146,8 +148,6 @@
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
   }
-  show table.cell: set align(left)
-  show table.cell: set block(width: default-table-cell-width)
   // TODO: Расположить table.header по центру и сделать шрифт жирным
 
   show figure.where(kind: raw): it => {
