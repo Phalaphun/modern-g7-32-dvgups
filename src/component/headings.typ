@@ -64,8 +64,8 @@
         selector(par).after(nearest-heading.location()).before(here()),
       )
 
-      if nearest-heading.level <= 2 and paragraphs-after-heading-before-current.len() == 1 {
-        [#parbreak() #pad(top: text-size, it)]
+      if nearest-heading.level == 1 and paragraphs-after-heading-before-current.len() == 1 {
+        pad(top: text-size, it)
       } else {
         it
       }
