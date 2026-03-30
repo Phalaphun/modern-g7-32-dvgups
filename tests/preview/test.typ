@@ -128,7 +128,7 @@
   // Функция вывода сообщения
   print("Hello, world!")
   ```,
-  caption: [Пример кода на Typst],
+  caption: [Пример кода на TypstПример кода на TypstПример кода на TypstПример кода на TypstПример кода на Typst],
 ) <example-code>
 
 Этот блок кода демонстрирует базовую структуру программы на Typst.
@@ -170,7 +170,7 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 #figure(
   image("/tests/assets/home.jpg", width: 40%),
-  caption: "Пример изображения",
+  caption: "Пример Пример кода на TypstПример кода на TypstПример кода на TypstПример кода на TypstПример кода на Typst",
 ) <example-image1>
 
 фывфывфывфывфывфывфвфывфыывывывывыфвыфвыфвфвывфыфывыфв

@@ -122,9 +122,9 @@
   show image: set align(center)
   show figure.where(kind: image): set figure(supplement: [Рисунок])
   show figure.where(kind: image): set block(above: 24pt, below: 24pt)
-  show figure.where(kind: image): set par(leading: 0em, first-line-indent: 0pt)
+  show figure.where(kind: image): set par(leading: 0.2em, first-line-indent: 0pt)
   show figure.caption.where(kind: image): set block(above: 12pt, below: 0pt)
-  show figure.caption.where(kind: image): set par(leading: 0em, first-line-indent: 0pt)
+  show figure.caption.where(kind: image): set par(leading: 0.5em, first-line-indent: 0pt)
 
   show figure.where(kind: table): it => {
     set figure.caption(position: top)
@@ -136,7 +136,7 @@
     set align(left)
     set block(above: 0pt, below: 10pt)
     set par(
-      leading: 0em,
+      leading: 0.5em,
       first-line-indent: (amount: default-indent, all: true),
     )
 
@@ -157,7 +157,7 @@
     set align(left)
     set block(above: 0pt, below: 10pt)
     set par(
-      leading: 0em,
+      leading: 0.5em,
       first-line-indent: (amount: default-indent, all: true),
     )
 
