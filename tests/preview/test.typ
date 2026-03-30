@@ -45,10 +45,10 @@
   title-footer-align: center, // Выравнивание города и года на титульном листе
   pagination-align: center, // Выравнивание номера страницы
   margin: (
-    left: 30mm,
+    left: 20mm,
     right: 15mm,
     top: 20mm,
-    bottom: 20mm,
+    bottom: 30mm,
   ), // Отступы страницы
   add-pagebreaks: true, // Убрать ли разрывы страниц
   performers: (
