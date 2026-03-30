@@ -1,5 +1,5 @@
 #import "/src/export.typ": (
-  abstract, appendix-heading, appendixes, enum-numbering, gost, long-table,title-templates
+  abstract, appendix-heading, appendixes, enum-numbering, gost, long-table,long-listing,title-templates
 )
 
 // Нумерация с использованием кириллицы
@@ -356,7 +356,151 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 
 
+#let make-lines(count) = range(0, count).map(i => "line " + str(i + 1))
 
+#let make-code(count, with-empty-lines: false, trailing-newline: false) = {
+  let lines = make-lines(count)
+  if with-empty-lines {
+    let spaced-lines = ()
+    for (i, line) in lines.enumerate() {
+      if calc.rem(i + 1, 5) == 0 {
+        spaced-lines.push(line + "\n")
+      } else {
+        spaced-lines.push(line)
+      }
+    }
+    lines = spaced-lines
+  }
+
+  let text = lines.join("\n")
+  if trailing-newline {
+    return text + "\n"
+  }
+  text
+}
+
+#long-listing(
+  ```python
+  print("Hello, world!")
+    print("Hello, world!")
+      print("Hello, world!")
+        print("Hello, world!")
+          print("Hello, world!")
+            print("Hello, world!")
+
+              print("Hello, world!")
+                print("Hello, world!")
+                  print("Hello, world!")
+                    print("Hello, world!")
+                      print("Hello, world!")
+                        print("Hello, world!")
+  
+    print("Hello, world!")
+      print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+                print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+
+  ```,
+  caption: [Короткий листинг на одной странице],
+) <listing-one>
 
 
 
