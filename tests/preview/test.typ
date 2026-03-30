@@ -1,5 +1,5 @@
 #import "/src/export.typ": (
-  abstract, appendix-heading, appendixes, enum-numbering, gost,
+  abstract, appendix-heading, appendixes, enum-numbering, gost, long-table
 )
 
 // Нумерация с использованием кириллицы
@@ -236,6 +236,40 @@ $ cal(A) := { x in RR | x "натуральное" } $
 = Заключение <conclusion>
 
 Шаблон modern-g7-32 для Typst значительно упрощает подготовку документов, соответствующих государственным стандартам. Он обеспечивает удобное создание таблиц, блоков кода и изображений, а гибкая настройка через функцию `gost.with` позволяет автоматически подставлять дату и исключать ненужные элементы с титульной страницы. Используйте данный шаблон для создания качественных и стандартизированных документов @petrov2021analiz.
+
+
+#let rows(count) = (
+  for i in range(0, count) {
+    ([Строка #(i + 1)], [Значение #(i + 1)],)
+  }
+).flatten()
+
+#let sample-table(count) = table(
+  columns: 2,
+  table.header([Колонка 1], [Колонка 2]),
+  ..rows(count),
+)
+
+#long-table(
+  sample-table(10),
+  caption: [Короткая таблица на одной странице],
+)
+
+#pagebreak()
+
+#long-table(
+  sample-table(40),
+  caption: [Таблица на две страницы],
+)
+
+#pagebreak()
+
+#long-table(
+  sample-table(90),
+  caption: [Таблица на три и более страниц],
+)
+
+
 
 #bibliography("references.bib")
 
