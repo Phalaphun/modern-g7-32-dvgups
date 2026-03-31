@@ -1,4 +1,5 @@
 #import "../constants.typ": (
+  default-long-table-continuation-text-size,
   default-long-table-continuation-cell-inset,
   default-long-table-end-marker-cell-inset,
   default-long-table-end-marker-value,
@@ -72,6 +73,7 @@
     leading: default-table-and-raw-caption-leading,
     first-line-indent: 0pt,
   )
+  set text(size: default-long-table-continuation-text-size)
 
   continuation-text
 }

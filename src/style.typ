@@ -142,6 +142,7 @@
   show figure.caption.where(kind: table): it => {
     set align(left)
     set block(..default-table-and-raw-caption-margin)
+    set text(size: default-table-caption-text-size)
     set par(
       leading: default-table-and-raw-caption-leading,
       first-line-indent: default-table-and-raw-caption-first-line-indent,
@@ -165,6 +166,7 @@
   show figure.caption.where(kind: raw): it => {
     set align(left)
     set block(..default-table-and-raw-caption-margin)
+    set text(size: default-raw-caption-text-size)
     set par(
       leading: default-table-and-raw-caption-leading,
       first-line-indent: default-table-and-raw-caption-first-line-indent,
