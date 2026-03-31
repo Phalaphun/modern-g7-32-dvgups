@@ -122,6 +122,7 @@
   show image: set align(center)
   show figure.where(kind: image): set figure(supplement: [Рисунок])
   show figure.where(kind: image): set block(..default-image-figure-margin)
+  show figure.where(kind: image): set figure(gap: default-image-figure-gap)
   show figure.where(kind: image): set par(..default-image-par-style)
   show figure.caption.where(kind: image): set block(..default-image-caption-margin)
   show figure.caption.where(kind: image): set text(size: default-image-caption-text-size)
@@ -213,3 +214,4 @@
   show: headings(text-size, indent, add-pagebreaks)
   body
 }
+

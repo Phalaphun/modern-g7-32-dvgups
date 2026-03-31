@@ -215,7 +215,7 @@ $ cal(A) := { x in RR | x "натуральное" } $
 Изображения добавляются с помощью функции `image()` внутри макроса `#figure`. Пример вставки изображения указан на рисунке @example-image.
 
 #figure(
-  image("/tests/assets/home.jpg", width: 40%),
+  image("/tests/assets/home.jpg", width: 35%),
   caption: "Пример изображения",
 ) <example-image>
 
