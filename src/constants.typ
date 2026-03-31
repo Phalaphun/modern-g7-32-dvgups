@@ -18,7 +18,7 @@
 #let default-image-caption-par-style = (leading: 0.5em, first-line-indent: 0pt)
 
 #let default-table-and-raw-figure-margin-above = 36pt
-#let default-table-and-raw-figure-below-lines = 1
+#let default-table-and-raw-figure-below-lines = 2
 #let default-table-and-raw-caption-margin = (above: 0pt, below: 16pt)
 #let default-table-caption-text-size = 14pt
 #let default-raw-caption-text-size = 14pt
