@@ -224,7 +224,7 @@ $ cal(A) := { x in RR | x "натуральное" } $
 Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third.
 
 
-Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third – использование типов и обозначений @ivanov2020osnovy.
+Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third – использование типов и обозначений @ivanov2020osnovy фыв фыв фыв фыв фыв фыв фыв фыв.
 
 #figure(
   image("/tests/assets/home.jpg", width: 40%),

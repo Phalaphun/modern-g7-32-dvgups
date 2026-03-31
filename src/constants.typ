@@ -11,7 +11,7 @@
 #let default-heading-margin = (below: 3em, above: 3em)
 #let default-heading-level-1-margin = (below: 3em, above: 0cm)
 
-#let default-image-figure-margin = (above: 24pt, below: 24pt)
+#let default-image-figure-margin = (above: 32pt, below: 32pt)
 #let default-image-par-style = (leading: 0.2em, first-line-indent: 0pt)
 #let default-image-caption-margin = (above: 12pt, below: 0pt)
 #let default-image-caption-text-size = 12pt
