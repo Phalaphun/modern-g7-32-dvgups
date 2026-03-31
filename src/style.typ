@@ -128,16 +128,17 @@
   show figure.caption.where(kind: image): set par(..default-image-caption-par-style)
 
   show figure.where(kind: table): it => {
+    let below-space = text-size * default-table-and-raw-figure-below-lines
     set figure.caption(position: top)
     set block(
       breakable: true,
       above: default-table-and-raw-figure-margin-above,
-      below: text-size * default-table-and-raw-figure-below-lines,
+      below: 0pt,
     )
     set align(left)
     show table.cell: set align(left)
     show table.cell: set block(width: default-table-cell-width)
-    it
+    [#it#v(below-space, weak: false)]
   }
   show figure.caption.where(kind: table): it => {
     set align(left)
@@ -153,15 +154,16 @@
   // TODO: Расположить table.header по центру и сделать шрифт жирным
 
   show figure.where(kind: raw): it => {
+    let below-space = text-size * default-table-and-raw-figure-below-lines
     set figure.caption(position: top)
     set block(
       breakable: true,
       above: default-table-and-raw-figure-margin-above,
-      below: text-size * default-table-and-raw-figure-below-lines,
+      below: 0pt,
     )
     set align(left)
     show raw.where(block: true): set block(..default-listing-raw-block-style)
-    it
+    [#it#v(below-space, weak: false)]
   }
   show figure.caption.where(kind: raw): it => {
     set align(left)
