@@ -1,4 +1,10 @@
-#import "../constants.typ": default-heading-margin, default-heading-level-1-margin
+#import "../constants.typ": (
+  default-appendix-heading-following-par-top-level-1,
+  default-appendix-heading-following-par-top-other-levels,
+  default-heading-margin,
+  default-heading-level-1-margin,
+)
+#import "appendixes.typ": is-heading-in-appendix
 
 #let structural-heading-titles = (
   performers: [Список исполнителей],
@@ -64,8 +70,23 @@
         selector(par).after(nearest-heading.location()).before(here()),
       )
 
-      if nearest-heading.level == 1 and paragraphs-after-heading-before-current.len() == 1 {
-        pad(top: text-size, it)
+      if paragraphs-after-heading-before-current.len() == 1 {
+        let top-padding = if is-heading-in-appendix(nearest-heading) {
+          if nearest-heading.level == 1 {
+            default-appendix-heading-following-par-top-level-1
+          } else {
+            default-appendix-heading-following-par-top-other-levels
+          }
+        } else if nearest-heading.level == 1 {
+          text-size
+        } else {
+          0pt
+        }
+        if top-padding == 0pt {
+          it
+        } else {
+          pad(top: top-padding, it)
+        }
       } else {
         it
       }

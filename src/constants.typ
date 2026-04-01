@@ -15,6 +15,8 @@
 #let default-appendix-heading-render = default-appendix-heading-render-top-right
 #let default-appendix-heading-label-title-gap-level-1 = 24pt
 #let default-appendix-heading-label-title-gap-other-levels = 18pt
+#let default-appendix-heading-following-par-top-level-1 = 0pt
+#let default-appendix-heading-following-par-top-other-levels = 0pt
 
 #let default-image-figure-margin = (above: 32pt, below: 32pt)
 #let default-image-figure-gap = 12pt
