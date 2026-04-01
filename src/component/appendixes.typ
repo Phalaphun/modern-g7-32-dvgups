@@ -1,4 +1,11 @@
 #import "../utils.typ": heading-numbering
+#import "../constants.typ": (
+  default-appendix-heading-render,
+  default-appendix-heading-label-title-gap-level-1,
+  default-appendix-heading-label-title-gap-other-levels,
+  default-appendix-heading-render-legacy,
+  default-appendix-heading-render-top-right,
+)
 
 #let is-heading-in-appendix(heading) = state("appendixes", false).at(
   heading.location(),
@@ -16,22 +23,48 @@
   heading(level: level)[(#status)\ #body]
 }
 
+#let render-appendix-heading(it) = {
+  let appendix-number = numbering(
+    it.numbering,
+    ..counter(heading).at(it.location()),
+  )
+  let appendix-label = [#upper([приложение]) #appendix-number]
+  let appendix-title = [#text(weight: "medium")[#it.body]]
+  let label-title-gap = if it.level == 1 {
+    default-appendix-heading-label-title-gap-level-1
+  } else {
+    default-appendix-heading-label-title-gap-other-levels
+  }
+
+  if default-appendix-heading-render == default-appendix-heading-render-top-right {
+    block(width: 100%)[
+      #stack(
+        dir: ttb,
+        spacing: label-title-gap,
+        align(right)[#appendix-label],
+        align(center)[#appendix-title],
+      )
+    ]
+  } else if default-appendix-heading-render == default-appendix-heading-render-legacy {
+    block(width: 100%)[
+      #align(center)[#appendix-label \ #appendix-title]
+    ]
+  } else {
+    block(width: 100%)[
+      #align(center)[#appendix-label \ #appendix-title]
+    ]
+  }
+}
+
 #let appendixes(content) = {
   set heading(numbering: heading-numbering, hanging-indent: 0pt)
-
-  show heading: set align(center)
   show heading: it => {
     assert(
       it.numbering != none,
       message: "В приложениях не может быть структурных заголовков или заголовков без нумерации",
     )
     counter("appendix").step()
-    block[#upper([приложение]) #numbering(
-        it.numbering,
-        ..counter(heading).at(
-          it.location(),
-        ),
-      ) \ #text(weight: "medium")[#it.body]]
+    render-appendix-heading(it)
   }
 
   show heading.where(level: 1): it => context {
