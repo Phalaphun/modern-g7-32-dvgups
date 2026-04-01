@@ -515,6 +515,15 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 
 
+
+#long-listing(
+  ```python
+  print("Hello, world!")
+
+  ```,
+  caption: [Короткий листинг на одной странице],
+) <listing-one>
+
 #bibliography("references.bib")
 
 #show: appendixes
