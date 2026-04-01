@@ -348,7 +348,7 @@ $ cal(A) := { x in RR | x "натуральное" } $
     [Проверка], [Проверка], [Проверка], [Проверка],
   ),
   caption: [Пример таблицы с данными фыа ыва ыва ыва ыва ы],
-) <example-tab1le>
+) <tablelong1>
 
 
 
@@ -522,7 +522,11 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
   ```,
   caption: [Короткий листинг на одной странице],
-) <listing-one>
+) <listing-one123>
+
+123 @listing-one123 123 
+
+@tablelong1
 
 #bibliography("references.bib")
 

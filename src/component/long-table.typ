@@ -147,17 +147,15 @@
     ],
   )
 
-  {
-    set figure(gap: default-long-table-figure-gap)
-    figure(
-      table(
-        ..table-options,
-        combined-header,
-        ..body-children,
-        end-marker-footer,
-      ),
-      caption: caption,
-      ..figure-args,
-    )
-  }
+  figure(
+    table(
+      ..table-options,
+      combined-header,
+      ..body-children,
+      end-marker-footer,
+    ),
+    caption: caption,
+    gap: default-long-table-figure-gap,
+    ..figure-args,
+  )
 }
