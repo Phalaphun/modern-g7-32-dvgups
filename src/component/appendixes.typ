@@ -3,6 +3,10 @@
   default-appendix-heading-render,
   default-appendix-heading-label-title-gap-level-1,
   default-appendix-heading-label-title-gap-other-levels,
+  default-appendix-title-padding-top-level-1,
+  default-appendix-title-padding-bottom-level-1,
+  default-appendix-title-padding-top-other-levels,
+  default-appendix-title-padding-bottom-other-levels,
   default-appendix-heading-render-legacy,
   default-appendix-heading-render-top-right,
 )
@@ -35,6 +39,21 @@
   } else {
     default-appendix-heading-label-title-gap-other-levels
   }
+  let title-top-padding = if it.level == 1 {
+    default-appendix-title-padding-top-level-1
+  } else {
+    default-appendix-title-padding-top-other-levels
+  }
+  let title-bottom-padding = if it.level == 1 {
+    default-appendix-title-padding-bottom-level-1
+  } else {
+    default-appendix-title-padding-bottom-other-levels
+  }
+  let appendix-title-with-padding = pad(
+    top: title-top-padding,
+    bottom: title-bottom-padding,
+    appendix-title,
+  )
 
   if default-appendix-heading-render == default-appendix-heading-render-top-right {
     block(width: 100%)[
@@ -42,16 +61,26 @@
         dir: ttb,
         spacing: label-title-gap,
         align(right)[#appendix-label],
-        align(center)[#appendix-title],
+        align(center)[#appendix-title-with-padding],
       )
     ]
   } else if default-appendix-heading-render == default-appendix-heading-render-legacy {
     block(width: 100%)[
-      #align(center)[#appendix-label \ #appendix-title]
+      #stack(
+        dir: ttb,
+        spacing: label-title-gap,
+        align(center)[#appendix-label],
+        align(center)[#appendix-title-with-padding],
+      )
     ]
   } else {
     block(width: 100%)[
-      #align(center)[#appendix-label \ #appendix-title]
+      #stack(
+        dir: ttb,
+        spacing: label-title-gap,
+        align(center)[#appendix-label],
+        align(center)[#appendix-title-with-padding],
+      )
     ]
   }
 }
