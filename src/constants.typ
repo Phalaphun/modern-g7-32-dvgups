@@ -10,9 +10,8 @@
 #let default-outline-depth = 3
 #let default-heading-margin = (below: 3em, above: 3em)
 #let default-heading-level-1-margin = (below: 3em, above: 0cm)
-#let default-appendix-heading-render-legacy = "legacy"
-#let default-appendix-heading-render-top-right = "top-right"
-#let default-appendix-heading-render = default-appendix-heading-render-top-right
+#let default-headings-not-bold = true
+#let default-appendix-heading-new-style = true
 #let default-appendix-heading-label-title-gap-level-1 = 24pt
 #let default-appendix-heading-label-title-gap-other-levels = 18pt
 #let default-appendix-title-padding-top-level-1 = 0pt

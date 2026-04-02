@@ -25,8 +25,11 @@
   structure-heading-style(heading(numbering: none)[#body])
 }
 
-#let headings(text-size, indent, add-pagebreaks) = body => {
+#let headings(text-size, indent, add-pagebreaks, headings-not-bold) = body => {
   show heading: set text(size: text-size)
+  if headings-not-bold {
+    show heading: set text(weight: "regular")
+  }
   set heading(numbering: "1.1")
 
   show heading: it => {

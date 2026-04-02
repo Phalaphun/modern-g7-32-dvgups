@@ -16,6 +16,8 @@
   pagination-skip-pages,
   section-number-prefix,
   add-pagebreaks,
+  headings-not-bold,
+  appendix-heading-new-style,
   body,
 ) = {
   let small-text-difference = (
@@ -28,6 +30,8 @@
     small-text-size: small-text-size,
     add-pagebreaks: add-pagebreaks,
     section-number-prefix: section-number-prefix,
+    headings-not-bold: headings-not-bold,
+    appendix-heading-new-style: appendix-heading-new-style,
   )) <modern-g7-32-parameters>]
 
 
@@ -211,7 +215,6 @@
     title: structural-heading-titles.references,
   )
 
-  show: headings(text-size, indent, add-pagebreaks)
+  show: headings(text-size, indent, add-pagebreaks, headings-not-bold)
   body
 }
-

@@ -47,6 +47,8 @@
   pagination-skip-pages: (),
   add-pagebreaks: true,
   section-number-prefix: false,
+  headings-not-bold: default-headings-not-bold,
+  appendix-heading-new-style: default-appendix-heading-new-style,
   city: none,
   year: auto,
   hide-title: false,
@@ -81,6 +83,8 @@
     skip-pagination-pages,
     section-number-prefix,
     add-pagebreaks,
+    headings-not-bold,
+    appendix-heading-new-style,
   )
 
   gost-common(
