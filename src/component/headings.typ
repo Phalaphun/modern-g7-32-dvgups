@@ -3,6 +3,7 @@
   default-appendix-heading-following-par-top-other-levels,
   default-heading-margin,
   default-heading-level-1-margin,
+  default-indent,
   default-system-headings-normal-case-left-align,
 )
 #import "appendixes.typ": is-heading-in-appendix
@@ -29,9 +30,11 @@
 )
 
 #let structure-heading-style(it, normal-case-left-align: false) = {
-  let alignment = if normal-case-left-align { left } else { center }
-  let content = if normal-case-left-align { it } else { upper(it) }
-  align(alignment)[#content]
+  if normal-case-left-align {
+    pad(left: default-indent, it)
+  } else {
+    align(center)[#upper(it)]
+  }
 }
 
 #let structure-heading(body) = {
@@ -50,6 +53,12 @@
   set heading(numbering: "1.1")
 
   show heading: it => {
+    let is-structural-heading = it.body in structural-heading-titles.values()
+    let is-configurable-structural-heading = (
+      system-headings-normal-case-left-align
+        and it.body in configurable-structural-heading-titles
+    )
+
     let heading-content = if headings-not-bold {
       [
         #set text(weight: "regular")
@@ -59,10 +68,15 @@
       it
     }
 
-    if it.body not in structural-heading-titles.values() {
+    if not is-structural-heading {
       pad(heading-content, left: indent)
+    } else if is-configurable-structural-heading {
+      structure-heading-style(
+        heading-content,
+        normal-case-left-align: true,
+      )
     } else {
-      heading-content
+      structure-heading-style(heading-content)
     }
   }
 
@@ -79,25 +93,6 @@
     .fold(selector, (acc, i) => acc.or(heading.where(body: i, level: 1)))
 
   show structural-heading: set heading(numbering: none)
-  show structural-heading: it => {
-    if add-pagebreaks {
-      pagebreak(weak: true)
-    }
-    let heading-content = structure-heading-style(
-      it,
-      normal-case-left-align:
-        system-headings-normal-case-left-align
-          and it.body in configurable-structural-heading-titles,
-    )
-    if headings-not-bold {
-      [
-        #set text(weight: "regular")
-        #heading-content
-      ]
-    } else {
-      heading-content
-    }
-  }
 
   show heading: set block(..default-heading-margin)
   show heading.where(level: 1): set block(..default-heading-level-1-margin)
