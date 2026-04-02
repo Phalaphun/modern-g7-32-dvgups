@@ -5,6 +5,7 @@
   default-heading-level-1-margin,
   default-indent,
   default-contents-heading-normal-case-left-align,
+  default-contents-heading-uppercase,
   default-system-headings-normal-case-left-align,
 )
 #import "appendixes.typ": is-heading-in-appendix
@@ -30,11 +31,17 @@
   structural-heading-titles.references,
 )
 
-#let structure-heading-style(it, normal-case-left-align: false) = {
+#let structure-heading-style(
+  it,
+  normal-case-left-align: false,
+  uppercase: true,
+) = {
   if normal-case-left-align {
     pad(left: default-indent, it)
-  } else {
+  } else if uppercase {
     align(center)[#upper(it)]
+  } else {
+    align(center)[#it]
   }
 }
 
@@ -51,6 +58,7 @@
     default-system-headings-normal-case-left-align,
   contents-heading-normal-case-left-align:
     default-contents-heading-normal-case-left-align,
+  contents-heading-uppercase: default-contents-heading-uppercase,
 ) = body => {
   show heading: set text(size: text-size)
   set heading(numbering: "1.1")
@@ -85,6 +93,11 @@
       structure-heading-style(
         heading-content,
         normal-case-left-align: true,
+      )
+    } else if is-contents-heading {
+      structure-heading-style(
+        heading-content,
+        uppercase: contents-heading-uppercase,
       )
     } else {
       structure-heading-style(heading-content)

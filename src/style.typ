@@ -19,6 +19,7 @@
   headings-not-bold,
   system-headings-normal-case-left-align,
   contents-heading-normal-case-left-align,
+  contents-heading-uppercase,
   appendix-heading-new-style,
   body,
 ) = {
@@ -37,6 +38,7 @@
       system-headings-normal-case-left-align,
     contents-heading-normal-case-left-align:
       contents-heading-normal-case-left-align,
+    contents-heading-uppercase: contents-heading-uppercase,
     appendix-heading-new-style: appendix-heading-new-style,
   )) <modern-g7-32-parameters>]
 
@@ -230,6 +232,7 @@
       system-headings-normal-case-left-align,
     contents-heading-normal-case-left-align:
       contents-heading-normal-case-left-align,
+    contents-heading-uppercase: contents-heading-uppercase,
   )
   body
 }
