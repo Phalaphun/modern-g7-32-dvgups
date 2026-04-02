@@ -27,16 +27,22 @@
 
 #let headings(text-size, indent, add-pagebreaks, headings-not-bold) = body => {
   show heading: set text(size: text-size)
-  if headings-not-bold {
-    show heading: set text(weight: "regular")
-  }
   set heading(numbering: "1.1")
 
   show heading: it => {
-    if it.body not in structural-heading-titles.values() {
-      pad(it, left: indent)
+    let heading-content = if headings-not-bold {
+      [
+        #set text(weight: "regular")
+        #it
+      ]
     } else {
       it
+    }
+
+    if it.body not in structural-heading-titles.values() {
+      pad(heading-content, left: indent)
+    } else {
+      heading-content
     }
   }
 
@@ -57,7 +63,15 @@
     if add-pagebreaks {
       pagebreak(weak: true)
     }
-    structure-heading-style(it)
+    let heading-content = structure-heading-style(it)
+    if headings-not-bold {
+      [
+        #set text(weight: "regular")
+        #heading-content
+      ]
+    } else {
+      heading-content
+    }
   }
 
   show heading: set block(..default-heading-margin)
