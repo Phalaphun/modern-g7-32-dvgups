@@ -35,8 +35,11 @@
     it.numbering,
     ..counter(heading).at(it.location()),
   )
-  let appendix-label = [#upper([приложение]) #appendix-number]
-  let appendix-title-weight = if headings-not-bold { "regular" } else { "medium" }
+  let appendix-label-weight = if headings-not-bold { "regular" } else { "bold" }
+  let appendix-label = [
+    #text(weight: appendix-label-weight)[#upper([приложение]) #appendix-number]
+  ]
+  let appendix-title-weight = if headings-not-bold { "regular" } else { "bold" }
   let appendix-title = [#text(weight: appendix-title-weight)[#it.body]]
   let label-title-gap = if it.level == 1 {
     default-appendix-heading-label-title-gap-level-1
@@ -60,6 +63,7 @@
   )
 
   if headings-not-bold {
+    show strong: set text(weight: "regular")
     set text(weight: "regular")
   }
 
