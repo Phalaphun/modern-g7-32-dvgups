@@ -4,6 +4,7 @@
   default-heading-margin,
   default-heading-level-1-margin,
   default-indent,
+  default-contents-heading-normal-case-left-align,
   default-system-headings-normal-case-left-align,
 )
 #import "appendixes.typ": is-heading-in-appendix
@@ -48,15 +49,22 @@
   headings-not-bold,
   system-headings-normal-case-left-align:
     default-system-headings-normal-case-left-align,
+  contents-heading-normal-case-left-align:
+    default-contents-heading-normal-case-left-align,
 ) = body => {
   show heading: set text(size: text-size)
   set heading(numbering: "1.1")
 
   show heading: it => {
     let is-structural-heading = it.body in structural-heading-titles.values()
+    let is-contents-heading = it.body == structural-heading-titles.contents
     let is-configurable-structural-heading = (
       system-headings-normal-case-left-align
         and it.body in configurable-structural-heading-titles
+    )
+    let is-configurable-contents-heading = (
+      contents-heading-normal-case-left-align
+        and is-contents-heading
     )
 
     let heading-content = if headings-not-bold {
@@ -70,7 +78,10 @@
 
     if not is-structural-heading {
       pad(heading-content, left: indent)
-    } else if is-configurable-structural-heading {
+    } else if (
+      is-configurable-structural-heading
+        or is-configurable-contents-heading
+    ) {
       structure-heading-style(
         heading-content,
         normal-case-left-align: true,

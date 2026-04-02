@@ -18,6 +18,7 @@
   add-pagebreaks,
   headings-not-bold,
   system-headings-normal-case-left-align,
+  contents-heading-normal-case-left-align,
   appendix-heading-new-style,
   body,
 ) = {
@@ -34,6 +35,8 @@
     headings-not-bold: headings-not-bold,
     system-headings-normal-case-left-align:
       system-headings-normal-case-left-align,
+    contents-heading-normal-case-left-align:
+      contents-heading-normal-case-left-align,
     appendix-heading-new-style: appendix-heading-new-style,
   )) <modern-g7-32-parameters>]
 
@@ -225,6 +228,8 @@
     headings-not-bold,
     system-headings-normal-case-left-align:
       system-headings-normal-case-left-align,
+    contents-heading-normal-case-left-align:
+      contents-heading-normal-case-left-align,
   )
   body
 }

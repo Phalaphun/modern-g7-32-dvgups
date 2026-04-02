@@ -50,6 +50,8 @@
   headings-not-bold: default-headings-not-bold,
   system-headings-normal-case-left-align:
     default-system-headings-normal-case-left-align,
+  contents-heading-normal-case-left-align:
+    default-contents-heading-normal-case-left-align,
   appendix-heading-new-style: default-appendix-heading-new-style,
   city: none,
   year: auto,
@@ -87,6 +89,7 @@
     add-pagebreaks,
     headings-not-bold,
     system-headings-normal-case-left-align,
+    contents-heading-normal-case-left-align,
     appendix-heading-new-style,
   )
 
