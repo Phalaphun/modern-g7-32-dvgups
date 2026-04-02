@@ -222,6 +222,11 @@
     style: "csl/gost-r-7-0-100-2018-numeric-alphabetical.csl",
     title: structural-heading-titles.references,
   )
+  show bibliography: it => {
+    show regex("(?m)^\\d+\\."): it => [#h(indent)#it]
+    show regex("\\t"): _ => h(0.5em)
+    it
+  }
 
   show: headings(
     text-size,
