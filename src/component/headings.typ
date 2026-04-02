@@ -3,6 +3,7 @@
   default-appendix-heading-following-par-top-other-levels,
   default-heading-margin,
   default-heading-level-1-margin,
+  default-system-headings-normal-case-left-align,
 )
 #import "appendixes.typ": is-heading-in-appendix
 
@@ -17,15 +18,34 @@
   references: [Список использованных источников],
 )
 
-#let structure-heading-style = it => {
-  align(center)[#upper(it)]
+#let configurable-structural-heading-titles = (
+  structural-heading-titles.performers,
+  structural-heading-titles.abstract,
+  structural-heading-titles.terms,
+  structural-heading-titles.abbreviations,
+  structural-heading-titles.intro,
+  structural-heading-titles.conclusion,
+  structural-heading-titles.references,
+)
+
+#let structure-heading-style(it, normal-case-left-align: false) = {
+  let alignment = if normal-case-left-align { left } else { center }
+  let content = if normal-case-left-align { it } else { upper(it) }
+  align(alignment)[#content]
 }
 
 #let structure-heading(body) = {
   structure-heading-style(heading(numbering: none)[#body])
 }
 
-#let headings(text-size, indent, add-pagebreaks, headings-not-bold) = body => {
+#let headings(
+  text-size,
+  indent,
+  add-pagebreaks,
+  headings-not-bold,
+  system-headings-normal-case-left-align:
+    default-system-headings-normal-case-left-align,
+) = body => {
   show heading: set text(size: text-size)
   set heading(numbering: "1.1")
 
@@ -63,7 +83,12 @@
     if add-pagebreaks {
       pagebreak(weak: true)
     }
-    let heading-content = structure-heading-style(it)
+    let heading-content = structure-heading-style(
+      it,
+      normal-case-left-align:
+        system-headings-normal-case-left-align
+          and it.body in configurable-structural-heading-titles,
+    )
     if headings-not-bold {
       [
         #set text(weight: "regular")
