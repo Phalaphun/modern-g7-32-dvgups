@@ -12,3 +12,5 @@ tests/**/.gitignore
 !tests/**/*.pdf
 tests/**/out/**/*.png
 tests/**/diff/**/*.png
+
+.vscode

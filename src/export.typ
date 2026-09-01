@@ -4,4 +4,6 @@
 #import "component/appendixes.typ": appendix-heading, appendixes
 #import "component/headings.typ": structure-heading
 #import "component/custom-title-template.typ"
+#import "component/long-table.typ": long-table
+#import "component/long-listing.typ": long-listing
 #import "utils.typ": enum-numbering

@@ -47,6 +47,13 @@
   pagination-skip-pages: (),
   add-pagebreaks: true,
   section-number-prefix: false,
+  headings-not-bold: default-headings-not-bold,
+  system-headings-normal-case-left-align:
+    default-system-headings-normal-case-left-align,
+  contents-heading-normal-case-left-align:
+    default-contents-heading-normal-case-left-align,
+  contents-heading-uppercase: default-contents-heading-uppercase,
+  appendix-heading-new-style: default-appendix-heading-new-style,
   city: none,
   year: auto,
   hide-title: false,
@@ -55,20 +62,6 @@
   ..title-arguments,
   body,
 ) = {
-  let table-counter = counter("table")
-  let image-counter = counter("image")
-  let citation-counter = counter("citation")
-  let appendix-counter = counter("appendix")
-
-  show figure.where(kind: image): it => {
-    image-counter.step()
-    it
-  }
-  show figure.where(kind: table): it => {
-    table-counter.step()
-    it
-  }
-
   if year == auto {
     year = int(datetime.today().display("[year]"))
   }
@@ -95,6 +88,11 @@
     skip-pagination-pages,
     section-number-prefix,
     add-pagebreaks,
+    headings-not-bold,
+    system-headings-normal-case-left-align,
+    contents-heading-normal-case-left-align,
+    contents-heading-uppercase,
+    appendix-heading-new-style,
   )
 
   gost-common(

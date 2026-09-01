@@ -1,75 +1,107 @@
 #import "/src/export.typ": (
-  abstract, appendix-heading, appendixes, enum-numbering, gost,
+  abstract, appendix-heading, appendixes, enum-numbering, gost, long-table,long-listing,title-templates
 )
 
 // Нумерация с использованием кириллицы
 #set enum(numbering: enum-numbering)
 
+// #show: gost.with(
+//   ministry: "Наименование министерства (ведомства) или другого структурного образования, в систему которого входит организация-исполнитель",
+//   organization: (
+//     full: "Полное наименование организации — исполнителя НИР",
+//     short: "Сокращённое наименование организации",
+//   ),
+//   udk: "индекс УДК",
+//   research-number: "регистрационный номер НИР",
+//   report-number: "регистрационный номер отчета",
+//   approved-by: (
+//     name: "Фамилия И.О.",
+//     position: "Должность, наимен. орг.",
+//     year: 2017,
+//   ), // Гриф согласования
+//   agreed-by: (
+//     name: "Фамилия И.О.",
+//     position: "Должность, наимен. орг.",
+//     year: auto,
+//   ), // Гриф утверждения, год подставляется из аргумента year
+//   report-type: "отчёт",
+//   about: "О научно-исследовательской работе",
+//   research: "Наименование НИР",
+//   bare-subject: false, // Можно убрать "по теме"
+//   subject: "Наименование отчёта",
+//   manager: (
+//     name: "Фамилия И.О.",
+//     position: "Должность",
+//     title: "Руководитель НИР,",
+//   ), // Руководитель отчёта
+//   stage: (type: "вид отчёта", num: 1), // Этап отчёта
+//   federal: "Наименование федеральной программы",
+//   part: 2, // Номер книги отчёта
+//   city: "Город",
+//   year: auto, // Можно поменять год, auto - текущий год
+//   text-size: (default: 14pt, small: 10pt), // Можно указать размеры текста
+//   indent: 1.25cm, // Можно указать отступ
+//   hide-title: false, // Убрать ли титульный лист
+//   title-footer-align: center, // Выравнивание города и года на титульном листе
+//   pagination-align: center, // Выравнивание номера страницы
+//   margin: (
+//     left: 20mm,
+//     right: 15mm,
+//     top: 20mm,
+//     bottom: 30mm,
+//   ), // Отступы страницы
+//   add-pagebreaks: true, // Убрать ли разрывы страниц
+//   performers: (
+//     "Всероссийский институт научной и технической информации "
+//       + "Российской академии наук (ВИНИТИ РАН)",
+//     // Можно указать организацию, к которой относятся следующие исполнители
+//     (
+//       name: "И.О. Фамилия",
+//       position: "Должность",
+//       part: "введение, раздел 1",
+//     ), // Можно добавить выполненную часть
+//     (name: "И.О. Фамилия", position: "Должность"),
+//     "Другая организация",
+//     (name: "И.О. Фамилия", position: "Должность"),
+//     (
+//       name: "И.О. Фамилия",
+//       position: "Должность",
+//       co-performer: true,
+//     ), // Поддерживаются соисполнители
+//   ), // Если исполнитель один - он будет перенесён на титульный лист
+// )
+
 #show: gost.with(
-  ministry: "Наименование министерства (ведомства) или другого структурного образования, в систему которого входит организация-исполнитель",
-  organization: (
-    full: "Полное наименование организации — исполнителя НИР",
-    short: "Сокращённое наименование организации",
+  title-template: title-templates.at("dvgups-default"),
+  ministry: (
+    [Министерство транспорта Российской Федерации],
+    [Федеральное агентство железнодорожного транспорта],
   ),
-  udk: "индекс УДК",
-  research-number: "регистрационный номер НИР",
-  report-number: "регистрационный номер отчета",
-  approved-by: (
-    name: "Фамилия И.О.",
-    position: "Должность, наимен. орг.",
-    year: 2017,
-  ), // Гриф согласования
-  agreed-by: (
-    name: "Фамилия И.О.",
-    position: "Должность, наимен. орг.",
-    year: auto,
-  ), // Гриф утверждения, год подставляется из аргумента year
-  report-type: "отчёт",
-  about: "О научно-исследовательской работе",
-  research: "Наименование НИР",
-  bare-subject: false, // Можно убрать "по теме"
-  subject: "Наименование отчёта",
-  manager: (
-    name: "Фамилия И.О.",
-    position: "Должность",
-    title: "Руководитель НИР,",
-  ), // Руководитель отчёта
-  stage: (type: "вид отчёта", num: 1), // Этап отчёта
-  federal: "Наименование федеральной программы",
-  part: 2, // Номер книги отчёта
-  city: "Город",
-  year: auto, // Можно поменять год, auto - текущий год
-  text-size: (default: 14pt, small: 10pt), // Можно указать размеры текста
-  indent: 1.25cm, // Можно указать отступ
-  hide-title: false, // Убрать ли титульный лист
-  title-footer-align: center, // Выравнивание города и года на титульном листе
-  pagination-align: center, // Выравнивание номера страницы
-  margin: (
-    left: 30mm,
-    right: 15mm,
-    top: 20mm,
-    bottom: 20mm,
-  ), // Отступы страницы
-  add-pagebreaks: true, // Убрать ли разрывы страниц
-  performers: (
-    "Всероссийский институт научной и технической информации "
-      + "Российской академии наук (ВИНИТИ РАН)",
-    // Можно указать организацию, к которой относятся следующие исполнители
-    (
-      name: "И.О. Фамилия",
-      position: "Должность",
-      part: "введение, раздел 1",
-    ), // Можно добавить выполненную часть
-    (name: "И.О. Фамилия", position: "Должность"),
-    "Другая организация",
-    (name: "И.О. Фамилия", position: "Должность"),
-    (
-      name: "И.О. Фамилия",
-      position: "Должность",
-      co-performer: true,
-    ), // Поддерживаются соисполнители
-  ), // Если исполнитель один - он будет перенесён на титульный лист
+  university: (
+    [Федеральное государственное бюджетное образовательное учреждение],
+    [высшего образования],
+    [«Дальневосточный государственный университет путей сообщения»],
+  ),
+  department: "Цифровая индустрия и защита информации",
+  topic: "Разработка защищенной базы данных",
+  work-type: "Курсовая работа",
+  discipline: "Системы хранения данных и их безопасность",
+  specialty-code: "09.04.02",
+  variant: 21,
+  work-number: 1,
+  group: "МО211БИС",
+  student: "Фамилия И.О.",
+  advisor: "Фамилия И.О.",
+  advisor-position-secondary: "няня",
+  city: "Хабаровск",
+  year: 2026,
+  pagination-align: right,
+  pagination-skip-pages: (2,3,4),
+  margin: (left: 20mm, right: 15mm, top: 20mm, bottom: 30mm),
+  section-number-prefix:true
 )
+
+
 
 #abstract(
   "шаблон",
@@ -109,9 +141,38 @@
     table.header([Заголовок 1], [Заголовок 2], [Т], [Заголовок 4]),
     [Проверка], [Проверка], [Проверка], [Проверка],
     [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
   ),
-  caption: [Пример таблицы с данными],
+  caption: [Пример таблицы с данными фыа ыва ыва ыва ыва ы],
 ) <example-table>
+
+
+Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third – использование типов и обозначений @ivanov2020osnovy.
 
 == Блоки кода
 
@@ -125,7 +186,7 @@
   // Функция вывода сообщения
   print("Hello, world!")
   ```,
-  caption: [Пример кода на Typst],
+  caption: [Пример кода на TypstПример кода на TypstПример кода на TypstПример кода на TypstПример кода на Typst],
 ) <example-code>
 
 Этот блок кода демонстрирует базовую структуру программы на Typst.
@@ -154,9 +215,30 @@ $ cal(A) := { x in RR | x "натуральное" } $
 Изображения добавляются с помощью функции `image()` внутри макроса `#figure`. Пример вставки изображения указан на рисунке @example-image.
 
 #figure(
-  image("/tests/assets/home.jpg", width: 40%),
+  image("/tests/assets/home.jpg", width: 35%),
   caption: "Пример изображения",
 ) <example-image>
+
+
+
+Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third.
+
+
+Формула @example-formula-first показывает как применять сложные функции, формула @example-formula-second демонстрирует как можно оформить матрицы, а формула @example-formula-third – использование типов и обозначений @ivanov2020osnovy фыв фыв фыв фыв фыв фыв фыв фыв.
+
+#figure(
+  image("/tests/assets/home.jpg", width: 40%),
+  caption: "Пример Пример кода на TypstПример кода на TypstПример кода на TypstПример кода на TypstПример кода на Typst",
+) <example-image1>
+
+фывфывфывфывфывфывфвфывфыывывывывыфвыфвыфвфвывфыфывыфв
+
+= Test
+== Tsts
+
+= пвапва
+
+А я хочу а я хочу опять
 
 = Работа с аргументами шаблона в gost.with
 
@@ -187,6 +269,265 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 Шаблон modern-g7-32 для Typst значительно упрощает подготовку документов, соответствующих государственным стандартам. Он обеспечивает удобное создание таблиц, блоков кода и изображений, а гибкая настройка через функцию `gost.with` позволяет автоматически подставлять дату и исключать ненужные элементы с титульной страницы. Используйте данный шаблон для создания качественных и стандартизированных документов @petrov2021analiz.
 
+
+#let rows(count) = (
+  for i in range(0, count) {
+    ([Строка #(i + 1)], [Значение #(i + 1)],)
+  }
+).flatten()
+
+#let sample-table(count) = table(
+  columns: 2,
+  table.header([Колонка 1], [Колонка 2]),
+  ..rows(count),
+)
+
+#long-table(
+  sample-table(10),
+  caption: [Короткая таблица на одной странице],
+)
+
+#pagebreak()
+
+#long-table(
+  sample-table(40),
+  caption: [Таблица на две страницы],
+)
+
+#pagebreak()
+
+#long-table(
+  sample-table(90),
+  caption: [Таблица на три и более страниц],
+)<asdasd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#long-table(
+  table(
+    columns: 4,
+    table.header([Заголовок 1], [Заголовок 2], [Т], [Заголовок 4]),
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка], [Проверка], [Проверка], [Проверка],
+  ),
+  caption: [Пример таблицы с данными фыа ыва ыва ыва ыва ы],
+) <tablelong1>
+
+
+
+// #hide("фывфыв")
+
+ыва
+
+
+
+#let make-lines(count) = range(0, count).map(i => "line " + str(i + 1))
+
+#let make-code(count, with-empty-lines: false, trailing-newline: false) = {
+  let lines = make-lines(count)
+  if with-empty-lines {
+    let spaced-lines = ()
+    for (i, line) in lines.enumerate() {
+      if calc.rem(i + 1, 5) == 0 {
+        spaced-lines.push(line + "\n")
+      } else {
+        spaced-lines.push(line)
+      }
+    }
+    lines = spaced-lines
+  }
+
+  let text = lines.join("\n")
+  if trailing-newline {
+    return text + "\n"
+  }
+  text
+}
+
+#long-listing(
+  ```python
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+        print("Hello, world!")
+
+  ```,
+  caption: [Короткий листинг на одфалоптывл  ыфва ывапвыа пывап ывапыва пыва пной странице],
+) <listing-one>
+
+Съешь еще эти булок да выепей чаю со мной и ним и ним и ним и ним и ним и ним и ним итем и тем и тем итем итем
+
+
+
+
+
+
+
+
+
+#long-listing(
+  ```python
+  print("Hello, world!")
+    print("Hello, world!")
+      print("Hello, world!")
+        print("Hello, world!")
+          print("Hello, world!")
+            print("Hello, world!")
+
+              print("Hello, world!")
+                print("He
+  ```,
+  caption: [Короткий листинг на одной странице],
+) <listing-one>
+
+
+
+
+#long-listing(
+  ```python
+  print("Hello, world!")
+
+  ```,
+  caption: [Короткий листинг на одной странице],
+) <listing-one123>
+
+123 @listing-one123 123 
+
+@tablelong1
+
 #bibliography("references.bib")
 
 #show: appendixes
@@ -205,6 +546,10 @@ $ cal(A) := { x in RR | x "натуральное" } $
   image("/tests/assets/abstract.jpg", width: 40%),
   caption: "Пример изображения",
 ) <appendix-image-3>
+
+#lorem(10)
+
+// #lorem(10)
 
 = Блоки кода
 Чтобы оформить блоки кода в документе, можно использовать синтаксис, похожий на Markdown. Пример указан на листинге @appendix-code:

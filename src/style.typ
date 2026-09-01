@@ -16,6 +16,11 @@
   pagination-skip-pages,
   section-number-prefix,
   add-pagebreaks,
+  headings-not-bold,
+  system-headings-normal-case-left-align,
+  contents-heading-normal-case-left-align,
+  contents-heading-uppercase,
+  appendix-heading-new-style,
   body,
 ) = {
   let small-text-difference = (
@@ -28,6 +33,13 @@
     small-text-size: small-text-size,
     add-pagebreaks: add-pagebreaks,
     section-number-prefix: section-number-prefix,
+    headings-not-bold: headings-not-bold,
+    system-headings-normal-case-left-align:
+      system-headings-normal-case-left-align,
+    contents-heading-normal-case-left-align:
+      contents-heading-normal-case-left-align,
+    contents-heading-uppercase: contents-heading-uppercase,
+    appendix-heading-new-style: appendix-heading-new-style,
   )) <modern-g7-32-parameters>]
 
 
@@ -119,21 +131,64 @@
   //   set math.equation(numbering: "(1)")
   // }
 
-  show figure: pad.with(bottom: default-figure-margin-bottom)
-
   show image: set align(center)
   show figure.where(kind: image): set figure(supplement: [Рисунок])
+  show figure.where(kind: image): set block(..default-image-figure-margin)
+  show figure.where(kind: image): set figure(gap: default-image-figure-gap)
+  show figure.where(kind: image): set par(..default-image-par-style)
+  show figure.caption.where(kind: image): set block(..default-image-caption-margin)
+  show figure.caption.where(kind: image): set text(size: default-image-caption-text-size)
+  show figure.caption.where(kind: image): set par(..default-image-caption-par-style)
 
   show figure.where(kind: table): it => {
+    let below-space = text-size * default-table-and-raw-figure-below-lines
     set figure.caption(position: top)
-    it
+    set block(
+      breakable: true,
+      above: default-table-and-raw-figure-margin-above,
+      below: 0pt,
+    )
+    set align(left)
+    show table.cell: set align(left)
+    show table.cell: set block(width: default-table-cell-width)
+    [#it#v(below-space, weak: false)]
   }
-  show figure.where(kind: table): set block(breakable: true)
-  show figure.caption.where(kind: table): set align(left)
-  show table.cell: set align(left)
+  show figure.caption.where(kind: table): it => {
+    set align(left)
+    set block(..default-table-and-raw-caption-margin)
+    set text(size: default-table-caption-text-size)
+    set par(
+      leading: default-table-and-raw-caption-leading,
+      first-line-indent: default-table-and-raw-caption-first-line-indent,
+    )
+
+    [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
+  }
   // TODO: Расположить table.header по центру и сделать шрифт жирным
 
-  show figure.where(kind: raw): set block(breakable: true)
+  show figure.where(kind: raw): it => {
+    let below-space = text-size * default-table-and-raw-figure-below-lines
+    set figure.caption(position: top)
+    set block(
+      breakable: true,
+      above: default-table-and-raw-figure-margin-above,
+      below: 0pt,
+    )
+    set align(left)
+    show raw.where(block: true): set block(..default-listing-raw-block-style)
+    [#it#v(below-space, weak: false)]
+  }
+  show figure.caption.where(kind: raw): it => {
+    set align(left)
+    set block(..default-table-and-raw-caption-margin)
+    set text(size: default-raw-caption-text-size)
+    set par(
+      leading: default-table-and-raw-caption-leading,
+      first-line-indent: default-table-and-raw-caption-first-line-indent,
+    )
+
+    [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
+  }
 
   show heading.where(level: 1): it => context {
     if not state("appendixes", false).at(it.location()) {
@@ -167,7 +222,22 @@
     style: "csl/gost-r-7-0-100-2018-numeric-alphabetical.csl",
     title: structural-heading-titles.references,
   )
+  show bibliography: it => {
+    show regex("(?m)^\\d+\\."): it => [#h(indent)#it]
+    show regex("\\t"): _ => h(0.5em)
+    it
+  }
 
-  show: headings(text-size, indent, add-pagebreaks)
+  show: headings(
+    text-size,
+    indent,
+    add-pagebreaks,
+    headings-not-bold,
+    system-headings-normal-case-left-align:
+      system-headings-normal-case-left-align,
+    contents-heading-normal-case-left-align:
+      contents-heading-normal-case-left-align,
+    contents-heading-uppercase: contents-heading-uppercase,
+  )
   body
 }

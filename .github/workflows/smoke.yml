@@ -1,0 +1,43 @@
+name: Gitea smoke test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  repository-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify package structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f typst.toml
+          test -d src
+          test -d template
+          test -d tests
+          git diff --exit-code
+
+      - name: Validate package manifest
+        shell: python
+        run: |
+          import pathlib
+          import tomllib
+
+          manifest_path = pathlib.Path("typst.toml")
+          manifest = tomllib.loads(manifest_path.read_text(encoding="utf-8"))
+          package = manifest.get("package", {})
+
+          required = ("name", "version", "entrypoint")
+          missing = [key for key in required if not package.get(key)]
+          if missing:
+              raise SystemExit(f"Missing package fields: {', '.join(missing)}")
+
+          entrypoint = pathlib.Path(package["entrypoint"])
+          if not entrypoint.is_file():
+              raise SystemExit(f"Entrypoint does not exist: {entrypoint}")
+
+          print(f"Validated {package['name']} {package['version']}")
