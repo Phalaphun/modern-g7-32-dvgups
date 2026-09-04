@@ -15,6 +15,7 @@
 #let default-contents-heading-normal-case-left-align = false
 #let default-contents-heading-uppercase = false
 #let default-appendix-heading-new-style = true
+#let default-appendix-heading-uppercase = false
 #let default-appendix-heading-label-title-gap-level-1 = 24pt
 #let default-appendix-heading-label-title-gap-other-levels = 18pt
 #let default-appendix-title-padding-top-level-1 = 0pt

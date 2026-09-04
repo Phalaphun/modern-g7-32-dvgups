@@ -54,6 +54,7 @@
     default-contents-heading-normal-case-left-align,
   contents-heading-uppercase: default-contents-heading-uppercase,
   appendix-heading-new-style: default-appendix-heading-new-style,
+  appendix-heading-uppercase: default-appendix-heading-uppercase,
   city: none,
   year: auto,
   hide-title: false,
@@ -93,6 +94,7 @@
     contents-heading-normal-case-left-align,
     contents-heading-uppercase,
     appendix-heading-new-style,
+    appendix-heading-uppercase,
   )
 
   gost-common(

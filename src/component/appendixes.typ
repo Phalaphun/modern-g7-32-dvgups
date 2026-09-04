@@ -1,6 +1,7 @@
 #import "../utils.typ": heading-numbering
 #import "../constants.typ": (
   default-appendix-heading-new-style,
+  default-appendix-heading-uppercase,
   default-appendix-heading-label-title-gap-level-1,
   default-appendix-heading-label-title-gap-other-levels,
   default-appendix-title-padding-top-level-1,
@@ -30,14 +31,20 @@
   it,
   headings-not-bold: default-headings-not-bold,
   appendix-heading-new-style: default-appendix-heading-new-style,
+  appendix-heading-uppercase: default-appendix-heading-uppercase,
 ) = {
   let appendix-number = numbering(
     it.numbering,
     ..counter(heading).at(it.location()),
   )
   let appendix-label-weight = if headings-not-bold { "regular" } else { "bold" }
+  let appendix-label-text = if appendix-heading-uppercase {
+    upper([приложение])
+  } else {
+    [Приложение]
+  }
   let appendix-label = [
-    #text(weight: appendix-label-weight)[#upper([приложение]) #appendix-number]
+    #text(weight: appendix-label-weight)[#appendix-label-text #appendix-number]
   ]
   let appendix-title-weight = if headings-not-bold { "regular" } else { "bold" }
   let appendix-title = [#text(weight: appendix-title-weight)[#it.body]]
@@ -109,12 +116,21 @@
         default: default-appendix-heading-new-style,
       )
     }
+    let appendix-heading-uppercase = if parameters == none {
+      default-appendix-heading-uppercase
+    } else {
+      parameters.value.at(
+        "appendix-heading-uppercase",
+        default: default-appendix-heading-uppercase,
+      )
+    }
 
     counter("appendix").step()
     render-appendix-heading(
       it,
       headings-not-bold: headings-not-bold,
       appendix-heading-new-style: appendix-heading-new-style,
+      appendix-heading-uppercase: appendix-heading-uppercase,
     )
   }
 

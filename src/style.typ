@@ -21,6 +21,7 @@
   contents-heading-normal-case-left-align,
   contents-heading-uppercase,
   appendix-heading-new-style,
+  appendix-heading-uppercase,
   body,
 ) = {
   let small-text-difference = (
@@ -40,6 +41,7 @@
       contents-heading-normal-case-left-align,
     contents-heading-uppercase: contents-heading-uppercase,
     appendix-heading-new-style: appendix-heading-new-style,
+    appendix-heading-uppercase: appendix-heading-uppercase,
   )) <modern-g7-32-parameters>]
 
 
