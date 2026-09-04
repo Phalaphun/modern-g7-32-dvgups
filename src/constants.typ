@@ -44,6 +44,7 @@
 #let default-table-and-raw-caption-margin = (above: 0pt, below: 16pt)
 #let default-table-text-size = 12pt
 #let default-table-caption-text-size = 12pt
+#let default-table-cell-vertical-inset = 6pt
 #let default-raw-caption-text-size = 14pt
 #let default-table-and-raw-caption-leading = 0.5em
 #let default-table-and-raw-caption-first-line-indent = (

@@ -98,6 +98,7 @@
   pagination-align: right,
   pagination-skip-pages: (2,3,4),
   margin: (left: 30mm, right: 10mm, top: 20mm, bottom: 20mm),
+  table-cell-vertical-inset: 6pt,
   section-number-prefix:true,
   contents-heading-normal-case-left-align: false,
   contents-heading-uppercase: false,

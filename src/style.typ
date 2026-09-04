@@ -11,6 +11,7 @@
   small-text-size,
   indent,
   margin,
+  table-cell-vertical-inset,
   title-footer-align,
   pagination-align,
   pagination-skip-pages,
@@ -40,6 +41,7 @@
   [#metadata((
     small-text-size: small-text-size,
     indent: indent,
+    table-cell-vertical-inset: table-cell-vertical-inset,
     add-pagebreaks: add-pagebreaks,
     section-number-prefix: section-number-prefix,
     headings-not-bold: headings-not-bold,
@@ -170,6 +172,7 @@
     )
     set align(left)
     set text(size: default-table-text-size)
+    set table(inset: (x: 5pt, y: table-cell-vertical-inset))
     show table.cell: set align(left)
     show table.cell: set block(width: default-table-cell-width)
     show table.cell.where(y: 0): set align(center)
