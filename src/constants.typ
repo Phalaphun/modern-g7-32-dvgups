@@ -1,5 +1,5 @@
 #let default-text-size = (default: 14pt, small: 10pt)
-#let default-indent = 1.25cm
+#let default-indent = 0.75cm
 #let default-margin = (left: 30mm, right: 15mm, top: 20mm, bottom: 20mm)
 #let default-justify = true
 #let default-leading = 1.5em - 0.75em
