@@ -152,8 +152,10 @@
       below: 0pt,
     )
     set align(left)
+    set text(size: default-table-text-size)
     show table.cell: set align(left)
     show table.cell: set block(width: default-table-cell-width)
+    show table.cell.where(y: 0): set align(center)
     [#it#v(below-space, weak: false)]
   }
   show figure.caption.where(kind: table): it => {
@@ -167,8 +169,6 @@
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
   }
-  // TODO: Расположить table.header по центру и сделать шрифт жирным
-
   show figure.where(kind: raw): it => {
     let below-space = text-size * default-table-and-raw-figure-below-lines
     set figure.caption(position: top)

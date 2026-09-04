@@ -35,7 +35,8 @@
 #let default-table-and-raw-figure-margin-above = 24pt
 #let default-table-and-raw-figure-below-lines = 2
 #let default-table-and-raw-caption-margin = (above: 0pt, below: 16pt)
-#let default-table-caption-text-size = 14pt
+#let default-table-text-size = 12pt
+#let default-table-caption-text-size = 12pt
 #let default-raw-caption-text-size = 14pt
 #let default-table-and-raw-caption-leading = 0.5em
 #let default-table-and-raw-caption-first-line-indent = (
@@ -77,4 +78,4 @@
 )
 #let default-long-table-end-marker-cell-inset = (x: 0pt, y: 0pt)
 #let default-long-table-figure-gap = 0pt
-#let default-long-table-continuation-text-size = 14pt
+#let default-long-table-continuation-text-size = 12pt

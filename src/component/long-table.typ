@@ -122,6 +122,12 @@
     .filter(child => child.func() == table.header)
     .map(header => header.fields().at("children", default: ()))
     .flatten()
+    .map(cell => {
+      let fields = cell.fields()
+      let body = fields.remove("body")
+      fields.insert("align", center)
+      table.cell(..fields, body)
+    })
 
   let body-children = original-children
     .filter(child => child.func() != table.header)
@@ -129,6 +135,7 @@
   let continuation-row = table.cell(
     colspan: column-count,
     stroke: none,
+    align: left,
     inset: continuation-cell-inset,
   )[
     #context {
