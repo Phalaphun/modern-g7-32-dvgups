@@ -205,7 +205,7 @@
     it
   }
 
-  set list(marker: [–], indent: indent, spacing: default-list-spacing)
+  set list(marker: [-], indent: indent, spacing: default-list-spacing)
   set enum(indent: indent, spacing: default-enum-spacing)
 
 
