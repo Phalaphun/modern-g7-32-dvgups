@@ -43,7 +43,7 @@
   indent: default-indent,
   margin: default-margin,
   title-footer-align: center,
-  pagination-align: center,
+  pagination-align: right,
   pagination-skip-pages: (),
   add-pagebreaks: true,
   section-number-prefix: false,
