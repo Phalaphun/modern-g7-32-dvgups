@@ -9,6 +9,7 @@
   default-long-listing-line-number-cell-inset,
   default-listing-raw-block-style,
   default-table-and-raw-caption-leading,
+  default-indent,
 )
 //TODO: Реализовать автоматическое выравнивание по левому краю. Чтобы отрезались лишние отступы табуляции. 
 #let marker-after-current-page(marker-position, current-position) = {
@@ -100,6 +101,9 @@
   )
   assert(caption != none, message: "Для long-listing требуется caption: ...")
 
+  let continuation-cell-inset = default-long-listing-continuation-cell-inset
+  continuation-cell-inset.insert("left", 0pt)
+
   let raw-fields = raw-content.fields()
   let raw-block = raw-fields.at("block", default: false)
   assert(raw-block, message: "long-listing поддерживает только raw(..., block: true).")
@@ -111,9 +115,17 @@
   let continuation-row = table.cell(
     colspan: 1,
     stroke: none,
-    inset: default-long-listing-continuation-cell-inset,
+    inset: continuation-cell-inset,
   )[
-    #continuation-title()
+    #context {
+      let parameters = query(<modern-g7-32-parameters>).first(default: none)
+      let indent = if parameters == none {
+        default-indent
+      } else {
+        parameters.value.at("indent", default: default-indent)
+      }
+      pad(left: indent, continuation-title())
+    }
   ]
 
   let lines-table = table(

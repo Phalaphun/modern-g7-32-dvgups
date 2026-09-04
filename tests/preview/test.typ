@@ -97,12 +97,13 @@
   year: 2026,
   pagination-align: right,
   pagination-skip-pages: (2,3,4),
-  margin: (left: 20mm, right: 15mm, top: 20mm, bottom: 30mm),
+  margin: (left: 30mm, right: 10mm, top: 20mm, bottom: 20mm),
   section-number-prefix:true,
   contents-heading-normal-case-left-align: false,
   contents-heading-uppercase: true,
   appendix-heading-new-style: true,
-  appendix-heading-uppercase: false
+  appendix-heading-uppercase: false,
+  indent:0.75cm
 )
 
 

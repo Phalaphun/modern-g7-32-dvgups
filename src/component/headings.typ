@@ -33,11 +33,12 @@
 
 #let structure-heading-style(
   it,
+  indent: default-indent,
   normal-case-left-align: false,
   uppercase: true,
 ) = {
   if normal-case-left-align {
-    pad(left: default-indent, it)
+    pad(left: indent, it)
   } else if uppercase {
     align(center)[#upper(it)]
   } else {
@@ -92,15 +93,17 @@
     ) {
       structure-heading-style(
         heading-content,
+        indent: indent,
         normal-case-left-align: true,
       )
     } else if is-contents-heading {
       structure-heading-style(
         heading-content,
+        indent: indent,
         uppercase: contents-heading-uppercase,
       )
     } else {
-      structure-heading-style(heading-content)
+      structure-heading-style(heading-content, indent: indent)
     }
   }
 

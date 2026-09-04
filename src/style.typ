@@ -32,6 +32,7 @@
   }
   [#metadata((
     small-text-size: small-text-size,
+    indent: indent,
     add-pagebreaks: add-pagebreaks,
     section-number-prefix: section-number-prefix,
     headings-not-bold: headings-not-bold,
@@ -161,7 +162,7 @@
     set text(size: default-table-caption-text-size)
     set par(
       leading: default-table-and-raw-caption-leading,
-      first-line-indent: default-table-and-raw-caption-first-line-indent,
+      first-line-indent: (amount: indent, all: true),
     )
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
@@ -186,7 +187,7 @@
     set text(size: default-raw-caption-text-size)
     set par(
       leading: default-table-and-raw-caption-leading,
-      first-line-indent: default-table-and-raw-caption-first-line-indent,
+      first-line-indent: (amount: indent, all: true),
     )
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]

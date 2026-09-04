@@ -5,6 +5,7 @@
   default-long-table-end-marker-value,
   default-long-table-figure-gap,
   default-table-and-raw-caption-leading,
+  default-indent,
 )
 
 #let marker-after-current-page(marker-position, current-position) = {
@@ -89,6 +90,9 @@
   )
   assert(caption != none, message: "Для long-table требуется caption: ...")
 
+  let continuation-cell-inset = default-long-table-continuation-cell-inset
+  continuation-cell-inset.insert("left", 0pt)
+
   let table-fields = table-content.fields()
   let original-children = table-fields.at("children", default: ())
   let has-footer = original-children.any(child => child.func() == table.footer)
@@ -125,9 +129,17 @@
   let continuation-row = table.cell(
     colspan: column-count,
     stroke: none,
-    inset: default-long-table-continuation-cell-inset,
+    inset: continuation-cell-inset,
   )[
-    #continuation-title()
+    #context {
+      let parameters = query(<modern-g7-32-parameters>).first(default: none)
+      let indent = if parameters == none {
+        default-indent
+      } else {
+        parameters.value.at("indent", default: default-indent)
+      }
+      pad(left: indent, continuation-title())
+    }
   ]
 
   let combined-header = table.header(
