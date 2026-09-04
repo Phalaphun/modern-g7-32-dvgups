@@ -164,7 +164,7 @@
     set text(size: default-table-caption-text-size)
     set par(
       leading: default-table-and-raw-caption-leading,
-      first-line-indent: (amount: indent, all: true),
+      first-line-indent: 0pt,
     )
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
