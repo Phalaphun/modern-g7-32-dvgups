@@ -6,6 +6,13 @@
   default-indent,
   default-contents-heading-normal-case-left-align,
   default-contents-heading-uppercase,
+  default-contents-heading-margin-bottom,
+  default-introduction-heading-normal-case-left-align,
+  default-introduction-heading-uppercase,
+  default-conclusion-heading-normal-case-left-align,
+  default-conclusion-heading-uppercase,
+  default-references-heading-normal-case-left-align,
+  default-references-heading-uppercase,
   default-system-headings-normal-case-left-align,
 )
 #import "appendixes.typ": is-heading-in-appendix
@@ -60,6 +67,16 @@
   contents-heading-normal-case-left-align:
     default-contents-heading-normal-case-left-align,
   contents-heading-uppercase: default-contents-heading-uppercase,
+  contents-heading-margin-bottom: default-contents-heading-margin-bottom,
+  introduction-heading-normal-case-left-align:
+    default-introduction-heading-normal-case-left-align,
+  introduction-heading-uppercase: default-introduction-heading-uppercase,
+  conclusion-heading-normal-case-left-align:
+    default-conclusion-heading-normal-case-left-align,
+  conclusion-heading-uppercase: default-conclusion-heading-uppercase,
+  references-heading-normal-case-left-align:
+    default-references-heading-normal-case-left-align,
+  references-heading-uppercase: default-references-heading-uppercase,
 ) = body => {
   show heading: set text(size: text-size)
   set heading(numbering: "1.1")
@@ -67,15 +84,13 @@
   show heading: it => {
     let is-structural-heading = it.body in structural-heading-titles.values()
     let is-contents-heading = it.body == structural-heading-titles.contents
+    let is-introduction-heading = it.body == structural-heading-titles.intro
+    let is-conclusion-heading = it.body == structural-heading-titles.conclusion
+    let is-references-heading = it.body == structural-heading-titles.references
     let is-configurable-structural-heading = (
       system-headings-normal-case-left-align
         and it.body in configurable-structural-heading-titles
     )
-    let is-configurable-contents-heading = (
-      contents-heading-normal-case-left-align
-        and is-contents-heading
-    )
-
     let heading-content = if headings-not-bold {
       [
         #set text(weight: "regular")
@@ -87,20 +102,39 @@
 
     if not is-structural-heading {
       pad(heading-content, left: indent)
-    } else if (
-      is-configurable-structural-heading
-        or is-configurable-contents-heading
-    ) {
-      structure-heading-style(
-        heading-content,
-        indent: indent,
-        normal-case-left-align: true,
-      )
     } else if is-contents-heading {
       structure-heading-style(
         heading-content,
         indent: indent,
+        normal-case-left-align: contents-heading-normal-case-left-align,
         uppercase: contents-heading-uppercase,
+      )
+    } else if is-introduction-heading {
+      structure-heading-style(
+        heading-content,
+        indent: indent,
+        normal-case-left-align: introduction-heading-normal-case-left-align,
+        uppercase: introduction-heading-uppercase,
+      )
+    } else if is-conclusion-heading {
+      structure-heading-style(
+        heading-content,
+        indent: indent,
+        normal-case-left-align: conclusion-heading-normal-case-left-align,
+        uppercase: conclusion-heading-uppercase,
+      )
+    } else if is-references-heading {
+      structure-heading-style(
+        heading-content,
+        indent: indent,
+        normal-case-left-align: references-heading-normal-case-left-align,
+        uppercase: references-heading-uppercase,
+      )
+    } else if is-configurable-structural-heading {
+      structure-heading-style(
+        heading-content,
+        indent: indent,
+        normal-case-left-align: true,
       )
     } else {
       structure-heading-style(heading-content, indent: indent)
@@ -123,6 +157,10 @@
 
   show heading: set block(..default-heading-margin)
   show heading.where(level: 1): set block(..default-heading-level-1-margin)
+  show heading.where(
+    level: 1,
+    body: structural-heading-titles.contents,
+  ): set block(below: contents-heading-margin-bottom)
 
   show par: it => context {
     let headings-before = query(selector(heading).before(here()))

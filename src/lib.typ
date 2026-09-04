@@ -53,6 +53,16 @@
   contents-heading-normal-case-left-align:
     default-contents-heading-normal-case-left-align,
   contents-heading-uppercase: default-contents-heading-uppercase,
+  contents-heading-margin-bottom: default-contents-heading-margin-bottom,
+  introduction-heading-normal-case-left-align:
+    default-introduction-heading-normal-case-left-align,
+  introduction-heading-uppercase: default-introduction-heading-uppercase,
+  conclusion-heading-normal-case-left-align:
+    default-conclusion-heading-normal-case-left-align,
+  conclusion-heading-uppercase: default-conclusion-heading-uppercase,
+  references-heading-normal-case-left-align:
+    default-references-heading-normal-case-left-align,
+  references-heading-uppercase: default-references-heading-uppercase,
   appendix-heading-new-style: default-appendix-heading-new-style,
   appendix-heading-uppercase: default-appendix-heading-uppercase,
   city: none,
@@ -93,6 +103,13 @@
     system-headings-normal-case-left-align,
     contents-heading-normal-case-left-align,
     contents-heading-uppercase,
+    contents-heading-margin-bottom,
+    introduction-heading-normal-case-left-align,
+    introduction-heading-uppercase,
+    conclusion-heading-normal-case-left-align,
+    conclusion-heading-uppercase,
+    references-heading-normal-case-left-align,
+    references-heading-uppercase,
     appendix-heading-new-style,
     appendix-heading-uppercase,
   )

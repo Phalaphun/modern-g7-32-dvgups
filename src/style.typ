@@ -20,6 +20,13 @@
   system-headings-normal-case-left-align,
   contents-heading-normal-case-left-align,
   contents-heading-uppercase,
+  contents-heading-margin-bottom,
+  introduction-heading-normal-case-left-align,
+  introduction-heading-uppercase,
+  conclusion-heading-normal-case-left-align,
+  conclusion-heading-uppercase,
+  references-heading-normal-case-left-align,
+  references-heading-uppercase,
   appendix-heading-new-style,
   appendix-heading-uppercase,
   body,
@@ -41,6 +48,16 @@
     contents-heading-normal-case-left-align:
       contents-heading-normal-case-left-align,
     contents-heading-uppercase: contents-heading-uppercase,
+    contents-heading-margin-bottom: contents-heading-margin-bottom,
+    introduction-heading-normal-case-left-align:
+      introduction-heading-normal-case-left-align,
+    introduction-heading-uppercase: introduction-heading-uppercase,
+    conclusion-heading-normal-case-left-align:
+      conclusion-heading-normal-case-left-align,
+    conclusion-heading-uppercase: conclusion-heading-uppercase,
+    references-heading-normal-case-left-align:
+      references-heading-normal-case-left-align,
+    references-heading-uppercase: references-heading-uppercase,
     appendix-heading-new-style: appendix-heading-new-style,
     appendix-heading-uppercase: appendix-heading-uppercase,
   )) <modern-g7-32-parameters>]
@@ -241,6 +258,16 @@
     contents-heading-normal-case-left-align:
       contents-heading-normal-case-left-align,
     contents-heading-uppercase: contents-heading-uppercase,
+    contents-heading-margin-bottom: contents-heading-margin-bottom,
+    introduction-heading-normal-case-left-align:
+      introduction-heading-normal-case-left-align,
+    introduction-heading-uppercase: introduction-heading-uppercase,
+    conclusion-heading-normal-case-left-align:
+      conclusion-heading-normal-case-left-align,
+    conclusion-heading-uppercase: conclusion-heading-uppercase,
+    references-heading-normal-case-left-align:
+      references-heading-normal-case-left-align,
+    references-heading-uppercase: references-heading-uppercase,
   )
   body
 }
