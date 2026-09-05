@@ -192,7 +192,7 @@
   }
 
   set ref(supplement: none)
-  set figure.caption(separator: " — ")
+  set figure.caption(separator: " – ")
 
 
 
