@@ -12,6 +12,7 @@
   indent,
   margin,
   body-leading,
+  contents-leading,
   listing-caption-gap,
   listing-caption-indent,
   listing-text-size,
@@ -59,6 +60,7 @@
     small-text-size: small-text-size,
     indent: indent,
     body-leading: body-leading,
+    contents-leading: contents-leading,
     listing-caption-gap: listing-caption-gap,
     listing-caption-indent: listing-caption-indent,
     listing-text-size: listing-text-size,
@@ -115,6 +117,7 @@
   )
 
   set outline(indent: indent, depth: default-outline-depth)
+  show outline: set par(leading: contents-leading)
   show outline: set block(below: indent / 2)
   show outline.entry: it => {
     show linebreak: [ ]

@@ -4,6 +4,7 @@
 #let default-justify = true
 #let default-leading = 1.5em - 0.75em
 #let default-body-leading = 1.5em - 0.75em + 1mm
+#let default-contents-leading = 1.5em - 0.75em + 1mm
 #let default-spacing = 1em
 #let default-figure-margin-bottom = 0.5em
 #let default-list-spacing = 1em
