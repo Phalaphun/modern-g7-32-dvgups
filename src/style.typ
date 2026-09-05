@@ -32,6 +32,7 @@
   section-number-prefix,
   add-pagebreaks,
   headings-not-bold,
+  heading-level-1-following-par-top,
   system-headings-normal-case-left-align,
   contents-heading-normal-case-left-align,
   contents-heading-uppercase,
@@ -73,6 +74,7 @@
     add-pagebreaks: add-pagebreaks,
     section-number-prefix: section-number-prefix,
     headings-not-bold: headings-not-bold,
+    heading-level-1-following-par-top: heading-level-1-following-par-top,
     system-headings-normal-case-left-align:
       system-headings-normal-case-left-align,
     contents-heading-normal-case-left-align:
@@ -287,6 +289,8 @@
     indent,
     add-pagebreaks,
     headings-not-bold,
+    heading-level-1-following-par-top:
+      heading-level-1-following-par-top,
     system-headings-normal-case-left-align:
       system-headings-normal-case-left-align,
     contents-heading-normal-case-left-align:

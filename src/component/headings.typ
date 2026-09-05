@@ -3,6 +3,7 @@
   default-appendix-heading-following-par-top-other-levels,
   default-heading-margin,
   default-heading-level-1-margin,
+  default-heading-level-1-following-par-top,
   default-indent,
   default-contents-heading-normal-case-left-align,
   default-contents-heading-uppercase,
@@ -62,6 +63,8 @@
   indent,
   add-pagebreaks,
   headings-not-bold,
+  heading-level-1-following-par-top:
+    default-heading-level-1-following-par-top,
   system-headings-normal-case-left-align:
     default-system-headings-normal-case-left-align,
   contents-heading-normal-case-left-align:
@@ -180,7 +183,7 @@
             default-appendix-heading-following-par-top-other-levels
           }
         } else if nearest-heading.level == 1 {
-          text-size
+          heading-level-1-following-par-top
         } else {
           0pt
         }

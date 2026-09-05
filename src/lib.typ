@@ -63,6 +63,8 @@
   add-pagebreaks: true,
   section-number-prefix: false,
   headings-not-bold: default-headings-not-bold,
+  heading-level-1-following-par-top:
+    default-heading-level-1-following-par-top,
   system-headings-normal-case-left-align:
     default-system-headings-normal-case-left-align,
   contents-heading-normal-case-left-align:
@@ -130,6 +132,7 @@
     section-number-prefix,
     add-pagebreaks,
     headings-not-bold,
+    heading-level-1-following-par-top,
     system-headings-normal-case-left-align,
     contents-heading-normal-case-left-align,
     contents-heading-uppercase,

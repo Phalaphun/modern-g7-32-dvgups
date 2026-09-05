@@ -95,6 +95,7 @@
 |---|---:|---|---|
 | `default-heading-margin` | `(below: 3em, above: 3em)` | — | Отступы до и после заголовков уровней 2 и ниже. |
 | `default-heading-level-1-margin` | `(below: 3em, above: 0cm)` | — | Отступы до и после заголовка первого уровня. |
+| `default-heading-level-1-following-par-top` | `14pt + 3mm` | `heading-level-1-following-par-top` | Дополнительный верхний отступ первого абзаца непосредственно после заголовка первого уровня. Не применяется, если следом расположен заголовок второго уровня. |
 | `default-headings-not-bold` | `true` | `headings-not-bold` | При `true` заголовки выводятся обычным, а не полужирным начертанием. |
 | `default-system-headings-normal-case-left-align` | `true` | `system-headings-normal-case-left-align` | Включает обычный регистр и выравнивание от абзацного отступа для общих служебных заголовков, кроме заголовков с отдельными настройками ниже. |
 | `default-contents-heading-normal-case-left-align` | `false` | `contents-heading-normal-case-left-align` | При `true` заголовок содержания выводится слева от `indent`; при `false` — по центру. |

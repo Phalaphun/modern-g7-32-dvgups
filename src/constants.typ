@@ -8,8 +8,9 @@
 #let default-list-spacing = 1em
 #let default-enum-spacing = 1em
 #let default-outline-depth = 3
-#let default-heading-margin = (below: 3em, above: 3em)
+#let default-heading-margin = (below: 3em-2mm, above: 3em)
 #let default-heading-level-1-margin = (below: 3em, above: 0cm)
+#let default-heading-level-1-following-par-top = 14pt + 3mm
 #let default-headings-not-bold = true
 #let default-system-headings-normal-case-left-align = true
 #let default-contents-heading-normal-case-left-align = false
