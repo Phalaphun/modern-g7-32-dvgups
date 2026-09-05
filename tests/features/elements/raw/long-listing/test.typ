@@ -31,6 +31,8 @@
 #long-listing(
   raw(make-code(8, with-empty-lines: true), lang: "python", block: true),
   caption: [Короткий листинг на одной странице],
+  caption-gap: 6pt,
+  line-vertical-inset: 6.5pt,
 ) <listing-one>
 
 #pagebreak()

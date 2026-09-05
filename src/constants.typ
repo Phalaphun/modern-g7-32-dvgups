@@ -44,8 +44,15 @@
 #let default-table-and-raw-caption-margin = (above: 0pt, below: 16pt)
 #let default-table-text-size = 12pt
 #let default-table-caption-text-size = 12pt
+#let default-table-caption-gap = 6pt
+#let default-table-caption-margin = (above: 0pt, below: 0pt)
 #let default-table-cell-vertical-inset = 6pt
-#let default-raw-caption-text-size = 14pt
+#let default-listing-caption-gap = 6pt
+#let default-listing-caption-margin = (above: 0pt, below: 0pt)
+#let default-listing-text-size = 12pt
+#let default-listing-caption-text-size = 12pt
+#let default-listing-line-vertical-inset = 6.5pt
+#let default-listing-continuation-text-size = 12pt
 #let default-table-and-raw-caption-leading = 0.5em
 #let default-table-and-raw-caption-first-line-indent = (
   amount: default-indent,
@@ -58,7 +65,7 @@
   inset: 6pt,
   stroke: 0.5pt + black,
 )
-#let default-long-listing-line-cell-inset = (x: 0pt, y: 4pt)
+#let default-long-listing-line-cell-inset = (x: 0pt, y: default-listing-line-vertical-inset)
 #let default-long-listing-end-marker-value = "modern-g7-32-long-listing-end-marker"
 #let default-long-listing-continuation-cell-inset = (
   left: default-indent,
@@ -68,13 +75,12 @@
 )
 #let default-long-listing-end-marker-cell-inset = (x: 0pt, y: 0pt)
 #let default-long-listing-frame-cell-inset = (x: 0pt, y: 0pt)
-#let default-long-listing-figure-gap = 0pt
-#let default-long-listing-continuation-text-size = 14pt
+#let default-long-listing-continuation-text-size = default-listing-continuation-text-size
 #let default-long-listing-line-number-cell-inset = (
   left: 0pt,
   right: 8pt,
-  top: 4pt,
-  bottom: 4pt,
+  top: default-listing-line-vertical-inset,
+  bottom: default-listing-line-vertical-inset,
 )
 
 #let default-long-table-end-marker-value = "modern-g7-32-long-table-end-marker"
@@ -85,5 +91,4 @@
   bottom: default-table-and-raw-caption-margin.below,
 )
 #let default-long-table-end-marker-cell-inset = (x: 0pt, y: 0pt)
-#let default-long-table-figure-gap = 0pt
 #let default-long-table-continuation-text-size = 12pt

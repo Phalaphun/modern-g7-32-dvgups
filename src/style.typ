@@ -11,6 +11,11 @@
   small-text-size,
   indent,
   margin,
+  listing-caption-gap,
+  listing-text-size,
+  listing-caption-text-size,
+  listing-continuation-text-size,
+  table-caption-gap,
   table-cell-vertical-inset,
   title-footer-align,
   pagination-align,
@@ -41,6 +46,11 @@
   [#metadata((
     small-text-size: small-text-size,
     indent: indent,
+    listing-caption-gap: listing-caption-gap,
+    listing-text-size: listing-text-size,
+    listing-caption-text-size: listing-caption-text-size,
+    listing-continuation-text-size: listing-continuation-text-size,
+    table-caption-gap: table-caption-gap,
     table-cell-vertical-inset: table-cell-vertical-inset,
     add-pagebreaks: add-pagebreaks,
     section-number-prefix: section-number-prefix,
@@ -170,6 +180,7 @@
       above: default-table-and-raw-figure-margin-above,
       below: 0pt,
     )
+    set figure(gap: table-caption-gap)
     set align(left)
     set text(size: default-table-text-size)
     set table(inset: (x: 5pt, y: table-cell-vertical-inset))
@@ -180,7 +191,7 @@
   }
   show figure.caption.where(kind: table): it => {
     set align(left)
-    set block(..default-table-and-raw-caption-margin)
+    set block(..default-table-caption-margin)
     set text(size: default-table-caption-text-size)
     set par(
       leading: default-table-and-raw-caption-leading,
@@ -197,14 +208,16 @@
       above: default-table-and-raw-figure-margin-above,
       below: 0pt,
     )
+    set figure(gap: listing-caption-gap)
     set align(left)
+    set text(size: listing-text-size)
     show raw.where(block: true): set block(..default-listing-raw-block-style)
     [#it#v(below-space, weak: false)]
   }
   show figure.caption.where(kind: raw): it => {
     set align(left)
-    set block(..default-table-and-raw-caption-margin)
-    set text(size: default-raw-caption-text-size)
+    set block(..default-listing-caption-margin)
+    set text(size: listing-caption-text-size)
     set par(
       leading: default-table-and-raw-caption-leading,
       first-line-indent: (amount: indent, all: true),

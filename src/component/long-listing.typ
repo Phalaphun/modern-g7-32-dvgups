@@ -3,11 +3,12 @@
   default-long-listing-continuation-cell-inset,
   default-long-listing-end-marker-cell-inset,
   default-long-listing-end-marker-value,
-  default-long-listing-figure-gap,
   default-long-listing-frame-cell-inset,
   default-long-listing-line-cell-inset,
   default-long-listing-line-number-cell-inset,
   default-listing-raw-block-style,
+  default-listing-caption-gap,
+  default-listing-line-vertical-inset,
   default-table-and-raw-caption-leading,
   default-indent,
 )
@@ -78,7 +79,16 @@
     leading: default-table-and-raw-caption-leading,
     first-line-indent: 0pt,
   )
-  set text(size: default-long-listing-continuation-text-size)
+  let parameters = query(<modern-g7-32-parameters>).first(default: none)
+  let continuation-text-size = if parameters == none {
+    default-long-listing-continuation-text-size
+  } else {
+    parameters.value.at(
+      "listing-continuation-text-size",
+      default: default-long-listing-continuation-text-size,
+    )
+  }
+  set text(size: continuation-text-size)
 
   continuation-text
 }
@@ -93,6 +103,8 @@
 #let long-listing(
   raw-content,
   caption: none,
+  caption-gap: default-listing-caption-gap,
+  line-vertical-inset: default-listing-line-vertical-inset,
   ..figure-args,
 ) = {
   assert(
@@ -111,6 +123,13 @@
   let raw-text = raw-fields.at("text", default: "")
   let raw-lang = raw-fields.at("lang", default: none)
   let raw-lines = trim-single-trailing-empty(raw-text.split("\n"))
+
+  let line-cell-inset = default-long-listing-line-cell-inset
+  line-cell-inset.insert("top", line-vertical-inset)
+  line-cell-inset.insert("bottom", line-vertical-inset)
+  let line-number-cell-inset = default-long-listing-line-number-cell-inset
+  line-number-cell-inset.insert("top", line-vertical-inset)
+  line-number-cell-inset.insert("bottom", line-vertical-inset)
 
   let continuation-row = table.cell(
     colspan: 1,
@@ -142,11 +161,11 @@
       (
         table.cell(
           stroke: none,
-          inset: default-long-listing-line-number-cell-inset,
+          inset: line-number-cell-inset,
         )[#align(right, line-number)],
         table.cell(
           stroke: none,
-          inset: default-long-listing-line-cell-inset,
+          inset: line-cell-inset,
         )[#line-content],
       )
     }).flatten(),
@@ -177,7 +196,7 @@
       end-marker-footer,
     ),
     kind: raw,
-    gap: default-long-listing-figure-gap,
+    gap: caption-gap - default-long-listing-continuation-cell-inset.bottom,
     caption: caption,
     ..figure-args,
   )

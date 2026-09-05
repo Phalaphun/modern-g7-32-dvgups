@@ -3,8 +3,8 @@
   default-long-table-continuation-cell-inset,
   default-long-table-end-marker-cell-inset,
   default-long-table-end-marker-value,
-  default-long-table-figure-gap,
   default-table-and-raw-caption-leading,
+  default-table-caption-gap,
   default-indent,
 )
 
@@ -82,6 +82,7 @@
 #let long-table(
   table-content,
   caption: none,
+  caption-gap: default-table-caption-gap,
   ..figure-args,
 ) = {
   assert(
@@ -174,7 +175,7 @@
       end-marker-footer,
     ),
     caption: caption,
-    gap: default-long-table-figure-gap,
+    gap: caption-gap - default-long-table-continuation-cell-inset.bottom,
     ..figure-args,
   )
 }

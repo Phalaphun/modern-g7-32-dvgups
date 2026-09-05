@@ -18,6 +18,7 @@
 #long-table(
   sample-table(10),
   caption: [Короткая таблица на одной странице],
+  caption-gap: 6pt,
 )
 
 #pagebreak()
