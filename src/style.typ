@@ -20,6 +20,10 @@
   table-after-table-gap,
   table-before-text-gap,
   table-before-heading-level-2-gap,
+  listing-after-text-gap,
+  listing-after-listing-gap,
+  listing-before-text-gap,
+  listing-before-heading-level-2-gap,
   listing-caption-gap,
   listing-caption-indent,
   listing-text-size,
@@ -73,6 +77,10 @@
     table-after-table-gap: table-after-table-gap,
     table-before-text-gap: table-before-text-gap,
     table-before-heading-level-2-gap: table-before-heading-level-2-gap,
+    listing-after-text-gap: listing-after-text-gap,
+    listing-after-listing-gap: listing-after-listing-gap,
+    listing-before-text-gap: listing-before-text-gap,
+    listing-before-heading-level-2-gap: listing-before-heading-level-2-gap,
     listing-caption-gap: listing-caption-gap,
     listing-caption-indent: listing-caption-indent,
     listing-text-size: listing-text-size,
@@ -129,9 +137,11 @@
   )
   show par: it => context {
     let previous-kind = table-flow-state.at(here())
-    let table-base-below = text-size * default-table-and-raw-figure-below-lines
+    let figure-base-below = text-size * default-table-and-raw-figure-below-lines
     let gap-adjustment = if previous-kind == "table" {
-      table-before-text-gap - table-base-below
+      table-before-text-gap - figure-base-below
+    } else if previous-kind == "listing" {
+      listing-before-text-gap - figure-base-below
     } else {
       0pt
     }
@@ -274,22 +284,34 @@
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
   }
-  show figure.where(kind: raw): it => {
+  show figure.where(kind: raw): it => context {
+    let previous-kind = table-flow-state.at(here())
+    let above-space = if previous-kind == "text" {
+      listing-after-text-gap
+    } else if previous-kind == "listing" {
+      listing-after-listing-gap
+    } else {
+      default-table-and-raw-figure-margin-above
+    }
     let below-space = text-size * default-table-and-raw-figure-below-lines
     set figure.caption(position: top)
     set block(
       breakable: true,
-      above: default-table-and-raw-figure-margin-above,
+      above: 0pt,
       below: 0pt,
     )
     set figure(gap: listing-caption-gap)
     set align(left)
     set text(size: listing-text-size)
     show raw.where(block: true): set block(..default-listing-raw-block-style)
-    [
+    block(
+      breakable: true,
+      above: above-space,
+      below: 0pt,
+    )[
       #table-flow-state.update("other")
       #it
-      #table-flow-state.update("other")
+      #table-flow-state.update("listing")
       #v(below-space, weak: false)
     ]
   }
@@ -318,9 +340,11 @@
   }
   show heading: it => context {
     let previous-kind = table-flow-state.at(here())
-    let table-base-below = text-size * default-table-and-raw-figure-below-lines
+    let figure-base-below = text-size * default-table-and-raw-figure-below-lines
     let gap-adjustment = if previous-kind == "table" and it.level == 2 {
-      table-before-heading-level-2-gap - table-base-below
+      table-before-heading-level-2-gap - figure-base-below
+    } else if previous-kind == "listing" and it.level == 2 {
+      listing-before-heading-level-2-gap - figure-base-below
     } else {
       0pt
     }

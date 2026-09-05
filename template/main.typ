@@ -31,6 +31,10 @@
   table-after-text-gap: 24pt + 2mm,
   table-after-table-gap: 24pt - 2mm,
   table-before-heading-level-2-gap: 28pt - 4mm,
+  listing-before-text-gap: 28pt + 1mm,
+  listing-after-text-gap: 24pt + 2mm,
+  listing-after-listing-gap: 24pt - 2mm,
+  listing-before-heading-level-2-gap: 28pt - 4mm,
   section-number-prefix:true
 )
 

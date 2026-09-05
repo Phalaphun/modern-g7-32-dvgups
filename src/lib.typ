@@ -50,6 +50,11 @@
   table-before-text-gap: default-table-before-text-gap,
   table-before-heading-level-2-gap:
     default-table-before-heading-level-2-gap,
+  listing-after-text-gap: default-listing-after-text-gap,
+  listing-after-listing-gap: default-listing-after-listing-gap,
+  listing-before-text-gap: default-listing-before-text-gap,
+  listing-before-heading-level-2-gap:
+    default-listing-before-heading-level-2-gap,
   listing-caption-gap: default-listing-caption-gap,
   listing-caption-indent: default-listing-caption-indent,
   listing-text-size: default-listing-text-size,
@@ -128,6 +133,10 @@
     table-after-table-gap,
     table-before-text-gap,
     table-before-heading-level-2-gap,
+    listing-after-text-gap,
+    listing-after-listing-gap,
+    listing-before-text-gap,
+    listing-before-heading-level-2-gap,
     listing-caption-gap,
     listing-caption-indent,
     listing-text-size,

@@ -59,6 +59,10 @@
 #let default-listing-caption-gap = 6pt + 1mm
 #let default-listing-caption-indent = 0pt
 #let default-listing-caption-margin = (above: 0pt, below: 0pt)
+#let default-listing-after-text-gap = 24pt + 2mm
+#let default-listing-after-listing-gap = 24pt - 2mm
+#let default-listing-before-text-gap = 28pt + 1mm
+#let default-listing-before-heading-level-2-gap = 28pt - 4mm
 #let default-listing-text-size = 12pt
 #let default-listing-caption-text-size = 12pt
 #let default-listing-line-vertical-inset = 6.5pt
