@@ -47,7 +47,8 @@
 #let default-table-caption-gap = 6pt + 1mm
 #let default-table-caption-margin = (above: 0pt, below: 0pt)
 #let default-table-cell-vertical-inset = 6pt
-#let default-listing-caption-gap = 6pt
+#let default-listing-caption-gap = 6pt + 1mm
+#let default-listing-caption-indent = 0pt
 #let default-listing-caption-margin = (above: 0pt, below: 0pt)
 #let default-listing-text-size = 12pt
 #let default-listing-caption-text-size = 12pt
@@ -73,6 +74,14 @@
   top: 0pt,
   bottom: default-table-and-raw-caption-margin.below,
 )
+#let default-long-listing-continuation-gap = (
+  default-table-and-raw-caption-margin.below - 2mm
+)
+#let default-long-listing-ending-gap = (
+  default-table-and-raw-caption-margin.below - 2mm
+)
+#let default-long-listing-continuation-indent = 0pt
+#let default-long-listing-ending-indent = 0pt
 #let default-long-listing-end-marker-cell-inset = (x: 0pt, y: 0pt)
 #let default-long-listing-frame-cell-inset = (x: 0pt, y: 0pt)
 #let default-long-listing-continuation-text-size = default-listing-continuation-text-size

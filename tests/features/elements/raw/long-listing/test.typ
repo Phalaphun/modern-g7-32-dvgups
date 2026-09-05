@@ -31,7 +31,11 @@
 #long-listing(
   raw(make-code(8, with-empty-lines: true), lang: "python", block: true),
   caption: [Короткий листинг на одной странице],
-  caption-gap: 6pt,
+  caption-gap: 6pt + 1mm,
+  continuation-gap: 16pt - 2mm,
+  ending-gap: 16pt - 2mm,
+  continuation-indent: 0pt,
+  ending-indent: 0pt,
   line-vertical-inset: 6.5pt,
 ) <listing-one>
 

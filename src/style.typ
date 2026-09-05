@@ -12,9 +12,14 @@
   indent,
   margin,
   listing-caption-gap,
+  listing-caption-indent,
   listing-text-size,
   listing-caption-text-size,
   listing-continuation-text-size,
+  long-listing-continuation-gap,
+  long-listing-ending-gap,
+  long-listing-continuation-indent,
+  long-listing-ending-indent,
   table-caption-gap,
   long-table-continuation-gap,
   long-table-ending-gap,
@@ -51,9 +56,14 @@
     small-text-size: small-text-size,
     indent: indent,
     listing-caption-gap: listing-caption-gap,
+    listing-caption-indent: listing-caption-indent,
     listing-text-size: listing-text-size,
     listing-caption-text-size: listing-caption-text-size,
     listing-continuation-text-size: listing-continuation-text-size,
+    long-listing-continuation-gap: long-listing-continuation-gap,
+    long-listing-ending-gap: long-listing-ending-gap,
+    long-listing-continuation-indent: long-listing-continuation-indent,
+    long-listing-ending-indent: long-listing-ending-indent,
     table-caption-gap: table-caption-gap,
     long-table-continuation-gap: long-table-continuation-gap,
     long-table-ending-gap: long-table-ending-gap,
@@ -228,7 +238,7 @@
     set text(size: listing-caption-text-size)
     set par(
       leading: default-table-and-raw-caption-leading,
-      first-line-indent: (amount: indent, all: true),
+      first-line-indent: (amount: listing-caption-indent, all: true),
     )
 
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
