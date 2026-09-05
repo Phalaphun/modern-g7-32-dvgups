@@ -11,6 +11,7 @@
   small-text-size,
   indent,
   margin,
+  body-leading,
   listing-caption-gap,
   listing-caption-indent,
   listing-text-size,
@@ -57,6 +58,7 @@
   [#metadata((
     small-text-size: small-text-size,
     indent: indent,
+    body-leading: body-leading,
     listing-caption-gap: listing-caption-gap,
     listing-caption-indent: listing-caption-indent,
     listing-text-size: listing-text-size,
@@ -108,7 +110,7 @@
       amount: indent,
       all: true,
     ),
-    leading: default-leading,
+    leading: body-leading,
     spacing: default-spacing,
   )
 
