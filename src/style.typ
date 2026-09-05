@@ -13,6 +13,7 @@
   margin,
   body-leading,
   contents-leading,
+  contents-entry-spacing,
   listing-caption-gap,
   listing-caption-indent,
   listing-text-size,
@@ -61,6 +62,7 @@
     indent: indent,
     body-leading: body-leading,
     contents-leading: contents-leading,
+    contents-entry-spacing: contents-entry-spacing,
     listing-caption-gap: listing-caption-gap,
     listing-caption-indent: listing-caption-indent,
     listing-text-size: listing-text-size,
@@ -121,7 +123,7 @@
   show outline: set block(below: indent / 2)
   show outline.entry: it => {
     show linebreak: [ ]
-    if is-heading-in-appendix(it.element) {
+    let entry = if is-heading-in-appendix(it.element) {
       let body = it.element.body
       link(it.element.location(), it.indented(
         none,
@@ -135,6 +137,7 @@
     } else {
       it
     }
+    block(below: contents-entry-spacing, entry)
   }
 
   set ref(supplement: none)
