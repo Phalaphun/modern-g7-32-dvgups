@@ -40,6 +40,8 @@
   image-before-text-gap: 32pt,
   image-after-image-gap: 32pt - 2mm,
   image-before-heading-level-2-gap: 3em - 3mm,
+  heading-following-par-top: 14pt + 3mm,
+  heading-following-par-all-levels: false,
   outline-depth: 3,
   section-number-prefix:true
 )

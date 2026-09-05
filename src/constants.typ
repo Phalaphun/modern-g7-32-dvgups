@@ -14,7 +14,8 @@
 #let default-heading-margin = (below: 3em-2mm, above: 3em-2mm)
 #let default-heading-level-1-margin = (below: 3em, above: 0cm)
 #let default-heading-level-2-after-level-1-above = 3em
-#let default-heading-level-1-following-par-top = 14pt + 3mm
+#let default-heading-following-par-top = 14pt + 3mm
+#let default-heading-following-par-all-levels = false
 #let default-headings-not-bold = true
 #let default-system-headings-normal-case-left-align = true
 #let default-contents-heading-normal-case-left-align = false

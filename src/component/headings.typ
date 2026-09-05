@@ -4,7 +4,8 @@
   default-heading-margin,
   default-heading-level-1-margin,
   default-heading-level-2-after-level-1-above,
-  default-heading-level-1-following-par-top,
+  default-heading-following-par-top,
+  default-heading-following-par-all-levels,
   default-indent,
   default-contents-heading-normal-case-left-align,
   default-contents-heading-uppercase,
@@ -66,8 +67,8 @@
   headings-not-bold,
   heading-level-2-after-level-1-above:
     default-heading-level-2-after-level-1-above,
-  heading-level-1-following-par-top:
-    default-heading-level-1-following-par-top,
+  heading-following-par-top: default-heading-following-par-top,
+  heading-following-par-all-levels: default-heading-following-par-all-levels,
   system-headings-normal-case-left-align:
     default-system-headings-normal-case-left-align,
   contents-heading-normal-case-left-align:
@@ -198,8 +199,8 @@
           } else {
             default-appendix-heading-following-par-top-other-levels
           }
-        } else if nearest-heading.level == 1 {
-          heading-level-1-following-par-top
+        } else if heading-following-par-all-levels or nearest-heading.level == 1 {
+          heading-following-par-top
         } else {
           0pt
         }
