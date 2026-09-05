@@ -61,7 +61,14 @@
 #let default-table-caption-text-size = 12pt
 #let default-table-caption-gap = 6pt + 1mm
 #let default-table-caption-margin = (above: 0pt, below: 0pt)
-#let default-table-cell-vertical-inset = 6pt
+#let default-table-cell-inset = (
+  top: 1mm,
+  bottom: 1mm,
+  left: 1mm,
+  right: 1mm,
+)
+#let default-table-cell-leading = (1em - 0.75em + 2mm / 3) + 4mm
+#let default-table-cell-min-height = 7mm
 #let default-listing-caption-gap = 6pt + 1mm
 #let default-listing-caption-indent = 0pt
 #let default-listing-caption-margin = (above: 0pt, below: 0pt)
@@ -112,6 +119,7 @@
 )
 
 #let default-long-table-end-marker-value = "modern-g7-32-long-table-end-marker"
+#let default-long-table-service-cell-marker = "modern-g7-32-long-table-service-cell"
 #let default-long-table-continuation-cell-inset = (
   left: default-indent,
   right: 0pt,

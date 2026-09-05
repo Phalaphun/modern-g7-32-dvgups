@@ -44,7 +44,9 @@
   long-table-ending-gap,
   long-table-continuation-indent,
   long-table-ending-indent,
-  table-cell-vertical-inset,
+  table-cell-inset,
+  table-cell-leading,
+  table-cell-min-height,
   title-footer-align,
   pagination-align,
   pagination-skip-pages,
@@ -113,7 +115,9 @@
     long-table-ending-gap: long-table-ending-gap,
     long-table-continuation-indent: long-table-continuation-indent,
     long-table-ending-indent: long-table-ending-indent,
-    table-cell-vertical-inset: table-cell-vertical-inset,
+    table-cell-inset: table-cell-inset,
+    table-cell-leading: table-cell-leading,
+    table-cell-min-height: table-cell-min-height,
     add-pagebreaks: add-pagebreaks,
     section-number-prefix: section-number-prefix,
     headings-not-bold: headings-not-bold,
@@ -296,9 +300,47 @@
     set figure(gap: table-caption-gap)
     set align(left)
     set text(size: default-table-text-size)
-    set table(inset: (x: 5pt, y: table-cell-vertical-inset))
+    set table(inset: table-cell-inset)
     show table.cell: set align(left)
     show table.cell: set block(width: default-table-cell-width)
+    show table.cell: it => {
+      // Long-table service rows have their own geometry and are explicitly
+      // marked so borderless data cells still receive the regular settings.
+      let is-long-table-service-cell = repr(it.body).contains(
+        default-long-table-service-cell-marker,
+      )
+      if is-long-table-service-cell {
+        it
+      } else {
+        let min-content-height = calc.max(
+          0pt,
+          table-cell-min-height - table-cell-inset.top - table-cell-inset.bottom,
+        )
+        let cell-align = if it.align != auto {
+          it.align
+        } else if it.y == 0 {
+          center
+        } else {
+          left
+        }
+        set par(
+          leading: table-cell-leading,
+          spacing: 0pt,
+          first-line-indent: 0pt,
+        )
+        pad(
+          ..table-cell-inset,
+          grid(
+            columns: (0pt, 1fr),
+            rows: auto,
+            inset: 0pt,
+            align: cell-align,
+            box(width: 0pt, height: min-content-height),
+            it.body,
+          ),
+        )
+      }
+    }
     show table.cell.where(y: 0): set align(center)
     block(
       breakable: true,

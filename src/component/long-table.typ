@@ -7,6 +7,7 @@
   default-long-table-ending-indent,
   default-long-table-end-marker-cell-inset,
   default-long-table-end-marker-value,
+  default-long-table-service-cell-marker,
   default-table-and-raw-caption-leading,
   default-table-caption-gap,
   default-indent,
@@ -205,6 +206,7 @@
     align: left,
     inset: continuation-cell-inset,
   )[
+    #hide(metadata(default-long-table-service-cell-marker))
     #continuation-title(
       continuation-gap: continuation-gap,
       ending-gap: ending-gap,
@@ -226,6 +228,7 @@
       stroke: none,
       inset: default-long-table-end-marker-cell-inset,
     )[
+      #hide(metadata(default-long-table-service-cell-marker))
       #hide(metadata(default-long-table-end-marker-value))
     ],
   )

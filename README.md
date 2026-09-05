@@ -165,7 +165,9 @@
 | `table-after-table-gap` | `default-table-after-table-gap` | `24pt - 2mm` | Верхняя составляющая интервала перед названием таблицы, непосредственно следующей за другой таблицей; уменьшена на 2 мм относительно прежних 24 пт. |
 | `table-before-heading-level-2-gap` | `default-table-before-heading-level-2-gap` | `28pt - 4mm` | Нижняя составляющая интервала после таблицы перед заголовком второго уровня; уменьшена на 4 мм относительно прежних 28 пт. Верхний отступ самого заголовка остаётся независимым. |
 | `table-caption-gap` | `default-table-caption-gap` | `6pt + 1mm` | Расстояние между обычным названием таблицы и самой таблицей. Для отдельной длинной таблицы этому параметру соответствует аргумент `caption-gap`. |
-| `table-cell-vertical-inset` | `default-table-cell-vertical-inset` | `6pt` | Верхнее и нижнее внутренние поля ячеек. При тексте размером 12 пт однострочная ячейка имеет высоту около 7 мм. |
+| `table-cell-inset` | `default-table-cell-inset` | `(top: 1mm, bottom: 1mm, left: 2mm, right: 2mm)` | Внутренние поля ячеек обычных и длинных таблиц. Не управляет минимальной высотой строки. |
+| `table-cell-leading` | `default-table-cell-leading` | `1em - 0.75em + 2mm / 3` | Межстрочный интервал внутри ячеек, откалиброванный как одинарный относительно полуторного интервала основного текста. Не влияет на основной текст и подписи. |
+| `table-cell-min-height` | `default-table-cell-min-height` | `7mm` | Минимальная итоговая высота строки обычной или длинной таблицы с учётом верхнего и нижнего `table-cell-inset`. Многострочные строки автоматически увеличиваются по содержимому. |
 | `long-table-continuation-gap` | `default-long-table-continuation-gap` | `16pt - 2mm` | Расстояние после строки «Продолжение таблицы» до повторяемой шапки. |
 | `long-table-ending-gap` | `default-long-table-ending-gap` | `16pt - 2mm` | Расстояние после строки «Окончание таблицы» до повторяемой шапки. |
 | `long-table-continuation-indent` | `default-long-table-continuation-indent` | `0pt` | Горизонтальный отступ строки «Продолжение таблицы». Нулевое значение выравнивает её по левой границе таблицы. |
@@ -183,6 +185,7 @@
 | `default-table-cell-width` | `100%` | Ширина внутреннего блока содержимого ячейки. |
 | `default-long-table-continuation-text-size` | `12pt` | Размер текста строк продолжения и окончания длинной таблицы. |
 | `default-long-table-continuation-cell-inset` | `(left: default-indent, right: 0pt, top: 0pt, bottom: 16pt)` | Служебные внутренние поля повторяемой строки длинной таблицы. Фактический левый отступ заменяется параметром продолжения или окончания. |
+| `default-long-table-service-cell-marker` | служебная строка | Внутренняя метка строк продолжения и окончания; исключает их из настроек высоты и межстрочного интервала ячеек с данными. |
 | `default-long-table-end-marker-value` | `"modern-g7-32-long-table-end-marker"` | Служебное значение метаданных, по которому определяется последняя страница длинной таблицы. |
 | `default-long-table-end-marker-cell-inset` | `(x: 0pt, y: 0pt)` | Внутренние поля невидимой ячейки-маркера конца длинной таблицы. |
 
@@ -274,7 +277,9 @@
 ```typst
 #show: gost.with(
   table-caption-gap: 6pt + 1mm,
-  table-cell-vertical-inset: 6pt,
+  table-cell-inset: (top: 1mm, bottom: 1mm, left: 2mm, right: 2mm),
+  table-cell-leading: 1em - 0.75em + 2mm / 3,
+  table-cell-min-height: 7mm,
   long-table-continuation-gap: 16pt - 2mm,
   long-table-ending-gap: 16pt - 2mm,
   long-table-continuation-indent: 0pt,
