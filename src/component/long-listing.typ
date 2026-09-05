@@ -12,7 +12,8 @@
   default-long-listing-line-number-cell-inset,
   default-listing-raw-block-style,
   default-listing-caption-gap,
-  default-listing-line-vertical-inset,
+  default-long-listing-data-cell-marker,
+  default-long-listing-first-line-cell-marker,
   default-table-and-raw-caption-leading,
   default-indent,
 )
@@ -164,7 +165,7 @@
   ending-gap: auto,
   continuation-indent: auto,
   ending-indent: auto,
-  line-vertical-inset: default-listing-line-vertical-inset,
+  line-vertical-inset: auto,
   ..figure-args,
 ) = {
   assert(
@@ -184,12 +185,22 @@
   let raw-lang = raw-fields.at("lang", default: none)
   let raw-lines = trim-single-trailing-empty(raw-text.split("\n"))
 
-  let line-cell-inset = default-long-listing-line-cell-inset
-  line-cell-inset.insert("top", line-vertical-inset)
-  line-cell-inset.insert("bottom", line-vertical-inset)
-  let line-number-cell-inset = default-long-listing-line-number-cell-inset
-  line-number-cell-inset.insert("top", line-vertical-inset)
-  line-number-cell-inset.insert("bottom", line-vertical-inset)
+  let line-cell-inset = if line-vertical-inset == auto {
+    0pt
+  } else {
+    let inset = default-long-listing-line-cell-inset
+    inset.insert("top", line-vertical-inset)
+    inset.insert("bottom", line-vertical-inset)
+    inset
+  }
+  let line-number-cell-inset = if line-vertical-inset == auto {
+    0pt
+  } else {
+    let inset = default-long-listing-line-number-cell-inset
+    inset.insert("top", line-vertical-inset)
+    inset.insert("bottom", line-vertical-inset)
+    inset
+  }
 
   let continuation-row = table.cell(
     colspan: 1,
@@ -214,16 +225,31 @@
         raw(line, lang: raw-lang, block: false)
       }
       let line-number = raw(str(index + 1), block: false)
+      let first-line-marker = if index == 0 {
+        hide(metadata(default-long-listing-first-line-cell-marker))
+      } else {
+        none
+      }
 
       (
         table.cell(
           stroke: none,
           inset: line-number-cell-inset,
-        )[#align(right, line-number)],
+          align: right,
+        )[
+          #hide(metadata(default-long-listing-data-cell-marker))
+          #first-line-marker
+          #line-number
+        ],
         table.cell(
           stroke: none,
           inset: line-cell-inset,
-        )[#line-content],
+          align: left,
+        )[
+          #hide(metadata(default-long-listing-data-cell-marker))
+          #first-line-marker
+          #line-content
+        ],
       )
     }).flatten(),
   )

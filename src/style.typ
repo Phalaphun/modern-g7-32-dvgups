@@ -35,6 +35,10 @@
   listing-text-size,
   listing-caption-text-size,
   listing-continuation-text-size,
+  long-listing-line-inset,
+  long-listing-first-line-inset,
+  long-listing-line-leading,
+  long-listing-line-min-height,
   long-listing-continuation-gap,
   long-listing-ending-gap,
   long-listing-continuation-indent,
@@ -106,6 +110,10 @@
     listing-text-size: listing-text-size,
     listing-caption-text-size: listing-caption-text-size,
     listing-continuation-text-size: listing-continuation-text-size,
+    long-listing-line-inset: long-listing-line-inset,
+    long-listing-first-line-inset: long-listing-first-line-inset,
+    long-listing-line-leading: long-listing-line-leading,
+    long-listing-line-min-height: long-listing-line-min-height,
     long-listing-continuation-gap: long-listing-continuation-gap,
     long-listing-ending-gap: long-listing-ending-gap,
     long-listing-continuation-indent: long-listing-continuation-indent,
@@ -383,6 +391,67 @@
     set figure(gap: listing-caption-gap)
     set align(left)
     set text(size: listing-text-size)
+    show table.cell: cell => {
+      let is-long-listing-data-cell = (
+        cell.align != auto
+          and repr(cell.body).contains(default-long-listing-data-cell-marker)
+      )
+      if not is-long-listing-data-cell {
+        cell
+      } else {
+        let is-first-line-cell = repr(cell.body).contains(
+          default-long-listing-first-line-cell-marker,
+        )
+        let cell-inset = if cell.inset != 0pt {
+          cell.inset
+        } else if is-first-line-cell {
+          long-listing-first-line-inset
+        } else {
+          long-listing-line-inset
+        }
+        let vertical-inset = if type(cell-inset) == dictionary {
+          let fallback = cell-inset.at(
+            "y",
+            default: cell-inset.at("rest", default: 0pt),
+          )
+          (
+            top: cell-inset.at("top", default: fallback),
+            bottom: cell-inset.at("bottom", default: fallback),
+          )
+        } else {
+          (top: cell-inset, bottom: cell-inset)
+        }
+        context {
+          let resolved-vertical-inset = (
+            top: measure(h(vertical-inset.top)).width,
+            bottom: measure(h(vertical-inset.bottom)).width,
+          )
+          let min-content-height = calc.max(
+            0pt,
+            long-listing-line-min-height
+              - resolved-vertical-inset.top
+              - resolved-vertical-inset.bottom,
+          )
+          let cell-align = if cell.align == auto { left } else { cell.align }
+          set par(
+            leading: long-listing-line-leading,
+            spacing: 0pt,
+            first-line-indent: 0pt,
+          )
+          pad(
+            ..cell-inset,
+            grid(
+              columns: (0pt, auto),
+              rows: auto,
+              inset: 0pt,
+              align: cell-align,
+              box(width: 0pt, height: min-content-height),
+              box(cell.body),
+            ),
+          )
+        }
+      }
+    }
     show raw.where(block: true): set block(..default-listing-raw-block-style)
     block(
       breakable: true,

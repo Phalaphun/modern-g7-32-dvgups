@@ -103,6 +103,10 @@
   listing-text-size: 12pt,
   listing-caption-text-size: 12pt,
   listing-continuation-text-size: 12pt,
+  // long-listing-line-inset: (top: 0pt, bottom: (1em - 0.75em + 2mm / 3) + 1.75mm, left: -1mm, right: 1mm),
+  // long-listing-first-line-inset: (top: -1mm, bottom: (1em - 0.75em + 2mm / 3) + 1.75mm, left: -1mm, right: 1mm),
+  // long-listing-line-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
+  long-listing-line-min-height: 7mm,
   long-listing-continuation-gap: 16pt - 2mm,
   long-listing-ending-gap: 16pt - 2mm,
   long-listing-continuation-indent: 0pt,
@@ -434,7 +438,7 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 #long-listing(
   ```python
-        print("Hello, world!")
+        print("Hello, world world world world world worldworld world world world world world world world worldworld world world world worldworld world world worldworld world world world worldworld world world worldworld world world world worldworld world world worldworld world world world world!")
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")

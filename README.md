@@ -202,6 +202,10 @@
 | `listing-text-size` | `default-listing-text-size` | `12pt` | Размер текста внутри листинга. |
 | `listing-caption-text-size` | `default-listing-caption-text-size` | `12pt` | Размер текста обычного названия листинга. |
 | `listing-continuation-text-size` | `default-listing-continuation-text-size` | `12pt` | Размер текста строк «Продолжение листинга» и «Окончание листинга». |
+| `long-listing-line-inset` | `default-long-listing-line-inset` | `(top: 0pt, bottom: (1em - 0.75em + 2mm / 3) + 1.75mm, left: -1mm, right: 1mm)` | Внутренние поля ячеек с кодом и номером строки длинного листинга. Верхнее поле и вертикальный интервал после каждой строки настраиваются независимо; горизонтальные поля не влияют на обычные листинги и служебные строки. |
+| `long-listing-first-line-inset` | `default-long-listing-first-line-inset` | `(top: -1mm, bottom: (1em - 0.75em + 2mm / 3) + 1.75mm, left: -1mm, right: 1mm)` | Все четыре внутренних поля первой строки длинного листинга. Позволяет независимо настроить её положение относительно верхней рамки, не изменяя остальные строки. |
+| `long-listing-line-leading` | `default-long-listing-line-leading` | `(1em - 0.75em + 2mm / 3) + 1.75mm` | Межстрочный интервал внутри ячеек длинного листинга, откалиброванный по тем же печатным значениям, что и таблицы. |
+| `long-listing-line-min-height` | `default-long-listing-line-min-height` | `7mm` | Минимальная итоговая высота строки длинного листинга с учётом верхнего и нижнего `long-listing-line-inset`. |
 | `long-listing-continuation-gap` | `default-long-listing-continuation-gap` | `16pt - 2mm` | Расстояние после строки «Продолжение листинга» до рамки. |
 | `long-listing-ending-gap` | `default-long-listing-ending-gap` | `16pt - 2mm` | Расстояние после строки «Окончание листинга» до рамки. |
 | `long-listing-continuation-indent` | `default-long-listing-continuation-indent` | `0pt` | Горизонтальный отступ строки «Продолжение листинга». Нулевое значение выравнивает её по левой границе рамки. |
@@ -212,10 +216,11 @@
 | Внутренняя константа | Значение по умолчанию | Назначение |
 |---|---:|---|
 | `default-listing-caption-margin` | `(above: 0pt, below: 0pt)` | Дополнительные внешние отступы блока названия листинга. |
-| `default-listing-line-vertical-inset` | `6.5pt` | Базовые верхнее и нижнее внутренние поля строки длинного листинга. |
+| `default-listing-line-vertical-inset` | `6.5pt` | Устаревшее базовое значение для совместимости с явным аргументом `line-vertical-inset`. Новые дефолты задаются через `long-listing-line-inset`. |
 | `default-listing-raw-block-style` | `(width: 100%, inset: 6pt, stroke: 0.5pt + black)` | Ширина, внутреннее поле и рамка блока кода. |
-| `default-long-listing-line-cell-inset` | `(x: 0pt, y: 6.5pt)` | Внутренние поля ячейки с кодом одной строки длинного листинга. |
-| `default-long-listing-line-number-cell-inset` | `(left: 0pt, right: 8pt, top: 6.5pt, bottom: 6.5pt)` | Внутренние поля ячейки с номером строки. |
+| `default-long-listing-line-cell-inset` | `(x: 0pt, y: 6.5pt)` | Устаревшие поля ячейки с кодом, используемые только при явном `line-vertical-inset`. |
+| `default-long-listing-line-number-cell-inset` | `(left: 0pt, right: 8pt, top: 6.5pt, bottom: 6.5pt)` | Устаревшие поля номера строки, используемые только при явном `line-vertical-inset`. |
+| `default-long-listing-data-cell-marker` | служебная строка | Внутренняя метка ячеек данных длинного листинга; отделяет их от строк продолжения и окончания. |
 | `default-long-listing-continuation-text-size` | `default-listing-continuation-text-size` | Внутренний псевдоним размера текста продолжения и окончания. |
 | `default-long-listing-continuation-cell-inset` | `(left: default-indent, right: 0pt, top: 0pt, bottom: 16pt)` | Служебные внутренние поля повторяемой строки длинного листинга. Фактический левый отступ заменяется параметром продолжения или окончания. |
 | `default-long-listing-frame-cell-inset` | `(x: 0pt, y: 0pt)` | Внутренние поля ячейки, содержащей рамку листинга. |
@@ -259,7 +264,6 @@
   ending-gap: 16pt - 2mm,
   continuation-indent: 0pt,
   ending-indent: 0pt,
-  line-vertical-inset: 6.5pt,
 )
 ```
 
@@ -270,7 +274,7 @@
 | `ending-gap` | Расстояние после строки «Окончание листинга». Значение `auto` использует `long-listing-ending-gap` из `gost.with`. |
 | `continuation-indent` | Отступ строки «Продолжение листинга». Значение `auto` использует `long-listing-continuation-indent` из `gost.with`. |
 | `ending-indent` | Отступ строки «Окончание листинга». Значение `auto` использует `long-listing-ending-indent` из `gost.with`. |
-| `line-vertical-inset` | Верхнее и нижнее внутренние поля строк. Дефолт `6.5pt` обеспечивает высоту однострочной строки не менее 7 мм. |
+| `line-vertical-inset` | **Устаревший аргумент.** При явной передаче переопределяет верхнее и нижнее поля строк в прежнем формате. Без него используются глобальные параметры `long-listing-line-inset`, `long-listing-line-leading` и `long-listing-line-min-height`. |
 
 ### Пример глобальной настройки
 
@@ -290,6 +294,20 @@
   listing-text-size: 12pt,
   listing-caption-text-size: 12pt,
   listing-continuation-text-size: 12pt,
+  long-listing-line-inset: (
+    top: 0pt,
+    bottom: (1em - 0.75em + 2mm / 3) + 1.75mm,
+    left: -1mm,
+    right: 1mm,
+  ),
+  long-listing-first-line-inset: (
+    top: -1mm,
+    bottom: (1em - 0.75em + 2mm / 3) + 1.75mm,
+    left: -1mm,
+    right: 1mm,
+  ),
+  long-listing-line-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
+  long-listing-line-min-height: 7mm,
   long-listing-continuation-gap: 16pt - 2mm,
   long-listing-ending-gap: 16pt - 2mm,
   long-listing-continuation-indent: 0pt,

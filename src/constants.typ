@@ -67,7 +67,7 @@
   left: 1mm,
   right: 1mm,
 )
-#let default-table-cell-leading = (1em - 0.75em + 2mm / 3) + 1.75mm
+#let default-table-cell-leading = (1em - 0.75em + 2mm / 3)
 #let default-table-cell-min-height = 7mm
 #let default-listing-caption-gap = 6pt + 1mm
 #let default-listing-caption-indent = 0pt
@@ -80,6 +80,22 @@
 #let default-listing-caption-text-size = 12pt
 #let default-listing-line-vertical-inset = 6.5pt
 #let default-listing-continuation-text-size = 12pt
+#let default-long-listing-line-inset = (
+  top: 0pt,
+  bottom: (1em - 0.75em + 2mm / 3) + 1.75mm,
+  left: -1mm,
+  right: 1mm,
+)
+#let default-long-listing-first-line-inset = (
+  top: -1mm,
+  bottom: (1em - 0.75em + 2mm / 3) + 1.75mm,
+  left: -1mm,
+  right: 1mm,
+)
+#let default-long-listing-line-leading = (1em - 0.75em + 2mm / 3) + 1.75mm
+#let default-long-listing-line-min-height = 7mm
+#let default-long-listing-data-cell-marker = "modern-g7-32-long-listing-data-cell"
+#let default-long-listing-first-line-cell-marker = "modern-g7-32-long-listing-first-line-cell"
 #let default-table-and-raw-caption-leading = 0.5em
 #let default-table-and-raw-caption-first-line-indent = (
   amount: default-indent,
