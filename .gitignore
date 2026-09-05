@@ -14,3 +14,4 @@ tests/**/out/**/*.png
 tests/**/diff/**/*.png
 
 .vscode
+*.doc
