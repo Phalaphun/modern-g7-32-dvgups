@@ -320,6 +320,13 @@ $ cal(A) := { x in RR | x "натуральное" } $
   caption: [Таблица на две страницы],
 )
 
+Абоба
+
+#long-table(
+  sample-table(2),
+  caption: [Таблица на две страницы],
+)
+
 #pagebreak()
 
 #long-table(

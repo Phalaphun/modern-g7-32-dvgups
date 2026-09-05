@@ -3,6 +3,7 @@
   default-appendix-heading-following-par-top-other-levels,
   default-heading-margin,
   default-heading-level-1-margin,
+  default-heading-level-2-after-level-1-above,
   default-heading-level-1-following-par-top,
   default-indent,
   default-contents-heading-normal-case-left-align,
@@ -63,6 +64,8 @@
   indent,
   add-pagebreaks,
   headings-not-bold,
+  heading-level-2-after-level-1-above:
+    default-heading-level-2-after-level-1-above,
   heading-level-1-following-par-top:
     default-heading-level-1-following-par-top,
   system-headings-normal-case-left-align:
@@ -160,6 +163,19 @@
 
   show heading: set block(..default-heading-margin)
   show heading.where(level: 1): set block(..default-heading-level-1-margin)
+  show heading.where(level: 2): it => context {
+    let headings-before = query(selector(heading).before(here()))
+    if headings-before.len() > 0 {
+      let nearest-heading = headings-before.last()
+      let paragraphs-between = query(
+        selector(par).after(nearest-heading.location()).before(here()),
+      )
+      if nearest-heading.level == 1 and paragraphs-between.len() == 0 {
+        set block(above: heading-level-2-after-level-1-above)
+      }
+    }
+    it
+  }
   show heading.where(
     level: 1,
     body: structural-heading-titles.contents,
