@@ -116,6 +116,11 @@
   listing-after-text-gap: 24pt + 2mm,
   listing-after-listing-gap: 24pt - 2mm,
   listing-before-heading-level-2-gap: 28pt - 4mm,
+  image-after-text-gap: 32pt + 1mm,
+  image-caption-gap: 12pt + 1mm,
+  image-before-text-gap: 32pt,
+  image-after-image-gap: 32pt - 2mm,
+  image-before-heading-level-2-gap: 3em - 3mm,
   long-table-continuation-gap: 16pt - 2mm,
   long-table-ending-gap: 16pt - 2mm,
   long-table-continuation-indent: 0pt,
@@ -132,7 +137,7 @@
   references-heading-uppercase: false,
   appendix-heading-new-style: true,
   appendix-heading-uppercase: false,
-  indent:0.75cm
+  indent:0.75cm,
 )
 
 

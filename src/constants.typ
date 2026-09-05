@@ -39,6 +39,11 @@
 
 #let default-image-figure-margin = (above: 32pt, below: 32pt)
 #let default-image-figure-gap = 12pt
+#let default-image-after-text-gap = 32pt + 1mm
+#let default-image-caption-gap = 12pt + 1mm
+#let default-image-before-text-gap = 32pt
+#let default-image-after-image-gap = 32pt - 2mm
+#let default-image-before-heading-level-2-gap = 3em - 3mm
 #let default-image-par-style = (leading: 0.2em, first-line-indent: 0pt)
 #let default-image-caption-margin = (above: 12pt, below: 0pt)
 #let default-image-caption-text-size = 12pt

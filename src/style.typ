@@ -3,7 +3,7 @@
 
 #import "constants.typ": *
 
-#let table-flow-state = state("modern-g7-32-table-flow", "other")
+#let figure-flow-state = state("modern-g7-32-figure-flow", "other")
 
 #let gost-style(
   year,
@@ -24,6 +24,11 @@
   listing-after-listing-gap,
   listing-before-text-gap,
   listing-before-heading-level-2-gap,
+  image-after-text-gap,
+  image-caption-gap,
+  image-before-text-gap,
+  image-after-image-gap,
+  image-before-heading-level-2-gap,
   listing-caption-gap,
   listing-caption-indent,
   listing-text-size,
@@ -61,6 +66,11 @@
   appendix-heading-uppercase,
   body,
 ) = {
+  let page-top-margin = if type(margin) == dictionary {
+    margin.at("top", default: 0pt)
+  } else {
+    margin
+  }
   let small-text-difference = (
     default-text-size.default - default-text-size.small
   )
@@ -81,6 +91,11 @@
     listing-after-listing-gap: listing-after-listing-gap,
     listing-before-text-gap: listing-before-text-gap,
     listing-before-heading-level-2-gap: listing-before-heading-level-2-gap,
+    image-after-text-gap: image-after-text-gap,
+    image-caption-gap: image-caption-gap,
+    image-before-text-gap: image-before-text-gap,
+    image-after-image-gap: image-after-image-gap,
+    image-before-heading-level-2-gap: image-before-heading-level-2-gap,
     listing-caption-gap: listing-caption-gap,
     listing-caption-indent: listing-caption-indent,
     listing-text-size: listing-text-size,
@@ -136,7 +151,7 @@
     spacing: default-spacing,
   )
   show par: it => context {
-    let previous-kind = table-flow-state.at(here())
+    let previous-kind = figure-flow-state.at(here())
     let figure-base-below = text-size * default-table-and-raw-figure-below-lines
     let gap-adjustment = if previous-kind == "table" {
       table-before-text-gap - figure-base-below
@@ -147,7 +162,7 @@
     }
     [
       #if gap-adjustment != 0pt { v(gap-adjustment, weak: false) }
-      #table-flow-state.update("text")
+      #figure-flow-state.update("text")
       #it
     ]
   }
@@ -230,16 +245,35 @@
 
   show image: set align(center)
   show figure.where(kind: image): set figure(supplement: [Рисунок])
-  show figure.where(kind: image): it => [#it#table-flow-state.update("other")]
-  show figure.where(kind: image): set block(..default-image-figure-margin)
-  show figure.where(kind: image): set figure(gap: default-image-figure-gap)
+  show figure.where(kind: image): it => context {
+    let previous-kind = figure-flow-state.at(here())
+    let at-page-top = here().position().y <= page-top-margin + 0.5pt
+    let image-adjustment = if not at-page-top and previous-kind == "text" {
+      image-after-text-gap - default-image-figure-margin.above
+    } else if not at-page-top and previous-kind == "image" {
+      image-after-image-gap - default-image-figure-margin.above
+    } else {
+      0pt
+    }
+
+    [
+      #if image-adjustment != 0pt { v(image-adjustment, weak: false) }
+      #it
+      #figure-flow-state.update("image")
+    ]
+  }
+  show figure.where(kind: image): set block(
+    above: default-image-figure-margin.above,
+    below: image-before-text-gap,
+  )
+  show figure.where(kind: image): set figure(gap: image-caption-gap)
   show figure.where(kind: image): set par(..default-image-par-style)
   show figure.caption.where(kind: image): set block(..default-image-caption-margin)
   show figure.caption.where(kind: image): set text(size: default-image-caption-text-size)
   show figure.caption.where(kind: image): set par(..default-image-caption-par-style)
 
   show figure.where(kind: table): it => context {
-    let previous-kind = table-flow-state.at(here())
+    let previous-kind = figure-flow-state.at(here())
     let above-space = if previous-kind == "text" {
       table-after-text-gap
     } else if previous-kind == "table" {
@@ -267,9 +301,9 @@
       above: above-space,
       below: 0pt,
     )[
-      #table-flow-state.update("other")
+      #figure-flow-state.update("other")
       #it
-      #table-flow-state.update("table")
+      #figure-flow-state.update("table")
       #v(below-space, weak: false)
     ]
   }
@@ -285,7 +319,7 @@
     [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
   }
   show figure.where(kind: raw): it => context {
-    let previous-kind = table-flow-state.at(here())
+    let previous-kind = figure-flow-state.at(here())
     let above-space = if previous-kind == "text" {
       listing-after-text-gap
     } else if previous-kind == "listing" {
@@ -309,9 +343,9 @@
       above: above-space,
       below: 0pt,
     )[
-      #table-flow-state.update("other")
+      #figure-flow-state.update("other")
       #it
-      #table-flow-state.update("listing")
+      #figure-flow-state.update("listing")
       #v(below-space, weak: false)
     ]
   }
@@ -339,18 +373,24 @@
     it
   }
   show heading: it => context {
-    let previous-kind = table-flow-state.at(here())
+    let previous-kind = figure-flow-state.at(here())
+    let previous-is-image = (
+      previous-kind == "image"
+        and here().position().y > page-top-margin + 0.5pt
+    )
     let figure-base-below = text-size * default-table-and-raw-figure-below-lines
     let gap-adjustment = if previous-kind == "table" and it.level == 2 {
       table-before-heading-level-2-gap - figure-base-below
     } else if previous-kind == "listing" and it.level == 2 {
       listing-before-heading-level-2-gap - figure-base-below
+    } else if previous-is-image and it.level == 2 {
+      image-before-heading-level-2-gap - default-heading-margin.above
     } else {
       0pt
     }
     [
       #if gap-adjustment != 0pt { v(gap-adjustment, weak: false) }
-      #table-flow-state.update("other")
+      #figure-flow-state.update("other")
       #it
     ]
   }
