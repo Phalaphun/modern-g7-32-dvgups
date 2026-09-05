@@ -16,6 +16,7 @@
   body-leading,
   contents-leading,
   contents-entry-spacing,
+  outline-depth,
   table-after-text-gap,
   table-after-table-gap,
   table-before-text-gap,
@@ -83,6 +84,7 @@
     body-leading: body-leading,
     contents-leading: contents-leading,
     contents-entry-spacing: contents-entry-spacing,
+    outline-depth: outline-depth,
     table-after-text-gap: table-after-text-gap,
     table-after-table-gap: table-after-table-gap,
     table-before-text-gap: table-before-text-gap,
@@ -167,7 +169,7 @@
     ]
   }
 
-  set outline(indent: indent, depth: default-outline-depth)
+  set outline(indent: indent, depth: outline-depth)
   show outline: set par(leading: contents-leading)
   show outline: set block(below: indent / 2)
   show outline.entry: it => {
