@@ -18,7 +18,11 @@
 #long-table(
   sample-table(10),
   caption: [Короткая таблица на одной странице],
-  caption-gap: 6pt,
+  caption-gap: 6pt + 1mm,
+  continuation-gap: 16pt - 2mm,
+  ending-gap: 16pt - 2mm,
+  continuation-indent: 0.75cm,
+  ending-indent: 0.75cm,
 )
 
 #pagebreak()

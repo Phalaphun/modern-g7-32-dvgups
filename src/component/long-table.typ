@@ -1,6 +1,10 @@
 #import "../constants.typ": (
   default-long-table-continuation-text-size,
   default-long-table-continuation-cell-inset,
+  default-long-table-continuation-gap,
+  default-long-table-ending-gap,
+  default-long-table-continuation-indent,
+  default-long-table-ending-indent,
   default-long-table-end-marker-cell-inset,
   default-long-table-end-marker-value,
   default-table-and-raw-caption-leading,
@@ -47,7 +51,12 @@
   figure-counter.display(figure-numbering)
 }
 
-#let continuation-title() = context {
+#let continuation-title(
+  continuation-gap: auto,
+  ending-gap: auto,
+  continuation-indent: auto,
+  ending-indent: auto,
+) = context {
   let current-position = here().position()
   let figure-elements = query(figure.where(kind: table).before(here()))
   let current-figure = figure-elements.at(-1, default: none)
@@ -76,13 +85,70 @@
   )
   set text(size: default-long-table-continuation-text-size)
 
-  continuation-text
+  let parameters = query(<modern-g7-32-parameters>).first(default: none)
+  let configured = if parameters == none { (:) } else { parameters.value }
+  let document-indent = configured.at("indent", default: default-indent)
+  let configured-continuation-indent = configured.at(
+    "long-table-continuation-indent",
+    default: default-long-table-continuation-indent,
+  )
+  let configured-ending-indent = configured.at(
+    "long-table-ending-indent",
+    default: default-long-table-ending-indent,
+  )
+  let configured-continuation-gap = configured.at(
+    "long-table-continuation-gap",
+    default: default-long-table-continuation-gap,
+  )
+  let configured-ending-gap = configured.at(
+    "long-table-ending-gap",
+    default: default-long-table-ending-gap,
+  )
+  let resolved-continuation-indent = if continuation-indent == auto {
+    configured-continuation-indent
+  } else {
+    continuation-indent
+  }
+  let resolved-ending-indent = if ending-indent == auto {
+    configured-ending-indent
+  } else {
+    ending-indent
+  }
+  let title-indent = if last-page {
+    if resolved-ending-indent == auto {
+      document-indent
+    } else {
+      resolved-ending-indent
+    }
+  } else {
+    if resolved-continuation-indent == auto {
+      document-indent
+    } else {
+      resolved-continuation-indent
+    }
+  }
+  let title-gap = if last-page {
+    if ending-gap == auto { configured-ending-gap } else { ending-gap }
+  } else {
+    if continuation-gap == auto {
+      configured-continuation-gap
+    } else {
+      continuation-gap
+    }
+  }
+  let gap-shift = default-long-table-continuation-cell-inset.bottom - title-gap
+
+  pad(left: title-indent, move(dy: gap-shift, continuation-text))
 }
 
 #let long-table(
   table-content,
   caption: none,
   caption-gap: default-table-caption-gap,
+  continuation-gap: auto,
+  ending-gap: auto,
+  continuation-indent: auto,
+  ending-indent: auto,
   ..figure-args,
 ) = {
   assert(
@@ -139,15 +205,12 @@
     align: left,
     inset: continuation-cell-inset,
   )[
-    #context {
-      let parameters = query(<modern-g7-32-parameters>).first(default: none)
-      let indent = if parameters == none {
-        default-indent
-      } else {
-        parameters.value.at("indent", default: default-indent)
-      }
-      pad(left: indent, continuation-title())
-    }
+    #continuation-title(
+      continuation-gap: continuation-gap,
+      ending-gap: ending-gap,
+      continuation-indent: continuation-indent,
+      ending-indent: ending-indent,
+    )
   ]
 
   let combined-header = table.header(
