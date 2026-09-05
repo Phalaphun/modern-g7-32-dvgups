@@ -121,7 +121,7 @@
   image-before-text-gap: 32pt,
   image-after-image-gap: 32pt - 2mm,
   image-before-heading-level-2-gap: 3em - 3mm,
-  outline-depth: 4,
+  outline-depth: 3,
   long-table-continuation-gap: 16pt - 2mm,
   long-table-ending-gap: 16pt - 2mm,
   long-table-continuation-indent: 0pt,
