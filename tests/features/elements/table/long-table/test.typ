@@ -21,8 +21,8 @@
   caption-gap: 6pt + 1mm,
   continuation-gap: 16pt - 2mm,
   ending-gap: 16pt - 2mm,
-  continuation-indent: 0.75cm,
-  ending-indent: 0.75cm,
+  continuation-indent: 0pt,
+  ending-indent: 0pt,
 )
 
 #pagebreak()

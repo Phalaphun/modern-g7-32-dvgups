@@ -96,7 +96,7 @@
 #let default-long-table-ending-gap = (
   default-table-and-raw-caption-margin.below - 2mm
 )
-#let default-long-table-continuation-indent = auto
-#let default-long-table-ending-indent = auto
+#let default-long-table-continuation-indent = 0pt
+#let default-long-table-ending-indent = 0pt
 #let default-long-table-end-marker-cell-inset = (x: 0pt, y: 0pt)
 #let default-long-table-continuation-text-size = 12pt
