@@ -74,7 +74,7 @@
   let last-page = marker != none and marker.location().page() == current-position.page
   let number = current-table-number()
   let continuation-text = if last-page {
-    [Окончание таблицы #number.]
+    [Окончание таблицы #number]
   } else {
     [Продолжение таблицы #number]
   }

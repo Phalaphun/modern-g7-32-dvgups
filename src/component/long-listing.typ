@@ -70,7 +70,7 @@
   let last-page = marker != none and marker.location().page() == current-position.page
   let number = current-listing-number()
   let continuation-text = if last-page {
-    [Окончание листинга #number.]
+    [Окончание листинга #number]
   } else {
     [Продолжение листинга #number]
   }
