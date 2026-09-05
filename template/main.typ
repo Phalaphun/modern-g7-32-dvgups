@@ -43,8 +43,8 @@
   heading-following-par-top: 14pt + 3mm,
   heading-following-par-all-levels: false,
   outline-depth: 3,
-  table-cell-inset: (top: 1mm, bottom: 1mm, left: 2mm, right: 2mm),
-  table-cell-leading: 1em - 0.75em + 2mm / 3,
+  table-cell-inset: (top: 1mm, bottom: 1mm, left: 1mm, right: 1mm),
+  table-cell-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
   table-cell-min-height: 7mm,
   section-number-prefix:true
 )

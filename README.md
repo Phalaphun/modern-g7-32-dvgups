@@ -165,8 +165,8 @@
 | `table-after-table-gap` | `default-table-after-table-gap` | `24pt - 2mm` | Верхняя составляющая интервала перед названием таблицы, непосредственно следующей за другой таблицей; уменьшена на 2 мм относительно прежних 24 пт. |
 | `table-before-heading-level-2-gap` | `default-table-before-heading-level-2-gap` | `28pt - 4mm` | Нижняя составляющая интервала после таблицы перед заголовком второго уровня; уменьшена на 4 мм относительно прежних 28 пт. Верхний отступ самого заголовка остаётся независимым. |
 | `table-caption-gap` | `default-table-caption-gap` | `6pt + 1mm` | Расстояние между обычным названием таблицы и самой таблицей. Для отдельной длинной таблицы этому параметру соответствует аргумент `caption-gap`. |
-| `table-cell-inset` | `default-table-cell-inset` | `(top: 1mm, bottom: 1mm, left: 2mm, right: 2mm)` | Внутренние поля ячеек обычных и длинных таблиц. Не управляет минимальной высотой строки. |
-| `table-cell-leading` | `default-table-cell-leading` | `1em - 0.75em + 2mm / 3` | Межстрочный интервал внутри ячеек, откалиброванный как одинарный относительно полуторного интервала основного текста. Не влияет на основной текст и подписи. |
+| `table-cell-inset` | `default-table-cell-inset` | `(top: 1mm, bottom: 1mm, left: 1mm, right: 1mm)` | Внутренние поля ячеек обычных и длинных таблиц. Не управляет минимальной высотой строки. |
+| `table-cell-leading` | `default-table-cell-leading` | `(1em - 0.75em + 2mm / 3) + 1.75mm` | Межстрочный интервал внутри ячеек, откалиброванный по печатному образцу. Не влияет на основной текст и подписи. |
 | `table-cell-min-height` | `default-table-cell-min-height` | `7mm` | Минимальная итоговая высота строки обычной или длинной таблицы с учётом верхнего и нижнего `table-cell-inset`. Многострочные строки автоматически увеличиваются по содержимому. |
 | `long-table-continuation-gap` | `default-long-table-continuation-gap` | `16pt - 2mm` | Расстояние после строки «Продолжение таблицы» до повторяемой шапки. |
 | `long-table-ending-gap` | `default-long-table-ending-gap` | `16pt - 2mm` | Расстояние после строки «Окончание таблицы» до повторяемой шапки. |
@@ -277,8 +277,8 @@
 ```typst
 #show: gost.with(
   table-caption-gap: 6pt + 1mm,
-  table-cell-inset: (top: 1mm, bottom: 1mm, left: 2mm, right: 2mm),
-  table-cell-leading: 1em - 0.75em + 2mm / 3,
+  table-cell-inset: (top: 1mm, bottom: 1mm, left: 1mm, right: 1mm),
+  table-cell-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
   table-cell-min-height: 7mm,
   long-table-continuation-gap: 16pt - 2mm,
   long-table-ending-gap: 16pt - 2mm,

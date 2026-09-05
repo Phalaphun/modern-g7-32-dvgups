@@ -63,11 +63,11 @@
 #let default-table-caption-margin = (above: 0pt, below: 0pt)
 #let default-table-cell-inset = (
   top: 1mm,
-  bottom: 1mm,
+  bottom: 1mm, // Можно пробовать немного поднимать, часть букв в ячейку уходит, но в ворде также
   left: 1mm,
   right: 1mm,
 )
-#let default-table-cell-leading = (1em - 0.75em + 2mm / 3) + 4mm
+#let default-table-cell-leading = (1em - 0.75em + 2mm / 3) + 1.75mm
 #let default-table-cell-min-height = 7mm
 #let default-listing-caption-gap = 6pt + 1mm
 #let default-listing-caption-indent = 0pt
