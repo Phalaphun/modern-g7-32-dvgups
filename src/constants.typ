@@ -46,6 +46,10 @@
 
 #let default-table-and-raw-figure-margin-above = 24pt
 #let default-table-and-raw-figure-below-lines = 2
+#let default-table-after-text-gap = 24pt + 2mm
+#let default-table-after-table-gap = 24pt - 2mm
+#let default-table-before-text-gap = 28pt + 1mm
+#let default-table-before-heading-level-2-gap = 28pt - 4mm
 #let default-table-and-raw-caption-margin = (above: 0pt, below: 16pt)
 #let default-table-text-size = 12pt
 #let default-table-caption-text-size = 12pt

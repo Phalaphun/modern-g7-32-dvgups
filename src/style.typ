@@ -3,6 +3,8 @@
 
 #import "constants.typ": *
 
+#let table-flow-state = state("modern-g7-32-table-flow", "other")
+
 #let gost-style(
   year,
   city,
@@ -14,6 +16,10 @@
   body-leading,
   contents-leading,
   contents-entry-spacing,
+  table-after-text-gap,
+  table-after-table-gap,
+  table-before-text-gap,
+  table-before-heading-level-2-gap,
   listing-caption-gap,
   listing-caption-indent,
   listing-text-size,
@@ -63,6 +69,10 @@
     body-leading: body-leading,
     contents-leading: contents-leading,
     contents-entry-spacing: contents-entry-spacing,
+    table-after-text-gap: table-after-text-gap,
+    table-after-table-gap: table-after-table-gap,
+    table-before-text-gap: table-before-text-gap,
+    table-before-heading-level-2-gap: table-before-heading-level-2-gap,
     listing-caption-gap: listing-caption-gap,
     listing-caption-indent: listing-caption-indent,
     listing-text-size: listing-text-size,
@@ -117,6 +127,20 @@
     leading: body-leading,
     spacing: default-spacing,
   )
+  show par: it => context {
+    let previous-kind = table-flow-state.at(here())
+    let table-base-below = text-size * default-table-and-raw-figure-below-lines
+    let gap-adjustment = if previous-kind == "table" {
+      table-before-text-gap - table-base-below
+    } else {
+      0pt
+    }
+    [
+      #if gap-adjustment != 0pt { v(gap-adjustment, weak: false) }
+      #table-flow-state.update("text")
+      #it
+    ]
+  }
 
   set outline(indent: indent, depth: default-outline-depth)
   show outline: set par(leading: contents-leading)
@@ -196,6 +220,7 @@
 
   show image: set align(center)
   show figure.where(kind: image): set figure(supplement: [Рисунок])
+  show figure.where(kind: image): it => [#it#table-flow-state.update("other")]
   show figure.where(kind: image): set block(..default-image-figure-margin)
   show figure.where(kind: image): set figure(gap: default-image-figure-gap)
   show figure.where(kind: image): set par(..default-image-par-style)
@@ -203,12 +228,21 @@
   show figure.caption.where(kind: image): set text(size: default-image-caption-text-size)
   show figure.caption.where(kind: image): set par(..default-image-caption-par-style)
 
-  show figure.where(kind: table): it => {
+  show figure.where(kind: table): it => context {
+    let previous-kind = table-flow-state.at(here())
+    let above-space = if previous-kind == "text" {
+      table-after-text-gap
+    } else if previous-kind == "table" {
+      table-after-table-gap
+    } else {
+      default-table-and-raw-figure-margin-above
+    }
     let below-space = text-size * default-table-and-raw-figure-below-lines
+
     set figure.caption(position: top)
     set block(
       breakable: true,
-      above: default-table-and-raw-figure-margin-above,
+      above: 0pt,
       below: 0pt,
     )
     set figure(gap: table-caption-gap)
@@ -218,7 +252,16 @@
     show table.cell: set align(left)
     show table.cell: set block(width: default-table-cell-width)
     show table.cell.where(y: 0): set align(center)
-    [#it#v(below-space, weak: false)]
+    block(
+      breakable: true,
+      above: above-space,
+      below: 0pt,
+    )[
+      #table-flow-state.update("other")
+      #it
+      #table-flow-state.update("table")
+      #v(below-space, weak: false)
+    ]
   }
   show figure.caption.where(kind: table): it => {
     set align(left)
@@ -243,7 +286,12 @@
     set align(left)
     set text(size: listing-text-size)
     show raw.where(block: true): set block(..default-listing-raw-block-style)
-    [#it#v(below-space, weak: false)]
+    [
+      #table-flow-state.update("other")
+      #it
+      #table-flow-state.update("other")
+      #v(below-space, weak: false)
+    ]
   }
   show figure.caption.where(kind: raw): it => {
     set align(left)
@@ -267,6 +315,20 @@
       }
     }
     it
+  }
+  show heading: it => context {
+    let previous-kind = table-flow-state.at(here())
+    let table-base-below = text-size * default-table-and-raw-figure-below-lines
+    let gap-adjustment = if previous-kind == "table" and it.level == 2 {
+      table-before-heading-level-2-gap - table-base-below
+    } else {
+      0pt
+    }
+    [
+      #if gap-adjustment != 0pt { v(gap-adjustment, weak: false) }
+      #table-flow-state.update("other")
+      #it
+    ]
   }
 
   set list(marker: [-], indent: indent, spacing: default-list-spacing)

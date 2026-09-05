@@ -27,6 +27,10 @@
   pagination-align: right,
   pagination-skip-pages: (2),
   margin: (left: 30mm, right: 10mm, top: 20mm, bottom: 20mm),
+  table-before-text-gap: 28pt + 1mm,
+  table-after-text-gap: 24pt + 2mm,
+  table-after-table-gap: 24pt - 2mm,
+  table-before-heading-level-2-gap: 28pt - 4mm,
   section-number-prefix:true
 )
 
