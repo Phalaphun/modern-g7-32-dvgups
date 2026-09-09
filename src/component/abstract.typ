@@ -24,7 +24,12 @@
   }
 
   let count = 0
-  if kind == cite {
+  if kind == table {
+    // Both regular tables and long-table are represented by one table figure.
+    // Querying figures counts every table once and is unaffected by the
+    // per-section resets used for table numbering.
+    count = query(figure.where(kind: table)).len()
+  } else if kind == cite {
     count = target-counter.final().dedup().len()
   } else if kind == ref {
     count = query(selector(ref))
