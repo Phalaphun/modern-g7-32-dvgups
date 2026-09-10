@@ -122,29 +122,52 @@
   )
 }
 
-#let long-sign-field(name, position, part: none, details: "подпись, дата") = {
+#let long-sign-field(
+  name,
+  position,
+  position-secondary: none,
+  part: none,
+  details: "подпись, дата",
+) = {
   let part-cell = []
   if part != none {
-    part-cell = table.cell(align: bottom, inset: (top: 1pt))[#small-text[#part]]
+    part-cell = small-text(part)
+  }
+
+  let position-secondary-cell = []
+  if position-secondary != none {
+    position-secondary-cell = position-secondary
   }
 
   set par(justify: false)
-  table(
-    stroke: none,
-    inset: (x: 0pt, y: 2pt),
-    columns: (auto, 1fr, auto, auto),
-    align: (left, center, right, right),
-    table.cell(inset: (right: 6pt))[#position],
-    table.cell(align: center, inset: (top: 11pt, bottom: 0pt))[
-      #line(length: 100%)
-    ],
-    table.cell(inset: (left: 6pt))[#unbreak-name(name)],
-    [],
-    [],
-    table.cell(align: center, inset: (top: 0pt, bottom: 0pt))[#small-text[#details]],
-    [],
-    part-cell,
-  )
+  layout(size => context {
+    // The secondary position must wrap without changing where the signature
+    // line starts, so the main columns are sized only by the first row.
+    let position-width = measure(position).width + 6pt
+    let name-cell = unbreak-name(name)
+    let name-width = measure(name-cell).width + 6pt
+    let position-secondary-width = size.width * 2 / 5
+
+    grid(
+      columns: (position-width, 1fr, name-width),
+      inset: 0pt,
+      align: (left, center, right),
+      grid.cell(inset: (right: 6pt))[#position],
+      grid.cell(align: center, inset: (top: 11pt, bottom: 0pt))[
+        #line(length: 100%)
+      ],
+      grid.cell(inset: (left: 6pt))[#name-cell],
+      grid.cell(inset: (top: 3pt, bottom: 2pt))[
+        #box(width: position-secondary-width)[#position-secondary-cell]
+      ],
+      grid.cell(align: center + top, inset: (top: 3pt, bottom: 2pt))[
+        #small-text[#details]
+      ],
+      grid.cell(align: right + top, inset: (top: 3pt, bottom: 2pt))[
+        #part-cell
+      ],
+    )
+  })
 }
 
 #let get-numbering-alphabet(number) = {
