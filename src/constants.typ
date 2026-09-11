@@ -96,10 +96,16 @@
 #let default-long-listing-line-min-height = 7mm
 #let default-long-listing-data-cell-marker = "modern-g7-32-long-listing-data-cell"
 #let default-long-listing-first-line-cell-marker = "modern-g7-32-long-listing-first-line-cell"
+#let default-long-listing-semantic-caption-marker = "modern-g7-32-long-listing-semantic-caption"
 #let default-table-and-raw-caption-leading = 0.5em
 #let default-table-and-raw-caption-first-line-indent = (
   amount: default-indent,
   all: true,
+)
+#let default-long-figure-semantic-caption-box-style = (
+  width: 100%,
+  height: 0pt,
+  clip: true,
 )
 
 #let default-table-cell-width = 100%
@@ -136,6 +142,7 @@
 
 #let default-long-table-end-marker-value = "modern-g7-32-long-table-end-marker"
 #let default-long-table-service-cell-marker = "modern-g7-32-long-table-service-cell"
+#let default-long-table-semantic-caption-marker = "modern-g7-32-long-table-semantic-caption"
 #let default-long-table-continuation-cell-inset = (
   left: default-indent,
   right: 0pt,

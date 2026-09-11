@@ -362,15 +362,22 @@
     ]
   }
   show figure.caption.where(kind: table): it => {
-    set align(left)
-    set block(..default-table-caption-margin)
-    set text(size: default-table-caption-text-size)
-    set par(
-      leading: default-table-and-raw-caption-leading,
-      first-line-indent: 0pt,
+    let is-long-semantic-caption = repr(it.body).contains(
+      default-long-table-semantic-caption-marker,
     )
+    if is-long-semantic-caption {
+      box(..default-long-figure-semantic-caption-box-style, it)
+    } else {
+      set align(left)
+      set block(..default-table-caption-margin)
+      set text(size: default-table-caption-text-size)
+      set par(
+        leading: default-table-and-raw-caption-leading,
+        first-line-indent: 0pt,
+      )
 
-    [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
+      [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
+    }
   }
   show figure.where(kind: raw): it => context {
     let previous-kind = figure-flow-state.at(here())
@@ -465,15 +472,22 @@
     ]
   }
   show figure.caption.where(kind: raw): it => {
-    set align(left)
-    set block(..default-listing-caption-margin)
-    set text(size: listing-caption-text-size)
-    set par(
-      leading: default-table-and-raw-caption-leading,
-      first-line-indent: (amount: listing-caption-indent, all: true),
+    let is-long-semantic-caption = repr(it.body).contains(
+      default-long-listing-semantic-caption-marker,
     )
+    if is-long-semantic-caption {
+      box(..default-long-figure-semantic-caption-box-style, it)
+    } else {
+      set align(left)
+      set block(..default-listing-caption-margin)
+      set text(size: listing-caption-text-size)
+      set par(
+        leading: default-table-and-raw-caption-leading,
+        first-line-indent: (amount: listing-caption-indent, all: true),
+      )
 
-    [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
+      [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
+    }
   }
 
   show heading.where(level: 1): it => context {

@@ -10,8 +10,11 @@
   default-long-listing-frame-cell-inset,
   default-long-listing-line-cell-inset,
   default-long-listing-line-number-cell-inset,
+  default-long-listing-semantic-caption-marker,
   default-listing-raw-block-style,
   default-listing-caption-gap,
+  default-listing-caption-indent,
+  default-listing-caption-text-size,
   default-long-listing-data-cell-marker,
   default-long-listing-first-line-cell-marker,
   default-table-and-raw-caption-leading,
@@ -57,7 +60,9 @@
   figure-counter.display(figure-numbering)
 }
 
-#let continuation-title(
+#let page-title(
+  caption,
+  caption-gap,
   continuation-gap: auto,
   ending-gap: auto,
   continuation-indent: auto,
@@ -72,82 +77,109 @@
   }
 
   let first-page = current-position.page == current-figure.location().page()
-  if first-page {
-    return []
-  }
-
-  let marker = nearest-end-marker(current-position)
-  let last-page = marker != none and marker.location().page() == current-position.page
   let number = current-listing-number()
-  let continuation-text = if last-page {
-    [Окончание листинга #number]
+  let figure-fields = current-figure.fields()
+  let supplement = figure-fields.at("supplement", default: [Листинг])
+  let separator = figure-fields.at("caption").fields().at(
+    "separator",
+    default: " – ",
+  )
+  let parameters = query(<modern-g7-32-parameters>).first(default: none)
+  let configured = if parameters == none { (:) } else { parameters.value }
+  let title = if first-page {
+    (
+      text: [#supplement #number#separator#caption],
+      indent: configured.at(
+        "listing-caption-indent",
+        default: default-listing-caption-indent,
+      ),
+      gap: caption-gap,
+      size: configured.at(
+        "listing-caption-text-size",
+        default: default-listing-caption-text-size,
+      ),
+      artifact-kind: "other",
+    )
   } else {
-    [Продолжение листинга #number]
+    let marker = nearest-end-marker(current-position)
+    let last-page = marker != none and marker.location().page() == current-position.page
+    let continuation-text-size = configured.at(
+      "listing-continuation-text-size",
+      default: default-long-listing-continuation-text-size,
+    )
+    let document-indent = configured.at("indent", default: default-indent)
+    let configured-continuation-indent = configured.at(
+      "long-listing-continuation-indent",
+      default: default-long-listing-continuation-indent,
+    )
+    let configured-ending-indent = configured.at(
+      "long-listing-ending-indent",
+      default: default-long-listing-ending-indent,
+    )
+    let configured-continuation-gap = configured.at(
+      "long-listing-continuation-gap",
+      default: default-long-listing-continuation-gap,
+    )
+    let configured-ending-gap = configured.at(
+      "long-listing-ending-gap",
+      default: default-long-listing-ending-gap,
+    )
+    let resolved-continuation-indent = if continuation-indent == auto {
+      configured-continuation-indent
+    } else {
+      continuation-indent
+    }
+    let resolved-ending-indent = if ending-indent == auto {
+      configured-ending-indent
+    } else {
+      ending-indent
+    }
+    let title-indent = if last-page {
+      if resolved-ending-indent == auto {
+        document-indent
+      } else {
+        resolved-ending-indent
+      }
+    } else {
+      if resolved-continuation-indent == auto {
+        document-indent
+      } else {
+        resolved-continuation-indent
+      }
+    }
+    let title-gap = if last-page {
+      if ending-gap == auto { configured-ending-gap } else { ending-gap }
+    } else {
+      if continuation-gap == auto {
+        configured-continuation-gap
+      } else {
+        continuation-gap
+      }
+    }
+    (
+      text: if last-page {
+        [Окончание листинга #number]
+      } else {
+        [Продолжение листинга #number]
+      },
+      indent: title-indent,
+      gap: title-gap,
+      size: continuation-text-size,
+      artifact-kind: "pagination-other",
+    )
   }
 
   set par(
     leading: default-table-and-raw-caption-leading,
     first-line-indent: 0pt,
   )
-  let parameters = query(<modern-g7-32-parameters>).first(default: none)
-  let configured = if parameters == none { (:) } else { parameters.value }
-  let continuation-text-size = configured.at(
-    "listing-continuation-text-size",
-    default: default-long-listing-continuation-text-size,
-  )
-  let document-indent = configured.at("indent", default: default-indent)
-  let configured-continuation-indent = configured.at(
-    "long-listing-continuation-indent",
-    default: default-long-listing-continuation-indent,
-  )
-  let configured-ending-indent = configured.at(
-    "long-listing-ending-indent",
-    default: default-long-listing-ending-indent,
-  )
-  let configured-continuation-gap = configured.at(
-    "long-listing-continuation-gap",
-    default: default-long-listing-continuation-gap,
-  )
-  let configured-ending-gap = configured.at(
-    "long-listing-ending-gap",
-    default: default-long-listing-ending-gap,
-  )
-  let resolved-continuation-indent = if continuation-indent == auto {
-    configured-continuation-indent
-  } else {
-    continuation-indent
-  }
-  let resolved-ending-indent = if ending-indent == auto {
-    configured-ending-indent
-  } else {
-    ending-indent
-  }
-  let title-indent = if last-page {
-    if resolved-ending-indent == auto {
-      document-indent
-    } else {
-      resolved-ending-indent
-    }
-  } else {
-    if resolved-continuation-indent == auto {
-      document-indent
-    } else {
-      resolved-continuation-indent
-    }
-  }
-  let title-gap = if last-page {
-    if ending-gap == auto { configured-ending-gap } else { ending-gap }
-  } else {
-    if continuation-gap == auto {
-      configured-continuation-gap
-    } else {
-      continuation-gap
-    }
-  }
-  set text(size: continuation-text-size)
+  set text(size: title.size)
 
-  let gap-shift = default-long-listing-continuation-cell-inset.bottom - title-gap
-  pad(left: title-indent, move(dy: gap-shift, continuation-text))
+  let gap-shift = default-long-listing-continuation-cell-inset.bottom - title.gap
+  pdf.artifact(
+    kind: title.artifact-kind,
+    pad(left: title.indent, move(dy: gap-shift, title.text)),
+  )
 }
 
 #let trim-single-trailing-empty(lines) = {
@@ -207,7 +239,9 @@
     stroke: none,
     inset: continuation-cell-inset,
   )[
-    #continuation-title(
+    #page-title(
+      caption,
+      caption-gap,
       continuation-gap: continuation-gap,
       ending-gap: ending-gap,
       continuation-indent: continuation-indent,
@@ -267,6 +301,9 @@
     ],
   )
 
+  // Keep the visible title with the repeated header while retaining one native
+  // caption for PDF semantics. A bottom, zero-height caption also keeps the
+  // figure destination on the first page that actually contains the listing.
   figure(
     table(
       columns: (1fr,),
@@ -279,8 +316,14 @@
       end-marker-footer,
     ),
     kind: raw,
-    gap: caption-gap - default-long-listing-continuation-cell-inset.bottom,
-    caption: caption,
+    gap: 0pt,
+    caption: figure.caption(
+      position: bottom,
+      [
+        #hide(metadata(default-long-listing-semantic-caption-marker))
+        #caption
+      ],
+    ),
     ..figure-args,
   )
 }

@@ -7,8 +7,10 @@
   default-long-table-ending-indent,
   default-long-table-end-marker-cell-inset,
   default-long-table-end-marker-value,
+  default-long-table-semantic-caption-marker,
   default-long-table-service-cell-marker,
   default-table-and-raw-caption-leading,
+  default-table-caption-text-size,
   default-table-caption-gap,
   default-indent,
 )
@@ -52,7 +54,9 @@
   figure-counter.display(figure-numbering)
 }
 
-#let continuation-title(
+#let page-title(
+  caption,
+  caption-gap,
   continuation-gap: auto,
   ending-gap: auto,
   continuation-indent: auto,
@@ -67,79 +71,99 @@
   }
 
   let first-page = current-position.page == current-figure.location().page()
-  if first-page {
-    return []
-  }
-
-  let marker = nearest-end-marker(current-position)
-  let last-page = marker != none and marker.location().page() == current-position.page
   let number = current-table-number()
-  let continuation-text = if last-page {
-    [Окончание таблицы #number]
+  let figure-fields = current-figure.fields()
+  let supplement = figure-fields.at("supplement", default: [Таблица])
+  let separator = figure-fields.at("caption").fields().at(
+    "separator",
+    default: " – ",
+  )
+  let title = if first-page {
+    (
+      text: [#supplement #number#separator#caption],
+      indent: 0pt,
+      gap: caption-gap,
+      size: default-table-caption-text-size,
+      artifact-kind: "other",
+    )
   } else {
-    [Продолжение таблицы #number]
+    let marker = nearest-end-marker(current-position)
+    let last-page = marker != none and marker.location().page() == current-position.page
+    let parameters = query(<modern-g7-32-parameters>).first(default: none)
+    let configured = if parameters == none { (:) } else { parameters.value }
+    let document-indent = configured.at("indent", default: default-indent)
+    let configured-continuation-indent = configured.at(
+      "long-table-continuation-indent",
+      default: default-long-table-continuation-indent,
+    )
+    let configured-ending-indent = configured.at(
+      "long-table-ending-indent",
+      default: default-long-table-ending-indent,
+    )
+    let configured-continuation-gap = configured.at(
+      "long-table-continuation-gap",
+      default: default-long-table-continuation-gap,
+    )
+    let configured-ending-gap = configured.at(
+      "long-table-ending-gap",
+      default: default-long-table-ending-gap,
+    )
+    let resolved-continuation-indent = if continuation-indent == auto {
+      configured-continuation-indent
+    } else {
+      continuation-indent
+    }
+    let resolved-ending-indent = if ending-indent == auto {
+      configured-ending-indent
+    } else {
+      ending-indent
+    }
+    let title-indent = if last-page {
+      if resolved-ending-indent == auto {
+        document-indent
+      } else {
+        resolved-ending-indent
+      }
+    } else {
+      if resolved-continuation-indent == auto {
+        document-indent
+      } else {
+        resolved-continuation-indent
+      }
+    }
+    let title-gap = if last-page {
+      if ending-gap == auto { configured-ending-gap } else { ending-gap }
+    } else {
+      if continuation-gap == auto {
+        configured-continuation-gap
+      } else {
+        continuation-gap
+      }
+    }
+    (
+      text: if last-page {
+        [Окончание таблицы #number]
+      } else {
+        [Продолжение таблицы #number]
+      },
+      indent: title-indent,
+      gap: title-gap,
+      size: default-long-table-continuation-text-size,
+      artifact-kind: "pagination-other",
+    )
   }
 
   set par(
     leading: default-table-and-raw-caption-leading,
     first-line-indent: 0pt,
   )
-  set text(size: default-long-table-continuation-text-size)
+  set text(size: title.size)
 
-  let parameters = query(<modern-g7-32-parameters>).first(default: none)
-  let configured = if parameters == none { (:) } else { parameters.value }
-  let document-indent = configured.at("indent", default: default-indent)
-  let configured-continuation-indent = configured.at(
-    "long-table-continuation-indent",
-    default: default-long-table-continuation-indent,
+  let gap-shift = default-long-table-continuation-cell-inset.bottom - title.gap
+  pdf.artifact(
+    kind: title.artifact-kind,
+    pad(left: title.indent, move(dy: gap-shift, title.text)),
   )
-  let configured-ending-indent = configured.at(
-    "long-table-ending-indent",
-    default: default-long-table-ending-indent,
-  )
-  let configured-continuation-gap = configured.at(
-    "long-table-continuation-gap",
-    default: default-long-table-continuation-gap,
-  )
-  let configured-ending-gap = configured.at(
-    "long-table-ending-gap",
-    default: default-long-table-ending-gap,
-  )
-  let resolved-continuation-indent = if continuation-indent == auto {
-    configured-continuation-indent
-  } else {
-    continuation-indent
-  }
-  let resolved-ending-indent = if ending-indent == auto {
-    configured-ending-indent
-  } else {
-    ending-indent
-  }
-  let title-indent = if last-page {
-    if resolved-ending-indent == auto {
-      document-indent
-    } else {
-      resolved-ending-indent
-    }
-  } else {
-    if resolved-continuation-indent == auto {
-      document-indent
-    } else {
-      resolved-continuation-indent
-    }
-  }
-  let title-gap = if last-page {
-    if ending-gap == auto { configured-ending-gap } else { ending-gap }
-  } else {
-    if continuation-gap == auto {
-      configured-continuation-gap
-    } else {
-      continuation-gap
-    }
-  }
-  let gap-shift = default-long-table-continuation-cell-inset.bottom - title-gap
-
-  pad(left: title-indent, move(dy: gap-shift, continuation-text))
 }
 
 #let long-table(
@@ -207,7 +231,9 @@
     inset: continuation-cell-inset,
   )[
     #hide(metadata(default-long-table-service-cell-marker))
-    #continuation-title(
+    #page-title(
+      caption,
+      caption-gap,
       continuation-gap: continuation-gap,
       ending-gap: ending-gap,
       continuation-indent: continuation-indent,
@@ -233,6 +259,9 @@
     ],
   )
 
+  // Keep the visible title with the repeated header while retaining one native
+  // caption for PDF semantics. A bottom, zero-height caption also keeps the
+  // figure destination on the first page that actually contains the table.
   figure(
     table(
       ..table-options,
@@ -240,8 +269,14 @@
       ..body-children,
       end-marker-footer,
     ),
-    caption: caption,
-    gap: caption-gap - default-long-table-continuation-cell-inset.bottom,
+    caption: figure.caption(
+      position: bottom,
+      [
+        #hide(metadata(default-long-table-semantic-caption-marker))
+        #caption
+      ],
+    ),
+    gap: 0pt,
     ..figure-args,
   )
 }
