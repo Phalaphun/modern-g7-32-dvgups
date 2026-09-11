@@ -39,6 +39,7 @@
   long-listing-first-line-inset,
   long-listing-line-leading,
   long-listing-line-min-height,
+  long-listing-line-number-gap,
   long-listing-continuation-gap,
   long-listing-ending-gap,
   long-listing-continuation-indent,
@@ -114,6 +115,7 @@
     long-listing-first-line-inset: long-listing-first-line-inset,
     long-listing-line-leading: long-listing-line-leading,
     long-listing-line-min-height: long-listing-line-min-height,
+    long-listing-line-number-gap: long-listing-line-number-gap,
     long-listing-continuation-gap: long-listing-continuation-gap,
     long-listing-ending-gap: long-listing-ending-gap,
     long-listing-continuation-indent: long-listing-continuation-indent,
@@ -409,7 +411,8 @@
         let is-first-line-cell = repr(cell.body).contains(
           default-long-listing-first-line-cell-marker,
         )
-        let cell-inset = if cell.inset != 0pt {
+        let uses-legacy-cell-inset = cell.inset != 0pt
+        let cell-inset = if uses-legacy-cell-inset {
           cell.inset
         } else if is-first-line-cell {
           long-listing-first-line-inset
@@ -447,13 +450,23 @@
           )
           pad(
             ..cell-inset,
-            grid(
-              columns: (0pt, auto),
-              rows: auto,
-              inset: 0pt,
-              align: cell-align,
-              box(width: 0pt, height: min-content-height),
-              box(cell.body),
+            align(
+              cell-align,
+              pad(
+                right: if cell-align == right and not uses-legacy-cell-inset {
+                  long-listing-line-number-gap
+                } else {
+                  0pt
+                },
+                grid(
+                  columns: (0pt, auto),
+                  rows: auto,
+                  inset: 0pt,
+                  align: cell-align,
+                  box(width: 0pt, height: min-content-height),
+                  box(cell.body),
+                ),
+              ),
             ),
           )
         }

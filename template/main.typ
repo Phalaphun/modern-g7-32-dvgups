@@ -49,6 +49,7 @@
   ),
   long-listing-line-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
   long-listing-line-min-height: 7mm,
+  long-listing-line-number-gap: 4mm,
   image-after-text-gap: 32pt + 1mm,
   image-caption-gap: 12pt + 1mm,
   image-before-text-gap: 32pt,

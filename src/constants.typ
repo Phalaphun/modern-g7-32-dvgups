@@ -94,6 +94,7 @@
 )
 #let default-long-listing-line-leading = (1em - 0.75em + 2mm / 3) + 1.75mm
 #let default-long-listing-line-min-height = 7mm
+#let default-long-listing-line-number-gap = 4mm
 #let default-long-listing-data-cell-marker = "modern-g7-32-long-listing-data-cell"
 #let default-long-listing-first-line-cell-marker = "modern-g7-32-long-listing-first-line-cell"
 #let default-long-listing-semantic-caption-marker = "modern-g7-32-long-listing-semantic-caption"
