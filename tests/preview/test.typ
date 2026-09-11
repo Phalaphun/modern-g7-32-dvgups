@@ -683,3 +683,13 @@ $ sum_(k=0)^n k = 1 + ... + n = (n(n+1)) / 2 $ <appendix-formula>
 
 #appendix-heading("справочное", level: 2)[Приложение второго уровня со статусом]
 #lorem(100)
+
+#long-listing(
+  ```python
+print("Hello, world!")
+print("Hello, world!")
+print("Hello, world!")
+
+  ```,
+  caption: [Короткий листинг на одной странице],
+) <listing-one>

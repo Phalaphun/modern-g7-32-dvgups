@@ -408,7 +408,7 @@
       default-long-table-semantic-caption-marker,
     )
     if is-long-semantic-caption {
-      box(..default-long-figure-semantic-caption-box-style, it)
+      block(..default-long-figure-semantic-caption-box-style, it)
     } else {
       set align(left)
       set block(..default-table-caption-margin)
@@ -529,7 +529,7 @@
       default-long-listing-semantic-caption-marker,
     )
     if is-long-semantic-caption {
-      box(..default-long-figure-semantic-caption-box-style, it)
+      block(..default-long-figure-semantic-caption-box-style, it)
     } else {
       set align(left)
       set block(..default-listing-caption-margin)
