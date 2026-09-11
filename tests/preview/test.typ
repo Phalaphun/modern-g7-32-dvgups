@@ -405,6 +405,21 @@ $ cal(A) := { x in RR | x "натуральное" } $
   caption: [Пример таблицы с данными фыа ыва ыва ыва ыва ы],
 ) <tablelong1>
 
+#pagebreak()
+
+#long-table(
+  table(
+    columns: (auto, 1fr),
+    table.header([Номер], [Значение]),
+    table.cell(align: right)[1], [Однозначный номер],
+    table.cell(align: right)[10], [Двузначный номер],
+    table.cell(align: right)[100], [Трёхзначный номер],
+  ),
+  caption: [Проверка ширины колонки auto],
+) <auto-column-long-table>
+
+#pagebreak()
+
 
 
 // #hide("фывфыв")

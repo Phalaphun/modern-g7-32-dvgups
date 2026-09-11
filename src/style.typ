@@ -300,6 +300,13 @@
       default-table-and-raw-figure-margin-above
     }
     let below-space = text-size * default-table-and-raw-figure-below-lines
+    let columns = it.body.fields().at("columns", default: ())
+    // `columns: 2` is normalized to two `auto` tracks. Keep the established
+    // full-width layout for such tables and only use intrinsic measurement
+    // when `auto` is mixed with fixed or fractional tracks.
+    let has-mixed-auto-columns = type(columns) == array and columns.any(
+      column => column == auto,
+    ) and columns.any(column => column != auto)
 
     set figure.caption(position: top)
     set block(
@@ -312,8 +319,7 @@
     set text(size: default-table-text-size)
     set table(inset: table-cell-inset)
     show table.cell: set align(left)
-    show table.cell: set block(width: default-table-cell-width)
-    show table.cell: it => {
+    let style-table-cell(it, intrinsic-width: false) = {
       // Long-table service rows have their own geometry and are explicitly
       // marked so borderless data cells still receive the regular settings.
       let is-long-table-service-cell = repr(it.body).contains(
@@ -322,6 +328,9 @@
       if is-long-table-service-cell {
         it
       } else {
+        set block(
+          width: if intrinsic-width { auto } else { default-table-cell-width },
+        )
         let min-content-height = calc.max(
           0pt,
           table-cell-min-height - table-cell-inset.top - table-cell-inset.bottom,
@@ -340,16 +349,47 @@
         )
         pad(
           ..table-cell-inset,
-          grid(
-            columns: (0pt, 1fr),
-            rows: auto,
-            inset: 0pt,
-            align: cell-align,
-            box(width: 0pt, height: min-content-height),
-            it.body,
-          ),
+          if intrinsic-width {
+            align(
+              cell-align,
+              grid(
+                columns: (0pt, auto),
+                rows: auto,
+                inset: 0pt,
+                align: cell-align,
+                box(width: 0pt, height: min-content-height),
+                it.body,
+              ),
+            )
+          } else {
+            grid(
+              columns: (0pt, 1fr),
+              rows: auto,
+              inset: 0pt,
+              align: cell-align,
+              box(width: 0pt, height: min-content-height),
+              it.body,
+            )
+          },
         )
       }
+    }
+    show table.cell: cell => {
+      let fields = cell.fields()
+      let cell-column = fields.at("x", default: 0)
+      let cell-colspan = fields.at("colspan", default: 1)
+      let valid-cell-column = type(columns) == array and cell-column < columns.len()
+      let cell-columns = if valid-cell-column {
+        let cell-end = calc.min(cell-column + cell-colspan, columns.len())
+        columns.slice(cell-column, cell-end)
+      } else {
+        ()
+      }
+      let only-auto-columns = cell-columns.len() > 0 and not cell-columns.any(
+        column => column != auto,
+      )
+      let intrinsic-width = has-mixed-auto-columns and only-auto-columns
+      style-table-cell(cell, intrinsic-width: intrinsic-width)
     }
     show table.cell.where(y: 0): set align(center)
     block(
