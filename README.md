@@ -583,3 +583,21 @@ CSL использует следующие основные поля запис
 ### [0.1.1](https://github.com/Phalaphun/modern-g7-32-dvgups/releases/tag/0.1.1) — 30 марта 2026
 
 - Первый тег форка с адаптацией титульного листа и базовой структуры документа для ДВГУПС.
+
+## Лицензирование
+
+Исходный код шаблона распространяется на условиях
+[GNU General Public License v3.0](LICENSE).
+
+В состав пакета входят сторонние CSL-стили:
+
+- `src/csl/gost-r-7-0-100-2018-numeric-alphabetical.csl` — [исходный материал](https://bibliostyle.ru/stil-gost-7-0-100-2018-dlya-mendeley-i-zotero-style-russian-gost-r-7-0-100-2018-csl/);
+- `src/csl/gost-r-7-0-100-2018-numeric-appearance.csl` — [исходный материал](https://bibliostyle.ru/style-russian-gost-r-7-0-100-2018-numeric-appearance-csl/).
+
+Авторы, указанные в CSL-файлах: Roman Raspopov, Рычков В. А. и
+bibliostyle.ru. Эти файлы распространяются отдельно на условиях
+[Creative Commons Attribution-ShareAlike 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0/),
+а не на условиях GPL-3.0-only. Сведения об авторах, исходных материалах и
+лицензии также сохранены непосредственно внутри файлов.
+
+Подробная информация приведена в [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
