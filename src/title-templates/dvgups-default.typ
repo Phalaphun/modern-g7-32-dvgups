@@ -154,12 +154,12 @@ let result1 = (
     signature-lines.push(long-sign-field(student, [Студент], details: "подпись, дата"))
   }
   if advisor != none {
-    let advisor-position-label = if advisor-position-secondary == none {
-      [Руководитель]
-    } else {
-      [Руководитель #linebreak() #advisor-position-secondary]
-    }
-    signature-lines.push(long-sign-field(advisor, advisor-position-label, details: "подпись, дата"))
+    signature-lines.push(long-sign-field(
+      advisor,
+      [Руководитель],
+      position-secondary: advisor-position-secondary,
+      details: "подпись, дата",
+    ))
   }
 
   if signature-lines.len() > 0 {

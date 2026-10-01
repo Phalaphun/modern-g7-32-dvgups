@@ -92,13 +92,61 @@
   group: "МО211БИС",
   student: "Фамилия И.О.",
   advisor: "Фамилия И.О.",
-  advisor-position-secondary: "няня",
+  advisor-position-secondary: "очень длинная должность и звание  прям ооочень длинная ",
   city: "Хабаровск",
   year: 2026,
   pagination-align: right,
-  pagination-skip-pages: (2,3,4),
-  margin: (left: 20mm, right: 15mm, top: 20mm, bottom: 30mm),
-  section-number-prefix:true
+  pagination-skip-pages: (2,3),
+  margin: (left: 30mm, right: 10mm, top: 20mm, bottom: 20mm),
+  listing-caption-gap: 6pt + 1mm,
+  listing-caption-indent: 0pt,
+  listing-text-size: 12pt,
+  listing-caption-text-size: 12pt,
+  listing-continuation-text-size: 12pt,
+  // long-listing-line-inset: (top: 0pt, bottom: (1em - 0.75em + 2mm / 3) + 1.75mm, left: -1mm, right: 1mm),
+  // long-listing-first-line-inset: (top: -1mm, bottom: (1em - 0.75em + 2mm / 3) + 1.75mm, left: -1mm, right: 1mm),
+  // long-listing-line-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
+  long-listing-line-min-height: 7mm,
+  long-listing-continuation-gap: 16pt - 2mm,
+  long-listing-ending-gap: 16pt - 2mm,
+  long-listing-continuation-indent: 0pt,
+  long-listing-ending-indent: 0pt,
+  table-caption-gap: 6pt + 1mm,
+  table-before-text-gap: 28pt + 1mm,
+  table-after-text-gap: 24pt + 2mm,
+  table-after-table-gap: 24pt - 2mm,
+  table-before-heading-level-2-gap: 28pt - 4mm,
+  listing-before-text-gap: 28pt + 1mm,
+  listing-after-text-gap: 24pt + 2mm,
+  listing-after-listing-gap: 24pt - 2mm,
+  listing-before-heading-level-2-gap: 28pt - 4mm,
+  image-after-text-gap: 32pt + 1mm,
+  image-caption-gap: 12pt + 1mm,
+  image-before-text-gap: 32pt,
+  image-after-image-gap: 32pt - 2mm,
+  image-before-heading-level-2-gap: 3em - 3mm,
+  heading-following-par-top: 14pt + 3mm,
+  heading-following-par-all-levels: false,
+  outline-depth: 3,
+  long-table-continuation-gap: 16pt - 2mm,
+  long-table-ending-gap: 16pt - 2mm,
+  long-table-continuation-indent: 0pt,
+  long-table-ending-indent: 0pt,
+  table-cell-inset: (top: 1mm, bottom: 1mm, left: 1mm, right: 1mm),
+  table-cell-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
+  table-cell-min-height: 7mm,
+  section-number-prefix:true,
+  contents-heading-normal-case-left-align: false,
+  contents-heading-uppercase: false,
+  introduction-heading-normal-case-left-align: false,
+  introduction-heading-uppercase: false,
+  conclusion-heading-normal-case-left-align: false,
+  conclusion-heading-uppercase: false,
+  references-heading-normal-case-left-align: false,
+  references-heading-uppercase: false,
+  appendix-heading-new-style: true,
+  appendix-heading-uppercase: false,
+  indent:0.75cm,
 )
 
 
@@ -294,6 +342,13 @@ $ cal(A) := { x in RR | x "натуральное" } $
   caption: [Таблица на две страницы],
 )
 
+Абоба
+
+#long-table(
+  sample-table(2),
+  caption: [Таблица на две страницы],
+)
+
 #pagebreak()
 
 #long-table(
@@ -318,7 +373,7 @@ $ cal(A) := { x in RR | x "натуральное" } $
   table(
     columns: 4,
     table.header([Заголовок 1], [Заголовок 2], [Т], [Заголовок 4]),
-    [Проверка], [Проверка], [Проверка], [Проверка],
+    [Проверка Проверка Проверка Проверка Проверка Проверка], [Проверка], [Проверка], [Проверка],
     [Проверка], [Проверка], [Проверка], [Проверка],
     [Проверка], [Проверка], [Проверка], [Проверка],
     [Проверка], [Проверка], [Проверка], [Проверка],
@@ -349,6 +404,21 @@ $ cal(A) := { x in RR | x "натуральное" } $
   ),
   caption: [Пример таблицы с данными фыа ыва ыва ыва ыва ы],
 ) <tablelong1>
+
+#pagebreak()
+
+#long-table(
+  table(
+    columns: (auto, 1fr),
+    table.header([Номер], [Значение]),
+    table.cell(align: right)[1], [Однозначный номер],
+    table.cell(align: right)[10], [Двузначный номер],
+    table.cell(align: right)[100], [Трёхзначный номер],
+  ),
+  caption: [Проверка ширины колонки auto],
+) <auto-column-long-table>
+
+#pagebreak()
 
 
 
@@ -383,8 +453,8 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 #long-listing(
   ```python
-        print("Hello, world!")
-        print("Hello, world!")
+print("1Hello, world world world world world worldworld world world world world world world world worldworld world world world worldworld world world worldworld world world world worldworld world world worldworld world world world worldworld world world worldworld world world world world!")
+print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
         print("Hello, world!")
@@ -500,7 +570,7 @@ $ cal(A) := { x in RR | x "натуральное" } $
 
 #long-listing(
   ```python
-  print("Hello, world!")
+print("Hello, world!")
     print("Hello, world!")
       print("Hello, world!")
         print("Hello, world!")
@@ -508,7 +578,7 @@ $ cal(A) := { x in RR | x "натуральное" } $
             print("Hello, world!")
 
               print("Hello, world!")
-                print("He
+print("He
   ```,
   caption: [Короткий листинг на одной странице],
 ) <listing-one>
@@ -527,6 +597,29 @@ $ cal(A) := { x in RR | x "натуральное" } $
 123 @listing-one123 123 
 
 @tablelong1
+
+asd
+asd
+asd
+as
+da
+sd
+#lorem(110)
+
+#long-listing(
+  ```python
+print("Hello, world!")
+print("123312312Hello, world!")
+      print("Hello, world!")
+        print("Hello, world!")
+          print("Hello, world!")
+            print("Hello, world!")
+
+              print("Hello, world!")
+                print("He
+  ```,
+  caption: [Короткий листинг на одной странице],
+) <listing-one>
 
 #bibliography("references.bib")
 
@@ -590,3 +683,13 @@ $ sum_(k=0)^n k = 1 + ... + n = (n(n+1)) / 2 $ <appendix-formula>
 
 #appendix-heading("справочное", level: 2)[Приложение второго уровня со статусом]
 #lorem(100)
+
+#long-listing(
+  ```python
+print("Hello, world!")
+print("Hello, world!")
+print("Hello, world!")
+
+  ```,
+  caption: [Короткий листинг на одной странице],
+) <listing-one>

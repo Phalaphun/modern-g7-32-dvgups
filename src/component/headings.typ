@@ -3,9 +3,19 @@
   default-appendix-heading-following-par-top-other-levels,
   default-heading-margin,
   default-heading-level-1-margin,
+  default-heading-level-2-after-level-1-above,
+  default-heading-following-par-top,
+  default-heading-following-par-all-levels,
   default-indent,
   default-contents-heading-normal-case-left-align,
   default-contents-heading-uppercase,
+  default-contents-heading-margin-bottom,
+  default-introduction-heading-normal-case-left-align,
+  default-introduction-heading-uppercase,
+  default-conclusion-heading-normal-case-left-align,
+  default-conclusion-heading-uppercase,
+  default-references-heading-normal-case-left-align,
+  default-references-heading-uppercase,
   default-system-headings-normal-case-left-align,
 )
 #import "appendixes.typ": is-heading-in-appendix
@@ -33,11 +43,12 @@
 
 #let structure-heading-style(
   it,
+  indent: default-indent,
   normal-case-left-align: false,
   uppercase: true,
 ) = {
   if normal-case-left-align {
-    pad(left: default-indent, it)
+    pad(left: indent, it)
   } else if uppercase {
     align(center)[#upper(it)]
   } else {
@@ -54,11 +65,25 @@
   indent,
   add-pagebreaks,
   headings-not-bold,
+  heading-level-2-after-level-1-above:
+    default-heading-level-2-after-level-1-above,
+  heading-following-par-top: default-heading-following-par-top,
+  heading-following-par-all-levels: default-heading-following-par-all-levels,
   system-headings-normal-case-left-align:
     default-system-headings-normal-case-left-align,
   contents-heading-normal-case-left-align:
     default-contents-heading-normal-case-left-align,
   contents-heading-uppercase: default-contents-heading-uppercase,
+  contents-heading-margin-bottom: default-contents-heading-margin-bottom,
+  introduction-heading-normal-case-left-align:
+    default-introduction-heading-normal-case-left-align,
+  introduction-heading-uppercase: default-introduction-heading-uppercase,
+  conclusion-heading-normal-case-left-align:
+    default-conclusion-heading-normal-case-left-align,
+  conclusion-heading-uppercase: default-conclusion-heading-uppercase,
+  references-heading-normal-case-left-align:
+    default-references-heading-normal-case-left-align,
+  references-heading-uppercase: default-references-heading-uppercase,
 ) = body => {
   show heading: set text(size: text-size)
   set heading(numbering: "1.1")
@@ -66,15 +91,13 @@
   show heading: it => {
     let is-structural-heading = it.body in structural-heading-titles.values()
     let is-contents-heading = it.body == structural-heading-titles.contents
+    let is-introduction-heading = it.body == structural-heading-titles.intro
+    let is-conclusion-heading = it.body == structural-heading-titles.conclusion
+    let is-references-heading = it.body == structural-heading-titles.references
     let is-configurable-structural-heading = (
       system-headings-normal-case-left-align
         and it.body in configurable-structural-heading-titles
     )
-    let is-configurable-contents-heading = (
-      contents-heading-normal-case-left-align
-        and is-contents-heading
-    )
-
     let heading-content = if headings-not-bold {
       [
         #set text(weight: "regular")
@@ -86,21 +109,42 @@
 
     if not is-structural-heading {
       pad(heading-content, left: indent)
-    } else if (
-      is-configurable-structural-heading
-        or is-configurable-contents-heading
-    ) {
-      structure-heading-style(
-        heading-content,
-        normal-case-left-align: true,
-      )
     } else if is-contents-heading {
       structure-heading-style(
         heading-content,
+        indent: indent,
+        normal-case-left-align: contents-heading-normal-case-left-align,
         uppercase: contents-heading-uppercase,
       )
+    } else if is-introduction-heading {
+      structure-heading-style(
+        heading-content,
+        indent: indent,
+        normal-case-left-align: introduction-heading-normal-case-left-align,
+        uppercase: introduction-heading-uppercase,
+      )
+    } else if is-conclusion-heading {
+      structure-heading-style(
+        heading-content,
+        indent: indent,
+        normal-case-left-align: conclusion-heading-normal-case-left-align,
+        uppercase: conclusion-heading-uppercase,
+      )
+    } else if is-references-heading {
+      structure-heading-style(
+        heading-content,
+        indent: indent,
+        normal-case-left-align: references-heading-normal-case-left-align,
+        uppercase: references-heading-uppercase,
+      )
+    } else if is-configurable-structural-heading {
+      structure-heading-style(
+        heading-content,
+        indent: indent,
+        normal-case-left-align: true,
+      )
     } else {
-      structure-heading-style(heading-content)
+      structure-heading-style(heading-content, indent: indent)
     }
   }
 
@@ -120,6 +164,23 @@
 
   show heading: set block(..default-heading-margin)
   show heading.where(level: 1): set block(..default-heading-level-1-margin)
+  show heading.where(level: 2): it => context {
+    let headings-before = query(selector(heading).before(here()))
+    if headings-before.len() > 0 {
+      let nearest-heading = headings-before.last()
+      let paragraphs-between = query(
+        selector(par).after(nearest-heading.location()).before(here()),
+      )
+      if nearest-heading.level == 1 and paragraphs-between.len() == 0 {
+        set block(above: heading-level-2-after-level-1-above)
+      }
+    }
+    it
+  }
+  show heading.where(
+    level: 1,
+    body: structural-heading-titles.contents,
+  ): set block(below: contents-heading-margin-bottom)
 
   show par: it => context {
     let headings-before = query(selector(heading).before(here()))
@@ -138,8 +199,8 @@
           } else {
             default-appendix-heading-following-par-top-other-levels
           }
-        } else if nearest-heading.level == 1 {
-          text-size
+        } else if heading-following-par-all-levels or nearest-heading.level == 1 {
+          heading-following-par-top
         } else {
           0pt
         }

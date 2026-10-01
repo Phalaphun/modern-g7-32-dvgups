@@ -26,7 +26,41 @@
   year: 2025,
   pagination-align: right,
   pagination-skip-pages: (2),
-  margin: (left: 20mm, right: 15mm, top: 20mm, bottom: 30mm),
+  margin: (left: 30mm, right: 10mm, top: 20mm, bottom: 20mm),
+  table-before-text-gap: 28pt + 1mm,
+  table-after-text-gap: 24pt + 2mm,
+  table-after-table-gap: 24pt - 2mm,
+  table-before-heading-level-2-gap: 28pt - 4mm,
+  listing-before-text-gap: 28pt + 1mm,
+  listing-after-text-gap: 24pt + 2mm,
+  listing-after-listing-gap: 24pt - 2mm,
+  listing-before-heading-level-2-gap: 28pt - 4mm,
+  long-listing-line-inset: (
+    top: 0pt,
+    bottom: (1em - 0.75em + 2mm / 3) + 1.75mm,
+    left: -1mm,
+    right: 1mm,
+  ),
+  long-listing-first-line-inset: (
+    top: -1mm,
+    bottom: (1em - 0.75em + 2mm / 3) + 1.75mm,
+    left: -1mm,
+    right: 1mm,
+  ),
+  long-listing-line-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
+  long-listing-line-min-height: 7mm,
+  long-listing-line-number-gap: 4mm,
+  image-after-text-gap: 32pt + 1mm,
+  image-caption-gap: 12pt + 1mm,
+  image-before-text-gap: 32pt,
+  image-after-image-gap: 32pt - 2mm,
+  image-before-heading-level-2-gap: 3em - 3mm,
+  heading-following-par-top: 14pt + 3mm,
+  heading-following-par-all-levels: false,
+  outline-depth: 3,
+  table-cell-inset: (top: 1mm, bottom: 1mm, left: 1mm, right: 1mm),
+  table-cell-leading: (1em - 0.75em + 2mm / 3) + 1.75mm,
+  table-cell-min-height: 7mm,
   section-number-prefix:true
 )
 
@@ -106,7 +140,7 @@ $ sum_(k=0)^n k = 1 + ... + n = (n(n+1)) / 2 $
 <example-formula-first>
 
 
-$ mat(1, 2, 3; 4, 5, 6; 7, 8, 9) * x = pi * psi(alef/x) $
+$ mat(1, 2, 3; 4, 5, 6; 7, 8, 9) * x = pi * psi(aleph/x) $
 <example-formula-second>
 
 $ cal(A) := { x in RR | x "натуральное" } $
