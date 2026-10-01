@@ -42,7 +42,7 @@ $packageParent = Join-Path $typstPackagePath "local\modern-g7-32-dvgups"
 $packageDirectory = Join-Path $packageParent "0.2.2"
 
 New-Item -ItemType Directory -Force -Path $packageParent
-git clone --branch release/0.2.2-rc `
+git clone --branch 0.2.2 `
   https://github.com/Phalaphun/modern-g7-32-dvgups.git `
   $packageDirectory
 ```
@@ -535,7 +535,7 @@ CSL использует следующие основные поля запис
 
 ## Список изменений
 
-### 0.2.2-rc — в разработке
+### [0.2.2](https://github.com/Phalaphun/modern-g7-32-dvgups/releases/tag/0.2.2) — 1 октября 2026
 
 - Параметры шаблона систематизированы и описаны в README; базовые значения откалиброваны по печатному образцу ДВГУПС.
 - Добавлены независимые настройки регистра и интервалов структурных разделов, глубины содержания, межстрочных интервалов основного текста и содержания.
