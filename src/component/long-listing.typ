@@ -21,25 +21,13 @@
   default-indent,
 )
 //TODO: Реализовать автоматическое выравнивание по левому краю. Чтобы отрезались лишние отступы табуляции. 
-#let marker-after-current-page(marker-position, current-position) = {
-  marker-position.page > current-position.page or (
-    marker-position.page == current-position.page
-      and marker-position.y >= current-position.y
-  )
-}
-
-#let nearest-end-marker(current-position) = {
-  let markers = query(metadata.where(value: default-long-listing-end-marker-value))
-    .filter(marker => {
-      let marker-position = marker.location().position()
-      marker-after-current-page(marker-position, current-position)
-    })
-    .sorted(key: marker => {
-      let marker-position = marker.location().position()
-      (marker-position.page, marker-position.y)
-    })
-
-  markers.at(0, default: none)
+// Match the footer in document order, independently of layout coordinates.
+// Anchor to the figure so every repeated header finds the same end marker.
+#let nearest-end-marker(current-figure) = {
+  query(
+    metadata.where(value: default-long-listing-end-marker-value)
+      .after(current-figure.location()),
+  ).first(default: none)
 }
 
 #let current-listing-number() = {
@@ -68,7 +56,7 @@
   continuation-indent: auto,
   ending-indent: auto,
 ) = context {
-  let current-position = here().position()
+  let current-page = here().page()
   let figure-elements = query(figure.where(kind: raw).before(here()))
   let current-figure = figure-elements.at(-1, default: none)
 
@@ -76,7 +64,7 @@
     return []
   }
 
-  let first-page = current-position.page == current-figure.location().page()
+  let first-page = current-page == current-figure.location().page()
   let number = current-listing-number()
   let figure-fields = current-figure.fields()
   let supplement = figure-fields.at("supplement", default: [Листинг])
@@ -101,8 +89,8 @@
       artifact-kind: "other",
     )
   } else {
-    let marker = nearest-end-marker(current-position)
-    let last-page = marker != none and marker.location().page() == current-position.page
+    let marker = nearest-end-marker(current-figure)
+    let last-page = marker != none and marker.location().page() == current-page
     let continuation-text-size = configured.at(
       "listing-continuation-text-size",
       default: default-long-listing-continuation-text-size,
