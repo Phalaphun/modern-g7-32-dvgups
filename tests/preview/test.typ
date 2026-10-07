@@ -693,3 +693,34 @@ print("Hello, world!")
   ```,
   caption: [Короткий листинг на одной странице],
 ) <listing-one>
+
+#long-listing(
+  ```python
+print("Hello, world!")
+print("123312312Hello, world!")
+      print("Hello, world!")
+        print("Hello, world!")
+          print("Hello, world!")
+            print("Hello, world!")
+
+              print("Hello, world!")
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+                print("He
+  ```,
+  caption: [Длинный листинг на двух страницах в приложении],
+) <listing-one-long-app>
